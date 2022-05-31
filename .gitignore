@@ -1,0 +1,35 @@
+## Generic
+# Ignore common local files
+.idea/
+.vscode/
+/coverage/
+/node_modules/
+/vendor/
+/logs/*
+
+## Python related
+# see https://github.com/github/gitignore/blob/main/Python.gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
