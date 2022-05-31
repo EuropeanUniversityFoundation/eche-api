@@ -1,3 +1,23 @@
+# OpenAPI Definition for ECHE API
+
+This tool is based on the OpenAPI Definition Starter project - see the original README below.
+
+## Quick start
+
+Inside the `redoc` directory, where this file is located, execute the following commands:
+
+    cp .env.example .env  # to create the local environment file
+    nano .env             # to edit parameters such as project name or HTTP ports
+    make up               # to create and launch Docker containers
+    make shell            # to use the shell inside the NodeJS container
+
+Inside the NodeJS container, also named `redoc`, follow the usage as indicated:
+
+  - `npm start` to watch for changes while editing the definition; accessible over `REDOC_PORT` (defaults to 3000)
+  - `npm run build` to preview the final build of the definition; accessible over `PROJECT_PORT` (defaults to 8000)
+
+---
+
 # OpenAPI Definition Starter
 
 ## How to use this starter
