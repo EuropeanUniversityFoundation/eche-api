@@ -2,17 +2,26 @@ import os
 
 docs_rootdir = 'docs'
 
+display_dir = 'display_dir'
+display_md  = 'display_md'
+display_err = 'display_error'
+
 def fetch(args):
     path = docs_rootdir
     for arg in args:
         path = os.path.join(path, arg)
 
     if os.path.isdir(path):
-        print("This is a directory: " + str(path))
+        display = display_dir
+        content = "This is a directory: " + str(path)
     elif os.path.isfile(path):
-        print("This is a file: " + str(path))
+        display = display_md
+        content = open(path, "r")
     else:
-        print("Cannot display anything.")
+        display = display_err
+        content = "Cannot display anything."
+
+    return display, content
 
 def tree(root=docs_rootdir):
     menu = {}
