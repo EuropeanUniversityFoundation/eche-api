@@ -17,6 +17,9 @@ The main app is built with Flask and it requires Python 3.8+ to run. To start th
     source venv/bin/activate
     # install required libraries
     pip install -r requirements.txt
+    # prepare the local settings
+    cp example.local_settings.py local_settings.py
+    nano local_settings.py
 
 ## Development
 
