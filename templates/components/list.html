@@ -1,0 +1,15 @@
+{%- set element = element|default(ul) -%}
+<{{ element }}>
+  {% for key, value in dict.items() recursive -%}
+  <li>
+  {%- if value is string -%}<a href="{{ value }}">{%- endif -%}
+  {{ key }}
+  {%- if value is string -%}</a>{%- endif -%}
+  {%- if value is mapping %}
+  <{{ element }}>
+  {{ loop(value.items()) -}}
+  </{{ element }}>
+  {% endif -%}
+  </li>
+  {% endfor -%}
+</{{ element }}>

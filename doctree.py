@@ -15,12 +15,18 @@ def fetch(args):
         print("Cannot display anything.")
 
 def tree(root=docs_rootdir):
-    print(os.walk(root, topdown=True))
-    for (root,dirs,files) in os.walk(root, topdown=True):
-        print (root)
-        print (dirs)
-        print (files)
+    menu = {}
+    for item in os.listdir(root):
+        path = os.path.join(root,item)
+        if os.path.isdir(path):
+            menu[item] = tree(path)
+        elif os.path.isfile(path):
+            menu[item] = '/' + path
+
+    return menu
 
 if __name__ == '__main__':
-    print(f"Docs")
-    tree()
+    print(f"Docs\n")
+
+    menu = tree()
+    print(menu)
