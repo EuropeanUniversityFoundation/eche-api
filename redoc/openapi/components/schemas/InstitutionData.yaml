@@ -1,0 +1,36 @@
+proposalNumber:
+  type: string
+  description: Proposal Number
+erasmusCode:
+  type: string
+  description: Erasmus Code
+pic:
+  type: string
+  description: PIC
+oid:
+  type: string
+  description: OID
+organisationLegalName:
+  type: string
+  description: Organisation Legal Name
+street:
+  type: string
+  description: Street
+postalCode:
+  type: string
+  description: Postal Code
+city:
+  type: string
+  description: City
+country:
+  type: string
+  description: Country
+webpage:
+  type: string
+  description: Webpage
+echeStartDate:
+  type: string
+  description: ECHE Start Date
+echeEndDate:
+  type: string
+  description: ECHE End Date

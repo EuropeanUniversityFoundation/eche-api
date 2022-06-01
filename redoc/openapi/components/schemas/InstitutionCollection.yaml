@@ -1,0 +1,25 @@
+type: object
+description: Collection of _Institution_ resources.
+required:
+  - data
+properties:
+  data:
+    type: array
+    description: List of _Institution_ resources.
+    items:
+      type: object
+      required:
+        - proposalNumber
+        - erasmusCode
+        - pic
+        # - oid
+        - organisationLegalName
+        - street
+        # - postalCode
+        - city
+        - country
+        - webpage
+        - echeStartDate
+        - echeEndDate
+      properties:
+        $ref: ./InstitutionData.yaml

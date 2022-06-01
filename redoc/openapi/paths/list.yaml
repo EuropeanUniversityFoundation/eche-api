@@ -1,0 +1,24 @@
+get:
+  tags:
+    - List
+  summary: GET /
+  description: |
+    This endpoint lists all _Institutions_ covered by this provider.
+  operationId: getList
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: calls per hour allowed by the user.
+          schema:
+            type: integer
+            format: int32
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InstitutionCollection.yaml
+          example:
+            $ref: ../components/responses/InstitutionCollection.yaml
+    '400':
+      $ref: ../components/responses/Problem.yaml
