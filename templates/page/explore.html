@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%- set active_page = 'explore' -%}
+
+{% block content %}
+  <h1>{% block title %}Explore{% endblock %}</h1>
+  <hr>
+  <section class="table-wrapper">
+  {{ content }}
+  </section>
+{% endblock %}

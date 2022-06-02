@@ -1,6 +1,8 @@
 from flask import Flask, render_template, Markup, url_for, redirect, flash
 from jinja_markdown import MarkdownExtension
 import doctree
+import eche
+
 import local_settings
 
 app = Flask(__name__)
@@ -54,6 +56,15 @@ def docs(params=''):
         card_title='Directory tree'
     )
     # return render_template('page/placeholder.html', menu_parent='docs')
+
+@app.route("/explore")
+def explore():
+    content = Markup(eche.print(classes=['table', 'table-striped', 'small']))
+    return render_template(
+        'page/explore.html',
+        menu_parent='explore',
+        content=content
+    )
 
 @app.route("/openapi")
 def openapi():

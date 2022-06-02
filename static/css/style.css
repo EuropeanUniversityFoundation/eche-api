@@ -18,3 +18,11 @@ body {
   border-color: red;
   color: red;
 }
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table.dataframe {
+  white-space: pre-wrap;
+}

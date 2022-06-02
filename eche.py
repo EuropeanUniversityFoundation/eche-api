@@ -58,6 +58,20 @@ def main():
 
     return df
 
+def print(classes=None):
+    df = load()
+    df = clean(df)
+    df.replace({None: np.nan}, inplace=True)
+
+    return df.to_html(
+        justify='inherit',
+        index=False,
+        na_rep='',
+        classes=classes,
+        table_id='echeTable',
+        render_links=True
+    )
+
 if __name__ == '__main__':
     df = main()
     print(df)
