@@ -25,3 +25,6 @@ eche_headers = {
     'ECHE Start Date': 'echeStartDate',
     'ECHE End Date': 'echeEndDate'
 }
+
+# ECHE null strings.
+eche_null_str = ['#N/A']

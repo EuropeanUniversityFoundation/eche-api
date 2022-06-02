@@ -8,7 +8,7 @@ import local_settings
 def load():
     eche_xlsx = os.path.join(local_settings.data_dir, local_settings.eche_xlsx)
 
-    # Load the Excel file
+    # Load the Excel file.
     workbook = load_workbook(eche_xlsx, data_only=True)
 
     # Load the first worksheet.
@@ -27,9 +27,37 @@ def load():
 
     return df
 
+def clean(df):
+    # Strip all strings from whitespace and line characters.
+    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+
+    # Nullify certain strings, like formula errors.
+    for s in local_settings.eche_null_str:
+        df.replace({s: None}, inplace=True)
+
+    return df
+
+def headers(df, headers_dict=local_settings.eche_headers):
+    columns = list(df)
+
+    # Remove whitespace in column names.
+    for col in columns:
+        if col != col.strip():
+            df.rename(columns={col:col.strip()}, inplace=True)
+
+    # Rename columns with machine names.
+    df.rename(columns=headers_dict, inplace=True)
+
 def main():
     # Load the ECHE list data into a DataFrame.
     df = load()
+    # Clean up the data.
+    df = clean(df)
+    # Replace the ECHE list headers with the corresponding API keys.
+    headers(df)
+
+    return df
 
 if __name__ == '__main__':
-    main()
+    df = main()
+    print(df)
