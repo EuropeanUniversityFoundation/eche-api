@@ -2,6 +2,7 @@ import os.path
 import numpy as np
 import pandas as pd
 from openpyxl import load_workbook
+import db
 
 import local_settings
 
@@ -74,4 +75,5 @@ def print(classes=None):
 
 if __name__ == '__main__':
     df = main()
-    print(df)
+    # connection = db.init()
+    db.df_to_sql(df)

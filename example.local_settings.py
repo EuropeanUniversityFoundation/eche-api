@@ -28,3 +28,6 @@ eche_headers = {
 
 # ECHE null strings.
 eche_null_str = ['#N/A']
+
+# Schema directory.
+schema_dir = 'schema'
