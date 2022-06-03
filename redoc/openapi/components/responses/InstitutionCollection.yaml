@@ -1,14 +1,12 @@
-data:
-  - proposalNumber: '111111111'
-    erasmusCode: 'AQ TESTING99'
-    pic: '999999999'
-    oid: 'E11111111'
-    organisationLegalName: 'TEST ENTRY'
-    street: 'Main street 1'
-    postalCode: null
-    city: 'Ridley Beach'
-    country: 'Antarctica'
-    webpage: 'https://example.com'
-    echeStartDate: '2021-01-01'
-    echeEndDate: '2029-12-31'
-    
+- proposalNumber: '111111111'
+  erasmusCode: 'AQ TESTING99'
+  pic: '999999999'
+  oid: 'E11111111'
+  organisationLegalName: 'TEST ENTRY'
+  street: 'Main street 1'
+  postalCode: null
+  city: 'Ridley Beach'
+  country: 'Antarctica'
+  webpage: 'https://example.com'
+  echeStartDate: '2021-01-01'
+  echeEndDate: '2029-12-31'

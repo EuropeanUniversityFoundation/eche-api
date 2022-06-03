@@ -46,82 +46,74 @@ paths:
               schema:
                 $ref: '#/components/schemas/InstitutionCollection'
               example:
-                data:
-                  - proposalNumber: '111111111'
-                    erasmusCode: AQ TESTING99
-                    pic: '999999999'
-                    oid: E11111111
-                    organisationLegalName: TEST ENTRY
-                    street: Main street 1
-                    postalCode: null
-                    city: Ridley Beach
-                    country: Antarctica
-                    webpage: https://example.com
-                    echeStartDate: '2021-01-01'
-                    echeEndDate: '2029-12-31'
+                - proposalNumber: '111111111'
+                  erasmusCode: AQ TESTING99
+                  pic: '999999999'
+                  oid: E11111111
+                  organisationLegalName: TEST ENTRY
+                  street: Main street 1
+                  postalCode: null
+                  city: Ridley Beach
+                  country: Antarctica
+                  webpage: https://example.com
+                  echeStartDate: '2021-01-01'
+                  echeEndDate: '2029-12-31'
         '400':
           $ref: '#/components/responses/Problem'
 components:
   schemas:
     InstitutionCollection:
-      type: object
-      description: Collection of _Institution_ resources.
-      required:
-        - data
-      properties:
-        data:
-          type: array
-          description: List of _Institution_ resources.
-          items:
-            type: object
-            required:
-              - proposalNumber
-              - erasmusCode
-              - pic
-              - organisationLegalName
-              - street
-              - city
-              - country
-              - webpage
-              - echeStartDate
-              - echeEndDate
-            properties:
-              proposalNumber:
-                type: string
-                description: Proposal Number
-              erasmusCode:
-                type: string
-                description: Erasmus Code
-              pic:
-                type: string
-                description: PIC
-              oid:
-                type: string
-                description: OID
-              organisationLegalName:
-                type: string
-                description: Organisation Legal Name
-              street:
-                type: string
-                description: Street
-              postalCode:
-                type: string
-                description: Postal Code
-              city:
-                type: string
-                description: City
-              country:
-                type: string
-                description: Country
-              webpage:
-                type: string
-                description: Webpage
-              echeStartDate:
-                type: string
-                description: ECHE Start Date
-              echeEndDate:
-                type: string
-                description: ECHE End Date
+      type: array
+      description: List of _Institution_ resources.
+      items:
+        type: object
+        required:
+          - proposalNumber
+          - erasmusCode
+          - pic
+          - organisationLegalName
+          - street
+          - city
+          - country
+          - echeStartDate
+          - echeEndDate
+        properties:
+          proposalNumber:
+            type: string
+            description: Proposal Number
+          erasmusCode:
+            type: string
+            description: Erasmus Code
+          pic:
+            type: string
+            description: PIC
+          oid:
+            type: string
+            description: OID
+          organisationLegalName:
+            type: string
+            description: Organisation Legal Name
+          street:
+            type: string
+            description: Street
+          postalCode:
+            type: string
+            description: Postal Code
+          city:
+            type: string
+            description: City
+          country:
+            type: string
+            description: Country
+          webpage:
+            type: string
+            description: Webpage
+          echeStartDate:
+            type: string
+            description: ECHE Start Date
+          echeEndDate:
+            type: string
+            description: ECHE End Date
     Problem:
       type: object
       additionalProperties: true
