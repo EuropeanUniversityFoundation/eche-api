@@ -1,7 +1,8 @@
-from flask import Flask, render_template, Markup, url_for, redirect, flash
+from flask import Flask, render_template, Markup, Response, redirect, flash
 from jinja_markdown import MarkdownExtension
 import doctree
 import eche
+import response
 
 import local_settings
 
@@ -57,7 +58,7 @@ def docs(params=''):
     )
     # return render_template('page/placeholder.html', menu_parent='docs')
 
-@app.route("/explore")
+@app.route("/explore/")
 def explore():
     content = Markup(eche.print(classes=['table', 'table-striped', 'small']))
     return render_template(
@@ -66,13 +67,19 @@ def explore():
         content=content
     )
 
-@app.route("/openapi")
+@app.route("/openapi/")
 def openapi():
     return render_template('redoc/index.html')
 
-@app.route("/api")
-def api():
-    return render_template('page/placeholder.html', menu_parent='api')
+@app.route("/api/", methods = ['GET'])
+@app.route("/api/<string:key>/<string:value>/", methods = ['GET'])
+def api(key='', value=''):
+    if key in local_settings.eche_headers.values():
+        body = response.list(filter=(key, value))
+    else:
+        body = response.list()
+
+    return Response(body, mimetype='application/json')
 
 if __name__ == '__main__':
     app.run(debug=True)
