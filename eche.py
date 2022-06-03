@@ -1,4 +1,4 @@
-import os.path
+import os
 import numpy as np
 import pandas as pd
 from openpyxl import load_workbook
@@ -60,9 +60,7 @@ def main():
     return df
 
 def print(classes=None):
-    df = load()
-    df = clean(df)
-    df.replace({None: np.nan}, inplace=True)
+    df = db.sql_to_df()
 
     return df.to_html(
         justify='inherit',

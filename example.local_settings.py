@@ -31,3 +31,9 @@ eche_null_str = ['#N/A']
 
 # Schema directory.
 schema_dir = 'schema'
+
+# Date fields to be parsed when reading from the database.
+date_fields = [
+    'echeStartDate',
+    'echeEndDate'
+]
