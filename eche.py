@@ -6,6 +6,7 @@ import db
 
 import local_settings
 
+# Load the first worksheet of an Excel file into a DataFrame.
 def load():
     eche_xlsx = os.path.join(local_settings.data_dir, local_settings.eche_xlsx)
 
@@ -28,6 +29,7 @@ def load():
 
     return df
 
+# Clean up whitespace and line characters from a DataFrame.
 def clean(df):
     # Strip all strings from whitespace and line characters.
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
@@ -38,6 +40,7 @@ def clean(df):
 
     return df
 
+# Rename DataFrame headers.
 def headers(df, headers_dict=local_settings.eche_headers):
     columns = list(df)
 
@@ -49,16 +52,7 @@ def headers(df, headers_dict=local_settings.eche_headers):
     # Rename columns with machine names.
     df.rename(columns=headers_dict, inplace=True)
 
-def main():
-    # Load the ECHE list data into a DataFrame.
-    df = load()
-    # Clean up the data.
-    df = clean(df)
-    # Replace the ECHE list headers with the corresponding API keys.
-    headers(df)
-
-    return df
-
+# Export a database table to a DataFrame and print it to HTML.
 def print(classes=None):
     df = db.sql_to_df()
 
@@ -70,6 +64,17 @@ def print(classes=None):
         table_id='echeTable',
         render_links=True
     )
+
+# Main function for this module.
+def main():
+    # Load the ECHE list data into a DataFrame.
+    df = load()
+    # Clean up the data.
+    df = clean(df)
+    # Replace the ECHE list headers with the corresponding API keys.
+    headers(df)
+
+    return df
 
 if __name__ == '__main__':
     df = main()
