@@ -13,10 +13,10 @@ import pandas as pd
 known3letter = ['LUX', 'IRL']
 
 # Column names, as API keys.
-col_ref = 'erasmusCode'
-col_norm = 'erasmusCodeNormalized'
-col_na = 'erasmusCodePrefix'
-col_cc = 'erasmusCodeCountryCode'
+col_ref     = 'erasmusCode'
+col_norm    = 'erasmusCodeNormalized'
+col_na      = 'erasmusCodePrefix'
+col_cc      = 'erasmusCodeCountryCode'
 
 # Match the known prefixes in Erasmus codes to ISO 3166 country codes.
 prefix_cc = {
@@ -168,31 +168,26 @@ def main():
 
     df = pd.DataFrame({col_ref: mock_codes})
 
-    print('Erasmus code testing\n')
+    print('Erasmus code processing\n')
 
-    print('This script will load some mock Erasmus codes.')
+    print('This script will load and normalize some mock Erasmus codes.')
     print('Some codes are valid, while others have formatting errors.')
     print('If an error is recoverable, it is handled quietly.')
-    print('If an error is NOT recoverable, a replacement is required.')
-    print('If a replacement is provided beforehand, it will NOT be checked.')
-    print('e.g. provide a replacement code like XX EMPTY00')
-    print('If no replacement is provided beforehand, user input is required.')
-    print('Unlike the preset replacement, user input will be checked.')
-    print('The check will be stuck until user input is valid or recoverable.')
+    print('If an error is NOT recoverable, an empty string will be stored.')
 
     input("\nPress Enter to see the mock codes...")
 
     print()
     print(df)
 
-    input("\nPress Enter to normalized codes...")
+    input("\nPress Enter to see the normalized codes...")
 
     df = process(df)
 
     print()
     print(df[df[col_norm] != ''])
 
-    input("\nPress Enter to unrecoverable codes...")
+    input("\nPress Enter to see the unrecoverable codes...")
 
     print()
     print(df[df[col_norm] == ''])

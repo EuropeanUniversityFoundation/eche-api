@@ -1,8 +1,9 @@
 import os
 import numpy as np
 import pandas as pd
-import erasmus
 from openpyxl import load_workbook
+import erasmus
+import country
 import db
 
 import local_settings
@@ -82,11 +83,13 @@ def main():
     # Replace the ECHE list headers with the corresponding API keys.
     headers(df)
     # Process Erasmus Codes.
-    df = erasmus.protocol(df)
+    df = erasmus.process(df)
+    # Process countries.
+    df = country.process(df)
 
     return df
 
 if __name__ == '__main__':
     df = main()
 
-    print(df.tail())
+    print(df.info())
