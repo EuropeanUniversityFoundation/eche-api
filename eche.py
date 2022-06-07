@@ -53,15 +53,22 @@ def headers(df, headers_dict=local_settings.eche_headers):
     df.rename(columns=headers_dict, inplace=True)
 
 # Export a database table to a DataFrame and print it to HTML.
-def print(classes=None):
-    df = db.sql_to_df()
+def print(table='eche', fields=[], filter=None, table_id='echeTable', classes=None):
+    query_params = {
+        'table': table,
+        'fields': fields
+    }
+    if filter is not None:
+        query_params['filter'] = filter
+
+    df = db.sql_to_df(query_params)
 
     return df.to_html(
         justify='inherit',
         index=False,
         na_rep='',
         classes=classes,
-        table_id='echeTable',
+        table_id=table_id,
         render_links=True
     )
 
