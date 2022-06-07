@@ -76,6 +76,8 @@ def openapi():
 def api(key='', value=''):
     if key in local_settings.eche_headers.values():
         body = response.list(filter=(key, value))
+    elif key in local_settings.processed_fields:
+        body = response.list(filter=(key, value))
     else:
         body = response.list()
 

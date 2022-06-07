@@ -34,3 +34,15 @@ echeStartDate:
 echeEndDate:
   type: string
   description: ECHE End Date
+erasmusCodeNormalized:
+  type: string
+  description: Normalized Erasmus Code
+erasmusCodePrefix:
+  type: string
+  description: Erasmus Code prefix
+erasmusCodeCountryCode:
+  type: string
+  description: Country code from Erasmus Code prefix
+countryCode:
+  type: string
+  description: Country code from Country

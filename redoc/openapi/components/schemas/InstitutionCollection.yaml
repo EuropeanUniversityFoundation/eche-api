@@ -15,5 +15,6 @@ items:
     # - webpage
     - echeStartDate
     - echeEndDate
+    - countryCode
   properties:
     $ref: ./InstitutionData.yaml
