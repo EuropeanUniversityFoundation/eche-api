@@ -30,14 +30,15 @@ def sql_to_df(query_params, date_fields=local_settings.date_fields):
 
     if 'filter' in query_params:
         key, value = query_params['filter']
-        if key in date_fields:
-            dt = datetime.fromisoformat(value)
-            value = dt.strftime('%Y-%m-%d %H:%M:%S')
-        query = f"SELECT {fields} FROM {table} WHERE {key}='{value}';"
-        print(query)
+        if value is None:
+            query = f"SELECT {fields} FROM {table} WHERE {key} IS NULL;"
+        else:
+            if key in date_fields:
+                dt = datetime.fromisoformat(value)
+                value = dt.strftime('%Y-%m-%d %H:%M:%S')
+            query = f"SELECT {fields} FROM {table} WHERE {key}='{value}';"
     else:
         query = f"SELECT {fields} FROM {table};"
-        print(query)
 
     connection = init()
 

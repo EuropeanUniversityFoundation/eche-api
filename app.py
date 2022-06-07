@@ -72,8 +72,9 @@ def openapi():
     return render_template('redoc/index.html')
 
 @app.route("/api/", methods = ['GET'])
+@app.route("/api/<string:key>/", methods = ['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods = ['GET'])
-def api(key='', value=''):
+def api(key=None, value=None):
     if key in local_settings.eche_headers.values():
         body = response.list(filter=(key, value))
     elif key in local_settings.processed_fields:
