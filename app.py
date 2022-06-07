@@ -60,7 +60,7 @@ def docs(params=''):
 
 @app.route("/explore/")
 def explore():
-    content = Markup(eche.print(classes=['table', 'table-striped', 'small']))
+    content = Markup(eche.to_html(classes=['table', 'table-striped', 'small']))
     return render_template(
         'page/explore.html',
         menu_parent='explore',

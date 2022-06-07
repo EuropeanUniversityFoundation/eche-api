@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
+import erasmus
 from openpyxl import load_workbook
 import db
 
@@ -53,7 +54,7 @@ def headers(df, headers_dict=local_settings.eche_headers):
     df.rename(columns=headers_dict, inplace=True)
 
 # Export a database table to a DataFrame and print it to HTML.
-def print(table='eche', fields=[], filter=None, table_id='echeTable', classes=None):
+def to_html(table='eche', fields=[], filter=None, table_id='echeTable', classes=None):
     query_params = {
         'table': table,
         'fields': fields
@@ -80,10 +81,12 @@ def main():
     df = clean(df)
     # Replace the ECHE list headers with the corresponding API keys.
     headers(df)
+    # Process Erasmus Codes.
+    df = erasmus.protocol(df)
 
     return df
 
 if __name__ == '__main__':
     df = main()
-    # connection = db.init()
-    db.df_to_sql(df)
+
+    print(df.tail())
