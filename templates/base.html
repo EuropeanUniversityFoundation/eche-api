@@ -22,7 +22,7 @@
                   ('/docs', 'docs', 'Documentation', False),
                   ('/explore', 'explore', 'Explore', False),
                   ('/openapi', 'openapi', 'Specification', True),
-                  ('/api', 'api', 'API', False)
+                  ('/api', 'api', 'API', True)
               ] -%}
               {%- set active_page = active_page|default('index') -%}
               {%- for href, id, caption, blank in navigation_bar %}
