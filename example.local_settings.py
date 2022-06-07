@@ -32,8 +32,25 @@ eche_null_str = ['#N/A']
 # Schema directory.
 schema_dir = 'schema'
 
+# Schema to install.
+schema_filename = 'eche.sql'
+
+# Database filename.
+db_filename = 'eche.db'
+
+# Primary database table.
+db_table = 'eche'
+
 # Date fields to be parsed when reading from the database.
 date_fields = [
     'echeStartDate',
     'echeEndDate'
+]
+
+# Processed fields.
+processed_fields = [
+    'erasmusCodeNormalized',
+    'erasmusCodePrefix',
+    'erasmusCodeCountryCode',
+    'countryCode'
 ]

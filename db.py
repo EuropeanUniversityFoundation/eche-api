@@ -5,8 +5,8 @@ from datetime import datetime
 
 import local_settings
 
-def init(db_name='test', schema='eche.sql'):
-    connection = sqlite3.connect(db_name + '.db')
+def init(db_filename=local_settings.db_filename, schema=local_settings.schema_filename):
+    connection = sqlite3.connect(db_filename)
     c = connection.cursor()
 
     schema_path = os.path.join(local_settings.schema_dir, schema)
@@ -17,7 +17,7 @@ def init(db_name='test', schema='eche.sql'):
 
     return connection
 
-def df_to_sql(df, table='eche'):
+def df_to_sql(df, table=local_settings.db_table):
     connection = init()
 
     df.to_sql(table, connection, if_exists='replace', index=False)
@@ -56,3 +56,5 @@ def fetchall(table='eche', connection=None):
 
 if __name__ == '__main__':
     init()
+
+    print(f'Created database {local_settings.db_filename}')

@@ -92,4 +92,6 @@ def main():
 if __name__ == '__main__':
     df = main()
 
-    print(df.info())
+    db.df_to_sql(df)
+
+    print(f'DataFrame loaded to {local_settings.db_filename}')

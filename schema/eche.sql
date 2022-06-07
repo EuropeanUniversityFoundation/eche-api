@@ -12,5 +12,9 @@ CREATE TABLE IF NOT EXISTS eche (
     webpage TEXT,
     echeStartDate TEXT NOT NULL,
     echeEndDate TEXT NOT NULL,
+    erasmusCodeNormalized TEXT,
+    erasmusCodePrefix TEXT,
+    erasmusCodeCountryCode TEXT,
+    countryCode TEXT NOT NULL,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
