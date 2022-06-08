@@ -54,3 +54,7 @@ processed_fields = [
     'erasmusCodeCountryCode',
     'countryCode'
 ]
+
+# Known API keys.
+known_keys = list(eche_headers.values())
+known_keys.extend(processed_fields)

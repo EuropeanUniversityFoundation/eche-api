@@ -14,7 +14,8 @@ def list(table='eche', fields=[], filter=None):
     df = db.sql_to_df(query_params)
 
     for field in local_settings.date_fields:
-        df[field] = df[field].dt.strftime('%Y-%m-%d')
+        if field in df.columns:
+            df[field] = df[field].dt.strftime('%Y-%m-%d')
 
     return df.to_json(orient="records")
 

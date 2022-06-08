@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Markup, Response, redirect, flash
+from flask import Flask, render_template, Markup, Response, request, flash
 from jinja_markdown import MarkdownExtension
 import doctree
 import eche
@@ -75,12 +75,16 @@ def openapi():
 @app.route("/api/<string:key>/", methods = ['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods = ['GET'])
 def api(key=None, value=None):
-    if key in local_settings.eche_headers.values():
-        body = response.list(filter=(key, value))
-    elif key in local_settings.processed_fields:
-        body = response.list(filter=(key, value))
+    fields = []
+    args = request.args
+    if 'fields' in args:
+        request_fields = args.get("fields").split(',')
+        fields = [f for f in request_fields if f in local_settings.known_keys]
+
+    if key in local_settings.known_keys:
+        body = response.list(filter=(key, value), fields=fields)
     else:
-        body = response.list()
+        body = response.list(fields=fields)
 
     return Response(body, mimetype='application/json')
 
