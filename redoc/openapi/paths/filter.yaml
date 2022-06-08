@@ -1,10 +1,10 @@
 get:
   tags:
     - Institutions
-  summary: GET /
+  summary: GET /{key}/{value}
   description: |
-    Get all _Institutions_ covered by this provider.
-  operationId: getList
+    Get _Institutions_ where a given **key** has a certain **value**.
+  operationId: getFilter
   responses:
     '200':
       description: OK

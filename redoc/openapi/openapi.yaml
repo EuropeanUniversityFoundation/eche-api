@@ -14,11 +14,15 @@ info:
   description:
     $ref: ./info-description.md
 tags:
-  - name: List
-    description: Exposes the complete ECHE list.
+  - name: Institutions
+    description: See all _Institutions_ in the ECHE list, with optional filtering.
 servers:
   - url: '/api/v0.1'
     description: Sandbox server (example data)
 paths:
-  /list:
+  /:
     $ref: paths/list.yaml
+  /{key}/{value}:
+    $ref: paths/filter.yaml
+  /{key}:
+    $ref: paths/null.yaml
