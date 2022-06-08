@@ -36,6 +36,8 @@ paths:
       description: |
         Get all _Institutions_ covered by this provider.
       operationId: getList
+      parameters:
+        - $ref: '#/components/parameters/QueryParamFields'
       responses:
         '200':
           description: OK
@@ -76,6 +78,10 @@ paths:
       description: |
         Get _Institutions_ where a given **key** has a certain **value**.
       operationId: getFilter
+      parameters:
+        - $ref: '#/components/parameters/PathParamKey'
+        - $ref: '#/components/parameters/PathParamValue'
+        - $ref: '#/components/parameters/QueryParamFields'
       responses:
         '200':
           description: OK
@@ -116,6 +122,9 @@ paths:
       description: |
         Get _Institutions_ where a given **key** has a `null` value.
       operationId: getNull
+      parameters:
+        - $ref: '#/components/parameters/PathParamKey'
+        - $ref: '#/components/parameters/QueryParamFields'
       responses:
         '200':
           description: OK
@@ -149,6 +158,65 @@ paths:
         '400':
           $ref: '#/components/responses/Problem'
 components:
+  parameters:
+    QueryParamFields:
+      in: query
+      name: fields
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - proposalNumber
+            - erasmusCode
+            - pic
+            - oid
+            - organisationLegalName
+            - street
+            - postalCode
+            - city
+            - country
+            - webpage
+            - echeStartDate
+            - echeEndDate
+            - erasmusCodeNormalized
+            - erasmusCodePrefix
+            - erasmusCodeCountryCode
+            - countryCode
+      description: |
+        The fields to include in the response.
+         If not specified, all fields will be included in the response.
+    PathParamKey:
+      in: path
+      name: key
+      schema:
+        type: string
+        enum:
+          - proposalNumber
+          - erasmusCode
+          - pic
+          - oid
+          - organisationLegalName
+          - street
+          - postalCode
+          - city
+          - country
+          - webpage
+          - echeStartDate
+          - echeEndDate
+          - erasmusCodeNormalized
+          - erasmusCodePrefix
+          - erasmusCodeCountryCode
+          - countryCode
+      description: The field to filter by.
+    PathParamValue:
+      in: path
+      name: value
+      schema:
+        type: string
+      description: The value to filter by.
   schemas:
     InstitutionCollection:
       type: array

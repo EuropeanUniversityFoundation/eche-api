@@ -5,6 +5,8 @@ get:
   description: |
     Get all _Institutions_ covered by this provider.
   operationId: getList
+  parameters:
+    - $ref: ../components/schemas/QueryParamFields.yaml
   responses:
     '200':
       description: OK

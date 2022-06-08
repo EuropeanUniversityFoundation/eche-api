@@ -5,6 +5,10 @@ get:
   description: |
     Get _Institutions_ where a given **key** has a certain **value**.
   operationId: getFilter
+  parameters:
+    - $ref: ../components/schemas/PathParamKey.yaml
+    - $ref: ../components/schemas/PathParamValue.yaml
+    - $ref: ../components/schemas/QueryParamFields.yaml
   responses:
     '200':
       description: OK

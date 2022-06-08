@@ -1,0 +1,22 @@
+in: path
+name: key
+schema:
+  type: string
+  enum:
+    - proposalNumber
+    - erasmusCode
+    - pic
+    - oid
+    - organisationLegalName
+    - street
+    - postalCode
+    - city
+    - country
+    - webpage
+    - echeStartDate
+    - echeEndDate
+    - erasmusCodeNormalized
+    - erasmusCodePrefix
+    - erasmusCodeCountryCode
+    - countryCode
+description: The field to filter by.
