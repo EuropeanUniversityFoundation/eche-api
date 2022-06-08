@@ -13,7 +13,10 @@ def list(table='eche', fields=[], filter=None):
 
     df = db.sql_to_df(query_params)
 
-    return df.to_json(orient="records", date_format='iso')
+    for field in local_settings.date_fields:
+        df[field] = df[field].dt.strftime('%Y-%m-%d')
+
+    return df.to_json(orient="records")
 
 def main():
     list()
