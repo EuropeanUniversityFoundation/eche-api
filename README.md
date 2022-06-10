@@ -40,6 +40,33 @@ To use the built-in web server locally, in debug mode, execute the following com
     export FLASK_ENV=development
     flask run
 
+## Depoyment
+
+### Apache2 + uWSGI
+
+Requirements:
+
+    apt install apache2 uwsgi libapache2-mod-proxy-uwsgi uwsgi-plugin-python3
+    a2enmod proxy proxy_http proxy_uwsgi alias headers deflate
+
+To deploy using Apache2 and uWSGI, copy configuration file templates:
+
+    # copy Apache2 config
+    cp deploy/apache.conf /etc/apache2/sites-available/eche-api.conf
+    ln -s /etc/apache2/sites-available/eche-api.conf /etc/apache2/sites-enabled/eche-api.conf
+    # copy uWSGI config
+    cp deploy/uwsgi.ini /etc/uwsgi/apps-available/eche-api.ini
+    ln -s /etc/uwsgi/apps-available/eche-api.ini /etc/uwsgi/apps-enabled/eche-api.ini
+
+NOTE: These config files are only templates, it will be necessary to adjust some paths and other parameters.
+
+Once the config files are ready:
+
+    # restart services
+    service apache2 restart
+    service uwsgi restart
+
+
 ---
 
 _This project is a work in progress and is considered unstable._
