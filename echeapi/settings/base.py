@@ -46,3 +46,6 @@ processed_fields = [
     'erasmusCodeCountryCode',
     'countryCode'
 ]
+
+# Log files directory.
+log_dir = ''
