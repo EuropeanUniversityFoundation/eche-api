@@ -1,14 +1,9 @@
-from flask import Flask, render_template, Markup, Response, request, flash
-from jinja_markdown import MarkdownExtension
-import doctree
-import eche
-import response
 
-import local_settings
+from flask import flash, Markup, render_template, request, Response
 
-app = Flask(__name__)
-app.jinja_env.add_extension(MarkdownExtension)
-app.secret_key = local_settings.app_secret_key
+from echeapi import app, settings
+from echeapi.utils import api, doctree, eche
+
 
 @app.route("/")
 def index():
@@ -74,19 +69,16 @@ def openapi():
 @app.route("/api/", methods = ['GET'])
 @app.route("/api/<string:key>/", methods = ['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods = ['GET'])
-def api(key=None, value=None):
+def api_(key=None, value=None):
     fields = []
     args = request.args
     if 'fields' in args:
         request_fields = args.get("fields").split(',')
-        fields = [f for f in request_fields if f in local_settings.known_keys]
+        fields = [f for f in request_fields if f in settings.known_keys]
 
-    if key in local_settings.known_keys:
-        body = response.list(filter=(key, value), fields=fields)
+    if key in settings.known_keys:
+        body = api.list(filter=(key, value), fields=fields)
     else:
-        body = response.list(fields=fields)
+        body = api.list(fields=fields)
 
     return Response(body, mimetype='application/json')
-
-if __name__ == '__main__':
-    app.run(debug=True)

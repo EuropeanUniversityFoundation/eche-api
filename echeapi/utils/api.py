@@ -1,7 +1,7 @@
-import pandas as pd
-import db
 
-import local_settings
+from echeapi import settings
+from echeapi.utils import db
+
 
 def list(table='eche', fields=[], filter=None):
     query_params = {
@@ -13,7 +13,7 @@ def list(table='eche', fields=[], filter=None):
 
     df = db.sql_to_df(query_params)
 
-    for field in local_settings.date_fields:
+    for field in settings.date_fields:
         if field in df.columns:
             df[field] = df[field].dt.strftime('%Y-%m-%d')
 

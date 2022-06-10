@@ -21,12 +21,12 @@ The main app is built with Flask and it requires Python 3.8+ to run. To start th
 In order to run the app, some preparatory steps are needed:
 
     # check the local settings
-    cp example.local_settings.py local_settings.py
-    nano local_settings.py
+    cp echeapi/settings/default.py echeapi/settings/local.py
+    nano echeapi/settings/local.py
     # create a database
-    python db.py
+    python echeapi/manage.py initialize
     # populate the database
-    python eche.py
+    python echeapi/manage.py populate
 
 ## Development
 
@@ -35,10 +35,15 @@ In order to run the app, some preparatory steps are needed:
 To use the built-in web server locally, in debug mode, execute the following commands:
 
     # first step can be skipped due to autodiscovery
-    export FLASK_APP=app
+    export FLASK_APP=echeapi
     # debug mode ON
     export FLASK_ENV=development
     flask run
+
+Or:
+
+    python echeapi/manage.py run
+
 
 ## Depoyment
 

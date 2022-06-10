@@ -1,15 +1,18 @@
+
 import os
 import sqlite3
-import pandas as pd
 from datetime import datetime
 
-import local_settings
+import pandas as pd
 
-def init(db_filename=local_settings.db_filename, schema=local_settings.schema_filename):
+from echeapi import settings
+
+
+def init(db_filename=settings.db_filename, schema=settings.schema_filename):
     connection = sqlite3.connect(db_filename)
     c = connection.cursor()
 
-    schema_path = os.path.join(local_settings.schema_dir, schema)
+    schema_path = os.path.join(settings.schema_dir, schema)
     schema_content = open(schema_path, "r")
 
     c.execute(schema_content.read())
@@ -17,12 +20,12 @@ def init(db_filename=local_settings.db_filename, schema=local_settings.schema_fi
 
     return connection
 
-def df_to_sql(df, table=local_settings.db_table):
+def df_to_sql(df, table=settings.db_table):
     connection = init()
 
     df.to_sql(table, connection, if_exists='replace', index=False)
 
-def sql_to_df(query_params, date_fields=local_settings.date_fields):
+def sql_to_df(query_params, date_fields=settings.date_fields):
     table = query_params['table']
 
     field_list = [f for f in query_params['fields']]
@@ -54,8 +57,3 @@ def fetchall(table='eche', connection=None):
     c.execute(f"SELECT * FROM {table};")
 
     return c.fetchall()
-
-if __name__ == '__main__':
-    init()
-
-    print(f'Created database {local_settings.db_filename}')

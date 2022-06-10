@@ -1,16 +1,16 @@
+
 import os
-import numpy as np
+
 import pandas as pd
 from openpyxl import load_workbook
-import erasmus
-import country
-import db
 
-import local_settings
+from echeapi import settings
+from echeapi.utils import db
+
 
 # Load the first worksheet of an Excel file into a DataFrame.
 def load():
-    eche_xlsx = os.path.join(local_settings.data_dir, local_settings.eche_xlsx)
+    eche_xlsx = os.path.join(settings.data_dir, settings.eche_xlsx)
 
     # Load the Excel file.
     workbook = load_workbook(eche_xlsx, data_only=True)
@@ -37,13 +37,13 @@ def clean(df):
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Nullify certain strings, like formula errors.
-    for s in local_settings.eche_null_str:
+    for s in settings.eche_null_str:
         df.replace({s: None}, inplace=True)
 
     return df
 
 # Rename DataFrame headers.
-def headers(df, headers_dict=local_settings.eche_headers):
+def headers(df, headers_dict=settings.eche_headers):
     columns = list(df)
 
     # Remove whitespace in column names.
@@ -73,25 +73,3 @@ def to_html(table='eche', fields=[], filter=None, table_id='echeTable', classes=
         table_id=table_id,
         render_links=True
     )
-
-# Main function for this module.
-def main():
-    # Load the ECHE list data into a DataFrame.
-    df = load()
-    # Clean up the data.
-    df = clean(df)
-    # Replace the ECHE list headers with the corresponding API keys.
-    headers(df)
-    # Process Erasmus Codes.
-    df = erasmus.process(df)
-    # Process countries.
-    df = country.process(df)
-
-    return df
-
-if __name__ == '__main__':
-    df = main()
-
-    db.df_to_sql(df)
-
-    print(f'DataFrame loaded to {local_settings.db_filename}')

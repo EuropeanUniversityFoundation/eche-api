@@ -1,5 +1,6 @@
-import pandas as pd
 import random
+
+import pandas as pd
 
 # Curated list of country codes and country names.
 cc_country = {
@@ -308,6 +309,7 @@ def main():
 
     print()
     print(df)
+
 
 if __name__ == '__main__':
     main()

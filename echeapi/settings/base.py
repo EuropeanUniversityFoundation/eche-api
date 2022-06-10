@@ -1,14 +1,6 @@
-# Local settings example.
-# Duplicate this file as 'local_settings.py' which should be ignored by git.
-
-# Flask requires a secret key to display flash messages.
-app_secret_key = ''
 
 # Data directory.
 data_dir = 'data'
-
-# ECHE list source file (Excel).
-eche_xlsx = 'accredited-heis-erasmus-2021-2027-mar22_en.xlsx'
 
 # ECHE list headers and corresponding API keys.
 eche_headers = {
@@ -54,7 +46,3 @@ processed_fields = [
     'erasmusCodeCountryCode',
     'countryCode'
 ]
-
-# Known API keys.
-known_keys = list(eche_headers.values())
-known_keys.extend(processed_fields)
