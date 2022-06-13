@@ -30,22 +30,26 @@ In order to run the app, some preparatory steps are needed:
 
 ## Development
 
+When developing the Python application, install the development packages as well:
+
+    # install required libraries
+    pip install -r requirements-dev.txt
+
+Inside the `redoc` directory there is a `README` file with detailed instructions to build the interactive specification.
+
 ### Built-in server
 
-To use the built-in web server locally, in debug mode, execute the following commands:
-
-    # first step can be skipped due to autodiscovery
-    export FLASK_APP=echeapi
-    # debug mode ON
-    export FLASK_ENV=development
-    flask run
-
-Or:
+To use the built-in web server locally, in debug mode, execute the following command:
 
     python echeapi/manage.py run
 
+Or:
 
-## Depoyment
+    export FLASK_APP=echeapi
+    export FLASK_ENV=development
+    flask run
+
+## Deployment
 
 ### Apache2 + uWSGI
 
