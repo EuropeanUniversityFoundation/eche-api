@@ -16,7 +16,7 @@ As such, while the original Erasmus Codes are retained, the ECHE API also provid
 6. Any _country_ component with **one letter** is followed by **two spaces**;
 7. Any _country_ component with **two letters** is followed by **one space**;
 8. The only known _country_ components with **three letters** are `IRL` and `LUX`;
-9. The _country_ component if followed by a _city_ component;
+9. The _country_ component is followed by a _city_ component;
 10. The _city_ component always starts and ends with a letter;
 11. The _city_ component may contain letters and hyphens;
 12. The _city_ component has variable length;
@@ -61,3 +61,9 @@ This API key may be useful for grouping entries without the need to process the 
 The _country_ component, or prefix of a normalized Erasmus Code is also converted to an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code, according to a known correspondence list.
 
 This API key may be useful for grouping entries without the need to process the Erasmus Codes, either original or normalized.
+
+## Further notes on the _country_ and _city_ components
+
+It is not uncommon for the Erasmus Code to contain a _city_ component that is different from the `city` field, since the components in the Erasmus code are related to its issuance, and not necessarily to the physical or legal address of an institution.
+
+The same holds true for the _country_ component - please refer to `03_COUNTRY.md` for more information on this topic.
