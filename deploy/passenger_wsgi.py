@@ -1,5 +1,6 @@
 
-import sys, os
+import os
+import sys
 
 VENV = os.path.dirname(__file__) + '/venv'
 PYTHON_BIN = VENV + '/bin/python'
