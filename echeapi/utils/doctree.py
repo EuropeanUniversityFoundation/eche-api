@@ -4,8 +4,9 @@ import os
 docs_rootdir = 'docs'
 
 display_dir = 'display_dir'
-display_md  = 'display_md'
+display_md = 'display_md'
 display_err = 'display_error'
+
 
 def fetch(args):
     path = docs_rootdir
@@ -24,10 +25,13 @@ def fetch(args):
 
     return display, content
 
+
 def tree(root=docs_rootdir):
     menu = {}
-    for item in os.listdir(root):
-        path = os.path.join(root,item)
+    dir = os.listdir(root)
+    dir.sort()
+    for item in dir:
+        path = os.path.join(root, item)
         if os.path.isdir(path):
             menu[item] = tree(path)
         elif os.path.isfile(path):
@@ -35,8 +39,9 @@ def tree(root=docs_rootdir):
 
     return menu
 
+
 if __name__ == '__main__':
-    print(f"Docs\n")
+    print("Docs\n")
 
     menu = tree()
     print(menu)

@@ -9,6 +9,7 @@ from echeapi.utils import api, doctree, eche
 def index():
     return render_template('page/home.html')
 
+
 @app.route("/docs/")
 @app.route("/docs/<path:params>")
 def docs(params=''):
@@ -30,7 +31,7 @@ def docs(params=''):
 
     if display == doctree.display_err:
         main = ''
-        flash('Path is invalid.', category='error')
+        flash(f'Path is invalid: {params}', category='error')
 
     # Build the sidebar menu.
     menu = doctree.tree()
@@ -53,6 +54,7 @@ def docs(params=''):
     )
     # return render_template('page/placeholder.html', menu_parent='docs')
 
+
 @app.route("/explore/")
 def explore():
     content = Markup(eche.to_html(classes=['table', 'table-striped', 'small']))
@@ -62,13 +64,15 @@ def explore():
         content=content
     )
 
+
 @app.route("/openapi/")
 def openapi():
     return render_template('redoc/index.html')
 
-@app.route("/api/", methods = ['GET'])
-@app.route("/api/<string:key>/", methods = ['GET'])
-@app.route("/api/<string:key>/<string:value>/", methods = ['GET'])
+
+@app.route("/api/", methods=['GET'])
+@app.route("/api/<string:key>/", methods=['GET'])
+@app.route("/api/<string:key>/<string:value>/", methods=['GET'])
 def api_(key=None, value=None):
     fields = []
     args = request.args
