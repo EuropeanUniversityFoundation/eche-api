@@ -51,6 +51,21 @@ Or:
 
 ## Deployment
 
+By default, this application is deployed on a server with the Plesk web admin panel. Alternative deployment methods are also suggested below.
+
+### Plesk + nginx + Phusion Passenger
+
+Deploy the code to the `DOCROOT`; for a top-level domain, it will be `httpdocs`; for a subdomain, it will look like `sub.domain.tld`. Follow the installation instructions above.
+
+**After** the code is deployed, go to _Hosting settings_ and change the _Document root_ to `DOCROOT/echeapi`.
+
+Then, go to _Apache & nginx Settings_ and do the following:
+
+1. under _nginx settings_ turn off __Proxy mode__ to stop using Apache;
+2. under _Additional nginx directives_ add `passenger_enabled on;` and save.
+
+_Phusion Passenger_ by convention will read the `passenger_wsgi.py` file from one level above the new _Document root_ and use the correct Python binary from the `venv` created upon installation.
+
 ### Apache2 + uWSGI
 
 Requirements:
