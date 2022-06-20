@@ -1,14 +1,15 @@
+"""
+Handle Erasmus codes.
+
+Erasmus codes for HEIs follow a naming convention that can be misinterpreted.
+The first 3 characters correspond to a country code and a space filler, when
+  needed; the country code can be 1, 2 or 3 characters long.
+In some cases, found in production applications, this rule is not followed.
+As such, it is necessary to check whether the Erasmus code is properly
+  formatted with the correct number of spaces.
+"""
 
 import pandas as pd
-
-# Handle Erasmus codes.
-#
-# Erasmus codes for HEIs follow a naming convention that can be misinterpreted.
-# The first 3 characters correspond to a country code and a space filler, when
-#   needed; the country code can be 1, 2 or 3 characters long.
-# In some cases, found in production applications, this rule is not followed.
-# As such, it is necessary to check whether the Erasmus code is properly
-#   formatted with the correct number of spaces.
 
 # 3 letter country codes have no trailing spaces, so they must be defined.
 known3letter = ['LUX', 'IRL']
@@ -37,8 +38,9 @@ prefix_cc = {
 }
 
 
-# Normalize Erasmus Codes.
 def normalize(row, ref_col=col_ref, empty=''):
+    """ Normalize Erasmus Codes.
+    """
     item = row[ref_col]
 
     code = item.strip() if item else ''
@@ -118,8 +120,9 @@ def normalize(row, ref_col=col_ref, empty=''):
     return code
 
 
-# Extract NA prefix from Erasmus code.
 def get_prefix(row, ref_col=col_norm):
+    """ Extract NA prefix from Erasmus code.
+    """
     item = row[ref_col]
 
     prefix = item[0:3].strip() if item else ''
@@ -127,8 +130,9 @@ def get_prefix(row, ref_col=col_norm):
     return prefix
 
 
-# Extract country code from prefix.
 def get_cc(row, ref_col=col_na):
+    """ Extract country code from prefix.
+    """
     item = row[ref_col]
 
     cc = prefix_cc[item] if item in prefix_cc else item
@@ -136,8 +140,9 @@ def get_cc(row, ref_col=col_na):
     return cc
 
 
-# Complete processing.
 def process(df):
+    """ Complete processing.
+    """
     # Store normalized Erasmus Codes in new column.
     df[col_norm] = df.apply(lambda row: normalize(row), axis=1)
 
@@ -150,8 +155,9 @@ def process(df):
     return df
 
 
-# Main function: run `python erasmus.py` in the console.
 def main():
+    """ Main function: run `python erasmus.py` in the console.
+    """
     mock_codes = [
         'BCITY01',           # faulty, missing spaces
         'B CITY01',          # faulty, missing space

@@ -1,5 +1,7 @@
-# Local settings example.
-# Duplicate this file as 'local_settings.py' which should be ignored by git.
+"""
+Local settings example.
+Duplicate this file as 'local_settings.py' which should be ignored by git.
+"""
 
 # Flask requires a secret key to display flash messages.
 app_secret_key = ''

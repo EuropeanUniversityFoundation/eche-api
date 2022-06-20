@@ -8,8 +8,9 @@ from echeapi import settings
 from echeapi.utils import db
 
 
-# Load the first worksheet of an Excel file into a DataFrame.
 def load():
+    """ Load the first worksheet of an Excel file into a DataFrame.
+    """
     eche_xlsx = os.path.join(settings.data_dir, settings.eche_xlsx)
 
     # Load the Excel file.
@@ -32,8 +33,9 @@ def load():
     return df
 
 
-# Clean up whitespace and line characters from a DataFrame.
 def clean(df):
+    """ Clean up whitespace and line characters from a DataFrame.
+    """
     # Strip all strings from whitespace and line characters.
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
 
@@ -44,8 +46,9 @@ def clean(df):
     return df
 
 
-# Rename DataFrame headers.
 def headers(df, headers_dict=settings.eche_headers):
+    """ Rename DataFrame headers.
+    """
     columns = list(df)
 
     # Remove whitespace in column names.
@@ -57,8 +60,9 @@ def headers(df, headers_dict=settings.eche_headers):
     df.rename(columns=headers_dict, inplace=True)
 
 
-# Export a database table to a DataFrame and print it to HTML.
 def to_html(table='eche', fields=[], filter=None, table_id='echeTable', classes=None):
+    """ Export a database table to a DataFrame and print it to HTML.
+    """
     query_params = {
         'table': table,
         'fields': fields,

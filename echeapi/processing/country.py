@@ -270,8 +270,9 @@ col_ref = 'country'
 col_cc = 'countryCode'
 
 
-# Extract country code from country name.
 def get_cc(row, ref_col=col_ref, empty=''):
+    """ Extract country code from country name.
+    """
     item = row[col_ref]
 
     for cc, country in cc_country.items():
@@ -281,15 +282,17 @@ def get_cc(row, ref_col=col_ref, empty=''):
     return empty
 
 
-# Complete processing.
 def process(df):
+    """ Complete processing.
+    """
     # Store country codes from country names in new column.
     df[col_cc] = df.apply(lambda row: get_cc(row), axis=1)
     return df
 
 
-# Main function: run `python country.py` in the console.
 def main():
+    """ Main function: run `python country.py` in the console.
+    """
     countries = []
     for i in range(10):
         country = random.choice(list(cc_country.values()))
