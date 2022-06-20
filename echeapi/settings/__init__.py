@@ -7,7 +7,7 @@ from .default import *
 try:
     from .local import *
 except ImportError:
-    print ('WARNING: Could not import local settings.')
+    print('WARNING: Could not import local settings.')
 
 
 # Project root directory

@@ -20,10 +20,11 @@ def init(db_filename=settings.db_filename, schema=settings.schema_filename):
 
     return connection
 
+
 def df_to_sql(df, table=settings.db_table):
     connection = init()
-
     df.to_sql(table, connection, if_exists='replace', index=False)
+
 
 def sql_to_df(query_params, date_fields=settings.date_fields):
     table = query_params['table']
@@ -48,6 +49,7 @@ def sql_to_df(query_params, date_fields=settings.date_fields):
     df = pd.read_sql_query(query, connection, coerce_float=False, parse_dates=date_fields)
 
     return df
+
 
 def fetchall(table='eche', connection=None):
     if connection is None:

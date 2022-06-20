@@ -15,7 +15,7 @@ eche_headers = {
     'Country': 'country',
     'Webpage': 'webpage',
     'ECHE Start Date': 'echeStartDate',
-    'ECHE End Date': 'echeEndDate'
+    'ECHE End Date': 'echeEndDate',
 }
 
 # ECHE null strings.
@@ -36,7 +36,7 @@ db_table = 'eche'
 # Date fields to be parsed when reading from the database.
 date_fields = [
     'echeStartDate',
-    'echeEndDate'
+    'echeEndDate',
 ]
 
 # Processed fields.
@@ -44,7 +44,7 @@ processed_fields = [
     'erasmusCodeNormalized',
     'erasmusCodePrefix',
     'erasmusCodeCountryCode',
-    'countryCode'
+    'countryCode',
 ]
 
 # Log files directory.

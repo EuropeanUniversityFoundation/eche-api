@@ -6,7 +6,7 @@ from echeapi.utils import db
 def list(table='eche', fields=[], filter=None):
     query_params = {
         'table': table,
-        'fields': fields
+        'fields': fields,
     }
     if filter is not None:
         query_params['filter'] = filter
@@ -19,8 +19,10 @@ def list(table='eche', fields=[], filter=None):
 
     return df.to_json(orient="records")
 
+
 def main():
     list()
+
 
 if __name__ == '__main__':
     main()

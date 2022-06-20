@@ -1,3 +1,4 @@
+
 import pandas as pd
 
 # Handle Erasmus codes.
@@ -13,27 +14,28 @@ import pandas as pd
 known3letter = ['LUX', 'IRL']
 
 # Column names, as API keys.
-col_ref     = 'erasmusCode'
-col_norm    = 'erasmusCodeNormalized'
-col_na      = 'erasmusCodePrefix'
-col_cc      = 'erasmusCodeCountryCode'
+col_ref = 'erasmusCode'
+col_norm = 'erasmusCodeNormalized'
+col_na = 'erasmusCodePrefix'
+col_cc = 'erasmusCodeCountryCode'
 
 # Match the known prefixes in Erasmus codes to ISO 3166 country codes.
 prefix_cc = {
-    'A':    'AT',
-    'B':    'BE',
-    'D':    'DE',
-    'E':    'ES',
-    'SF':   'FI',
-    'F':    'FR',
-    'G':    'GR',
-    'IRL':  'IE',
-    'I':    'IT',
-    'LUX':  'LU',
-    'N':    'NO',
-    'P':    'PT',
-    'S':    'SE'
+    'A': 'AT',
+    'B': 'BE',
+    'D': 'DE',
+    'E': 'ES',
+    'SF': 'FI',
+    'F': 'FR',
+    'G': 'GR',
+    'IRL': 'IE',
+    'I': 'IT',
+    'LUX': 'LU',
+    'N': 'NO',
+    'P': 'PT',
+    'S': 'SE',
 }
+
 
 # Normalize Erasmus Codes.
 def normalize(row, ref_col=col_ref, empty=''):
@@ -98,14 +100,14 @@ def normalize(row, ref_col=col_ref, empty=''):
                     # Reassemble the parts.
                     code = code[0:3] + "-".join(code_parts)
 
-            # Check the length of the code after the cleaning.
-            if code[-3:].isdigit():
-                code_txt = code[:-3]
-                code_no = code[-3:]
-            else:
-                code_txt = code[:-2]
-                code_no = code[-2:]
-            # Truncate the text component at 10 characters.
+            # # Check the length of the code after the cleaning.
+            # if code[-3:].isdigit():
+            #     code_txt = code[:-3]
+            #     code_no = code[-3:]
+            # else:
+            #     code_txt = code[:-2]
+            #     code_no = code[-2:]
+            # # Truncate the text component at 10 characters.
             # code = code_txt[:10] + code_no
 
         # Handle invalid codes
@@ -115,6 +117,7 @@ def normalize(row, ref_col=col_ref, empty=''):
 
     return code
 
+
 # Extract NA prefix from Erasmus code.
 def get_prefix(row, ref_col=col_norm):
     item = row[ref_col]
@@ -123,6 +126,7 @@ def get_prefix(row, ref_col=col_norm):
 
     return prefix
 
+
 # Extract country code from prefix.
 def get_cc(row, ref_col=col_na):
     item = row[ref_col]
@@ -130,6 +134,7 @@ def get_cc(row, ref_col=col_na):
     cc = prefix_cc[item] if item in prefix_cc else item
 
     return cc
+
 
 # Complete processing.
 def process(df):
@@ -144,26 +149,27 @@ def process(df):
 
     return df
 
+
 # Main function: run `python erasmus.py` in the console.
 def main():
     mock_codes = [
-        'BCITY01',          # faulty, missing spaces
-        'B CITY01',         # faulty, missing space
-        'B  CITY01',        # correct
-        'B   CITY01',       # faulty, extra spaces
-        ' B  CITY01',       # faulty, does not start with a letter
-        'NLCITY01',         # faulty, missing space
-        '1NL CITY01',       # faulty, starts with number
-        'NL CITY01',        # correct
-        'NL CITY101',       # correct
-        'NL City01',        # faulty, not all uppercase
-        'NL  CITY01',       # faulty, extra space
-        'LUCITY01',         # faulty, chopped country code
-        'LUXCITY01',        # correct
-        'LUXGRAND-DUCHY01', # faulty, text component is too long
-        'LUXCITY01 ',       # faulty, trailing space
-        'LUX CITY01',       # faulty, extra space
-        'LUX  CITY01'       # faulty, extra spaces
+        'BCITY01',           # faulty, missing spaces
+        'B CITY01',          # faulty, missing space
+        'B  CITY01',         # correct
+        'B   CITY01',        # faulty, extra spaces
+        ' B  CITY01',        # faulty, does not start with a letter
+        'NLCITY01',          # faulty, missing space
+        '1NL CITY01',        # faulty, starts with number
+        'NL CITY01',         # correct
+        'NL CITY101',        # correct
+        'NL City01',         # faulty, not all uppercase
+        'NL  CITY01',        # faulty, extra space
+        'LUCITY01',          # faulty, chopped country code
+        'LUXCITY01',         # correct
+        'LUXGRAND-DUCHY01',  # faulty, text component is too long
+        'LUXCITY01 ',        # faulty, trailing space
+        'LUX CITY01',        # faulty, extra space
+        'LUX  CITY01',       # faulty, extra spaces
     ]
 
     df = pd.DataFrame({col_ref: mock_codes})
@@ -191,6 +197,7 @@ def main():
 
     print()
     print(df[df[col_norm] == ''])
+
 
 if __name__ == '__main__':
     main()

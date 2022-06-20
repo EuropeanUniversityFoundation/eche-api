@@ -22,8 +22,8 @@ def docs(params=''):
         main = Markup(
             render_template(
                 'components/markdown.html',
-                content=markdown
-            )
+                content=markdown,
+            ),
         )
 
     if display == doctree.display_dir:
@@ -39,8 +39,8 @@ def docs(params=''):
         render_template(
             'components/list.html',
             element='ul',
-            dict={'docs': menu}
-        )
+            dict={'docs': menu},
+        ),
     )
 
     # Build the page.
@@ -50,7 +50,7 @@ def docs(params=''):
         htag=htag,
         main=main,
         sidebar=sidebar,
-        card_title='Directory tree'
+        card_title='Directory tree',
     )
     # return render_template('page/placeholder.html', menu_parent='docs')
 
@@ -61,7 +61,7 @@ def explore():
     return render_template(
         'page/explore.html',
         menu_parent='explore',
-        content=content
+        content=content,
     )
 
 

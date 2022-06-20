@@ -31,6 +31,7 @@ def load():
 
     return df
 
+
 # Clean up whitespace and line characters from a DataFrame.
 def clean(df):
     # Strip all strings from whitespace and line characters.
@@ -42,6 +43,7 @@ def clean(df):
 
     return df
 
+
 # Rename DataFrame headers.
 def headers(df, headers_dict=settings.eche_headers):
     columns = list(df)
@@ -49,16 +51,17 @@ def headers(df, headers_dict=settings.eche_headers):
     # Remove whitespace in column names.
     for col in columns:
         if col != col.strip():
-            df.rename(columns={col:col.strip()}, inplace=True)
+            df.rename(columns={col: col.strip()}, inplace=True)
 
     # Rename columns with machine names.
     df.rename(columns=headers_dict, inplace=True)
+
 
 # Export a database table to a DataFrame and print it to HTML.
 def to_html(table='eche', fields=[], filter=None, table_id='echeTable', classes=None):
     query_params = {
         'table': table,
-        'fields': fields
+        'fields': fields,
     }
     if filter is not None:
         query_params['filter'] = filter
@@ -71,5 +74,5 @@ def to_html(table='eche', fields=[], filter=None, table_id='echeTable', classes=
         na_rep='',
         classes=classes,
         table_id=table_id,
-        render_links=True
+        render_links=True,
     )
