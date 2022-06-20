@@ -16,7 +16,8 @@ def fetch(args):
         content = f"This is a directory: docs/{os.path.relpath(path, settings.docs_dir)}"
     elif os.path.isfile(path):
         display = display_md
-        content = open(path, "r")
+        with open(path, "r") as f:
+            content = f.read()
     else:
         display = display_err
         content = "Cannot display anything."
@@ -27,8 +28,7 @@ def fetch(args):
 def tree(root=settings.docs_dir):
     menu = {}
     dir = os.listdir(root)
-    dir.sort()
-    for item in dir:
+    for item in sorted(dir):
         path = os.path.join(root, item)
         if os.path.isdir(path):
             menu[item] = tree(path)

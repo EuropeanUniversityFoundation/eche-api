@@ -132,10 +132,7 @@ def get_cc(row, ref_col=col_na):
     """ Extract country code from prefix.
     """
     item = row[ref_col]
-
-    cc = prefix_cc[item] if item in prefix_cc else item
-
-    return cc
+    return prefix_cc.get(item, item)
 
 
 def process(df):

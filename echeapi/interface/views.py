@@ -18,11 +18,10 @@ def docs(params=''):
 
     if display == doctree.display_md:
         htag = 'h5'
-        markdown = content.read()
         main = Markup(
             render_template(
                 'components/markdown.html',
-                content=markdown,
+                content=content,
             ),
         )
 

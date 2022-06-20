@@ -13,9 +13,10 @@ def init(db_filename=settings.db_filename, schema=settings.schema_filename):
     c = connection.cursor()
 
     schema_path = os.path.join(settings.schema_dir, schema)
-    schema_content = open(schema_path, "r")
+    with open(schema_path, "r") as f:
+        schema_content = f.read()
 
-    c.execute(schema_content.read())
+    c.execute(schema_content)
     connection.commit()
 
     return connection
@@ -30,7 +31,7 @@ def sql_to_df(query_params, date_fields=settings.date_fields):
     table = query_params['table']
 
     field_list = [f for f in query_params['fields']]
-    fields = ",".join(field_list) if len(field_list) > 0 else "*"
+    fields = ",".join(field_list) if field_list else "*"
 
     if 'filter' in query_params:
         key, value = query_params['filter']

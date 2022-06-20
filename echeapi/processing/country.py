@@ -261,6 +261,11 @@ cc_country = {
     "ZW": "Zimbabwe",
 }
 
+# Map names to codes.
+cc_country_by_name = {
+    name: cc for cc, name in cc_country.items()
+}
+
 # Column names, as API keys.
 col_ref = 'country'
 col_cc = 'countryCode'
@@ -270,12 +275,7 @@ def get_cc(row, ref_col=col_ref, empty=''):
     """ Extract country code from country name.
     """
     item = row[ref_col]
-
-    for cc, country in cc_country.items():
-        if item == country:
-            return cc
-
-    return empty
+    return cc_country_by_name.get(item, empty)
 
 
 def process(df):

@@ -73,10 +73,7 @@ def test_erasmus():
 
 
 def test_country():
-    countries = []
-    for i in range(10):
-        _country = random.choice(list(country.cc_country.values()))
-        countries.append(_country)
+    countries = random.sample(list(country.cc_country.values()), 10)
 
     df = pd.DataFrame({country.col_ref: countries})
 
