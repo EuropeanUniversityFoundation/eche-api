@@ -10,7 +10,7 @@ services:
       - PROD_BASE_URL=${PROD_BASE_URL}
     volumes:
       - ./:/var/www/html
-      - ../static/redoc:/var/www/html/upstream
+      - ../echeapi/interface/static/redoc:/var/www/html/upstream
     ports:
       - "${REDOC_PORT}:8080"
     command: sh -c "tail -f /dev/null"

@@ -1,18 +1,14 @@
-from flask import Flask, render_template, Markup, Response, request, flash
-from jinja_markdown import MarkdownExtension
-import doctree
-import eche
-import response
 
-import local_settings
+from flask import flash, Markup, render_template, request, Response
 
-app = Flask(__name__)
-app.jinja_env.add_extension(MarkdownExtension)
-app.secret_key = local_settings.app_secret_key
+from echeapi import app, settings
+from echeapi.utils import api, doctree, eche
+
 
 @app.route("/")
 def index():
     return render_template('page/home.html')
+
 
 @app.route("/docs/")
 @app.route("/docs/<path:params>")
@@ -22,20 +18,22 @@ def docs(params=''):
 
     if display == doctree.display_md:
         htag = 'h5'
-        markdown = content.read()
         main = Markup(
             render_template(
                 'components/markdown.html',
-                content=markdown
-            )
+                content=content,
+            ),
         )
 
-    if display == doctree.display_dir:
+    elif display == doctree.display_dir:
         main = content
 
-    if display == doctree.display_err:
+    elif display == doctree.display_err:
         main = ''
-        flash('Path is invalid.', category='error')
+        flash(f'Path is invalid: {params}', category='error')
+
+    else:
+        raise ValueError(display)
 
     # Build the sidebar menu.
     menu = doctree.tree()
@@ -43,8 +41,9 @@ def docs(params=''):
         render_template(
             'components/list.html',
             element='ul',
-            dict={'docs': menu}
-        )
+            dict={'docs': menu},
+            prefix='docs',
+        ),
     )
 
     # Build the page.
@@ -54,9 +53,10 @@ def docs(params=''):
         htag=htag,
         main=main,
         sidebar=sidebar,
-        card_title='Directory tree'
+        card_title='Directory tree',
     )
     # return render_template('page/placeholder.html', menu_parent='docs')
+
 
 @app.route("/explore/")
 def explore():
@@ -64,29 +64,28 @@ def explore():
     return render_template(
         'page/explore.html',
         menu_parent='explore',
-        content=content
+        content=content,
     )
+
 
 @app.route("/openapi/")
 def openapi():
     return render_template('redoc/index.html')
 
-@app.route("/api/", methods = ['GET'])
-@app.route("/api/<string:key>/", methods = ['GET'])
-@app.route("/api/<string:key>/<string:value>/", methods = ['GET'])
-def api(key=None, value=None):
+
+@app.route("/api/", methods=['GET'])
+@app.route("/api/<string:key>/", methods=['GET'])
+@app.route("/api/<string:key>/<string:value>/", methods=['GET'])
+def api_(key=None, value=None):
     fields = []
     args = request.args
     if 'fields' in args:
         request_fields = args.get("fields").split(',')
-        fields = [f for f in request_fields if f in local_settings.known_keys]
+        fields = [f for f in request_fields if f in settings.known_keys]
 
-    if key in local_settings.known_keys:
-        body = response.list(filter=(key, value), fields=fields)
+    if key in settings.known_keys:
+        body = api.list(filter=(key, value), fields=fields)
     else:
-        body = response.list(fields=fields)
+        body = api.list(fields=fields)
 
     return Response(body, mimetype='application/json')
-
-if __name__ == '__main__':
-    app.run(debug=True)

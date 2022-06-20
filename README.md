@@ -21,26 +21,50 @@ The main app is built with Flask and it requires Python 3.8+ to run. To start th
 In order to run the app, some preparatory steps are needed:
 
     # check the local settings
-    cp example.local_settings.py local_settings.py
-    nano local_settings.py
+    cp echeapi/settings/default.py echeapi/settings/local.py
+    nano echeapi/settings/local.py
     # create a database
-    python db.py
+    python echeapi/manage.py initialize
     # populate the database
-    python eche.py
+    python echeapi/manage.py populate
 
 ## Development
 
+When developing the Python application, install the development packages as well:
+
+    # install required libraries
+    pip install -r requirements-dev.txt
+
+Inside the `redoc` directory there is a `README` file with detailed instructions to build the interactive specification.
+
 ### Built-in server
 
-To use the built-in web server locally, in debug mode, execute the following commands:
+To use the built-in web server locally, in debug mode, execute the following command:
 
-    # first step can be skipped due to autodiscovery
-    export FLASK_APP=app
-    # debug mode ON
+    python echeapi/manage.py run
+
+Or:
+
+    export FLASK_APP=echeapi
     export FLASK_ENV=development
     flask run
 
-## Depoyment
+## Deployment
+
+By default, this application is deployed on a server with the Plesk web admin panel. Alternative deployment methods are also suggested below.
+
+### Plesk + nginx + Phusion Passenger
+
+Deploy the code to the `DOCROOT`; for a top-level domain, it will be `httpdocs`; for a subdomain, it will look like `sub.domain.tld`. Follow the installation instructions above.
+
+**After** the code is deployed, go to _Hosting settings_ and change the _Document root_ to `DOCROOT/echeapi`.
+
+Then, go to _Apache & nginx Settings_ and do the following:
+
+1. under _nginx settings_ turn off __Proxy mode__ to stop using Apache;
+2. under _Additional nginx directives_ add `passenger_enabled on;` and save.
+
+_Phusion Passenger_ by convention will read the `passenger_wsgi.py` file from one level above the new _Document root_ and use the correct Python binary from the `venv` created upon installation.
 
 ### Apache2 + uWSGI
 

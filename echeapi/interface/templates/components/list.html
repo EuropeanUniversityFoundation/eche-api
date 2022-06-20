@@ -2,7 +2,7 @@
 <{{ element }}>
   {% for key, value in dict.items() recursive -%}
   <li>
-  {%- if value is string -%}<a href="{{ value }}">{%- endif -%}
+  {%- if value is string -%}<a href="/{{ prefix }}/{{ value }}">{%- endif -%}
   {{ key }}
   {%- if value is string -%}</a>{%- endif -%}
   {%- if value is mapping %}

@@ -1,0 +1,4 @@
+-r requirements.txt
+flake8
+ipython
+isort<5.0
