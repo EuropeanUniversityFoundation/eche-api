@@ -37,17 +37,20 @@ def sql_to_df(query_params, date_fields=settings.date_fields):
         key, value = query_params['filter']
         if value is None:
             query = f"SELECT {fields} FROM {table} WHERE {key} IS NULL;"
+            params = ()
         else:
             if key in date_fields:
                 dt = datetime.fromisoformat(value)
                 value = dt.strftime('%Y-%m-%d %H:%M:%S')
-            query = f"SELECT {fields} FROM {table} WHERE {key}='{value}';"
+            query = f"SELECT {fields} FROM {table} WHERE {key} = ?;"
+            params = (value,)
     else:
         query = f"SELECT {fields} FROM {table};"
+        params = ()
 
     connection = init()
 
-    df = pd.read_sql_query(query, connection, coerce_float=False, parse_dates=date_fields)
+    df = pd.read_sql_query(query, connection, coerce_float=False, parse_dates=date_fields, params=params)
 
     return df
 
