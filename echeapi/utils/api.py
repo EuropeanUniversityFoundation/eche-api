@@ -3,10 +3,10 @@ from echeapi import settings
 from echeapi.utils import db
 
 
-def list(table='eche', fields=[], filter=None):
+def list(table='eche', fields=None, filter=None):
     query_params = {
         'table': table,
-        'fields': fields,
+        'fields': fields or [],
     }
     if filter is not None:
         query_params['filter'] = filter

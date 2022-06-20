@@ -273,7 +273,7 @@ col_cc = 'countryCode'
 def get_cc(row, ref_col=col_ref, empty=''):
     """ Extract country code from country name.
     """
-    item = row[col_ref]
+    item = row[ref_col]
 
     for cc, country in cc_country.items():
         if item == country:

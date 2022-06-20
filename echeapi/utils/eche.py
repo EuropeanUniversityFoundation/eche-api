@@ -60,12 +60,12 @@ def headers(df, headers_dict=settings.eche_headers):
     df.rename(columns=headers_dict, inplace=True)
 
 
-def to_html(table='eche', fields=[], filter=None, table_id='echeTable', classes=None):
+def to_html(table='eche', fields=None, filter=None, table_id='echeTable', classes=None):
     """ Export a database table to a DataFrame and print it to HTML.
     """
     query_params = {
         'table': table,
-        'fields': fields,
+        'fields': fields or [],
     }
     if filter is not None:
         query_params['filter'] = filter

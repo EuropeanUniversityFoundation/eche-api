@@ -26,12 +26,15 @@ def docs(params=''):
             ),
         )
 
-    if display == doctree.display_dir:
+    elif display == doctree.display_dir:
         main = content
 
-    if display == doctree.display_err:
+    elif display == doctree.display_err:
         main = ''
         flash(f'Path is invalid: {params}', category='error')
+
+    else:
+        raise ValueError(display)
 
     # Build the sidebar menu.
     menu = doctree.tree()
