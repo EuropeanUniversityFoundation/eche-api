@@ -1,7 +1,7 @@
 
 import os
 
-docs_rootdir = 'docs'
+from echeapi import settings
 
 display_dir = 'display_dir'
 display_md = 'display_md'
@@ -9,13 +9,11 @@ display_err = 'display_error'
 
 
 def fetch(args):
-    path = docs_rootdir
-    for arg in args:
-        path = os.path.join(path, arg)
+    path = os.path.join(settings.docs_dir, *args)
 
     if os.path.isdir(path):
         display = display_dir
-        content = "This is a directory: " + str(path)
+        content = f"This is a directory: docs/{os.path.relpath(path, settings.docs_dir)}"
     elif os.path.isfile(path):
         display = display_md
         content = open(path, "r")
@@ -26,7 +24,7 @@ def fetch(args):
     return display, content
 
 
-def tree(root=docs_rootdir):
+def tree(root=settings.docs_dir):
     menu = {}
     dir = os.listdir(root)
     dir.sort()
@@ -35,13 +33,6 @@ def tree(root=docs_rootdir):
         if os.path.isdir(path):
             menu[item] = tree(path)
         elif os.path.isfile(path):
-            menu[item] = '/' + path
+            menu[item] = os.path.relpath(path, settings.docs_dir)
 
     return menu
-
-
-if __name__ == '__main__':
-    print("Docs\n")
-
-    menu = tree()
-    print(menu)

@@ -5,7 +5,7 @@ import subprocess
 from echeapi import settings
 
 
-def main():
+def main(*args):
     os.chdir(settings.src_dir)
 
     print('=== FLAKE8 ===')
@@ -13,7 +13,3 @@ def main():
 
     print('=== ISORT ===')
     subprocess.run(['isort', '--apply'])
-
-
-if __name__ == '__main__':
-    main()

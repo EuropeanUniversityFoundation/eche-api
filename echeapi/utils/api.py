@@ -18,11 +18,3 @@ def list(table='eche', fields=None, filter=None):
             df[field] = df[field].dt.strftime('%Y-%m-%d')
 
     return df.to_json(orient="records")
-
-
-def main():
-    list()
-
-
-if __name__ == '__main__':
-    main()

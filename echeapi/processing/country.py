@@ -1,8 +1,4 @@
 
-import random
-
-import pandas as pd
-
 # Curated list of country codes and country names.
 cc_country = {
     "AC": "Ascension Island",
@@ -288,34 +284,3 @@ def process(df):
     # Store country codes from country names in new column.
     df[col_cc] = df.apply(lambda row: get_cc(row), axis=1)
     return df
-
-
-def main():
-    """ Main function: run `python country.py` in the console.
-    """
-    countries = []
-    for i in range(10):
-        country = random.choice(list(cc_country.values()))
-        countries.append(country)
-
-    df = pd.DataFrame({col_ref: countries})
-
-    print('Country code processing\n')
-
-    print('This script will load random countries and get their country codes.')
-
-    input("\nPress Enter to see the countries...")
-
-    print()
-    print(df)
-
-    input("\nPress Enter to see the country codes...")
-
-    df = process(df)
-
-    print()
-    print(df)
-
-
-if __name__ == '__main__':
-    main()

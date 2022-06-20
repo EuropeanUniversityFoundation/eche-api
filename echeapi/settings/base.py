@@ -47,5 +47,8 @@ processed_fields = [
     'countryCode',
 ]
 
+# Docs directory.
+docs_dir = 'docs'
+
 # Log files directory.
 log_dir = ''

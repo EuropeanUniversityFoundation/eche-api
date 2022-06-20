@@ -43,6 +43,7 @@ def docs(params=''):
             'components/list.html',
             element='ul',
             dict={'docs': menu},
+            prefix='docs',
         ),
     )
 

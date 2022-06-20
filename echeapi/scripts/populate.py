@@ -4,7 +4,7 @@ from echeapi.processing import country, erasmus
 from echeapi.utils import db, eche
 
 
-def main():
+def main(*args):
     # Load the ECHE list data into a DataFrame.
     df = eche.load()
     # Clean up the data.

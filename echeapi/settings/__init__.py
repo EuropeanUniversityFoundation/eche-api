@@ -16,6 +16,7 @@ src_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__fil
 data_dir = os.path.join(src_dir, data_dir)
 schema_dir = os.path.join(src_dir, schema_dir)
 db_filename = os.path.join(src_dir, db_filename)
+docs_dir = os.path.join(src_dir, docs_dir)
 log_dir = os.path.join(src_dir, log_dir)
 
 

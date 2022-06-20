@@ -9,8 +9,6 @@ As such, it is necessary to check whether the Erasmus code is properly
   formatted with the correct number of spaces.
 """
 
-import pandas as pd
-
 # 3 letter country codes have no trailing spaces, so they must be defined.
 known3letter = ['LUX', 'IRL']
 
@@ -153,57 +151,3 @@ def process(df):
     df[col_cc] = df.apply(lambda row: get_cc(row), axis=1)
 
     return df
-
-
-def main():
-    """ Main function: run `python erasmus.py` in the console.
-    """
-    mock_codes = [
-        'BCITY01',           # faulty, missing spaces
-        'B CITY01',          # faulty, missing space
-        'B  CITY01',         # correct
-        'B   CITY01',        # faulty, extra spaces
-        ' B  CITY01',        # faulty, does not start with a letter
-        'NLCITY01',          # faulty, missing space
-        '1NL CITY01',        # faulty, starts with number
-        'NL CITY01',         # correct
-        'NL CITY101',        # correct
-        'NL City01',         # faulty, not all uppercase
-        'NL  CITY01',        # faulty, extra space
-        'LUCITY01',          # faulty, chopped country code
-        'LUXCITY01',         # correct
-        'LUXGRAND-DUCHY01',  # faulty, text component is too long
-        'LUXCITY01 ',        # faulty, trailing space
-        'LUX CITY01',        # faulty, extra space
-        'LUX  CITY01',       # faulty, extra spaces
-    ]
-
-    df = pd.DataFrame({col_ref: mock_codes})
-
-    print('Erasmus code processing\n')
-
-    print('This script will load and normalize some mock Erasmus codes.')
-    print('Some codes are valid, while others have formatting errors.')
-    print('If an error is recoverable, it is handled quietly.')
-    print('If an error is NOT recoverable, an empty string will be stored.')
-
-    input("\nPress Enter to see the mock codes...")
-
-    print()
-    print(df)
-
-    input("\nPress Enter to see the normalized codes...")
-
-    df = process(df)
-
-    print()
-    print(df[df[col_norm] != ''])
-
-    input("\nPress Enter to see the unrecoverable codes...")
-
-    print()
-    print(df[df[col_norm] == ''])
-
-
-if __name__ == '__main__':
-    main()

@@ -11,12 +11,12 @@ def main(cmd):
     except ImportError:
         print('Invalid command')
     else:
-        script.main()
+        script.main(*sys.argv[2:])
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Usage: ./manage.py initialize|populate|run|lint')
+        print('Usage: ./manage.py initialize|populate|run|lint|test')
     else:
         sys.path[0] = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         main(sys.argv[1])
