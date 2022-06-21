@@ -20,4 +20,4 @@ app.jinja_env.add_extension(MarkdownExtension)
 app.secret_key = settings.app_secret_key
 app.logger.addHandler(file_handler)
 
-import echeapi.interface.views
+from echeapi.interface.views import api, errors, pages
