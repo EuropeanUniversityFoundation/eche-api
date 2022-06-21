@@ -20,7 +20,7 @@ def fetch(args):
             content = f.read()
     else:
         display = display_err
-        content = "Cannot display anything."
+        content = "Cannot display the requested content."
 
     return display, content
 

@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
         <div class="container">
           <div class="navbar-brand">ECHE API</div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
     </header>
 
     <div class="container">
-      <section class="content my-5">
+      <section class="content my-5" role="main">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
           <div class="flash {{ category }}">{{ message }}</div>

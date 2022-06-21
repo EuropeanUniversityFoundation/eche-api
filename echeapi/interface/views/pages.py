@@ -18,6 +18,7 @@ def index():
 def docs(params=''):
     display, content = doctree.fetch(params.split('/'))
     htag = 'h1'
+    main = Markup(render_template('snippets/docs-placeholder.html'))
 
     if display == doctree.display_md:
         htag = 'h5'
@@ -29,10 +30,10 @@ def docs(params=''):
         )
 
     elif display == doctree.display_dir:
-        main = content
+        if params != '':
+            flash(content, category='warning')
 
     elif display == doctree.display_err:
-        main = ''
         flash(f'Path is invalid: {params}', category='error')
 
     else:
