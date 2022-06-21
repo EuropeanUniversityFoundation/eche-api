@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-{%- set active_page = index -%}
 
 {% block content %}
-  <h1>{% block title %}Page not found{% endblock %}</h1>
-  <p><em>{{ message }}</em></p>
+  <h1>{% block title %}{{ error.name }}{% endblock %}</h1>
+  <p><em>{{ error.description }}</em></p>
 {% endblock %}

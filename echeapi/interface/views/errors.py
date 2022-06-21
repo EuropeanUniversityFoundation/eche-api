@@ -5,16 +5,16 @@ from echeapi import app
 
 
 @app.errorhandler(404)
-def page_not_found(message):
+def page_not_found(error):
     return render_template(
         'errors/404.html',
-        message=message,
-    ), 404
+        error=error,
+    ), error.code
 
 
 @app.errorhandler(500)
-def server_error(message):
+def server_error(error):
     return render_template(
         'errors/500.html',
-        message=message,
-    ), 500
+        error=error,
+    ), error.code

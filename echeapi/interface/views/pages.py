@@ -7,7 +7,10 @@ from echeapi.utils import doctree, eche
 
 @app.route("/")
 def index():
-    return render_template('page/home.html')
+    return render_template(
+        'page/home.html',
+        menu_parent='index',
+    )
 
 
 @app.route("/docs/")
