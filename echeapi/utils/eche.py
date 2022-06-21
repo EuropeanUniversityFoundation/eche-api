@@ -1,6 +1,4 @@
 
-import os
-
 import pandas as pd
 from openpyxl import load_workbook
 
@@ -8,13 +6,11 @@ from echeapi import settings
 from echeapi.utils import db
 
 
-def load():
+def load(fname):
     """ Load the first worksheet of an Excel file into a DataFrame.
     """
-    eche_xlsx = os.path.join(settings.data_dir, settings.eche_xlsx)
-
     # Load the Excel file.
-    workbook = load_workbook(eche_xlsx, data_only=True)
+    workbook = load_workbook(fname, data_only=True)
 
     # Load the first worksheet.
     idx, sheet = next(enumerate(workbook.worksheets))
