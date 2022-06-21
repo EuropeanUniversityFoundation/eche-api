@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {%- set active_page = 'explore' -%}
 
+{% block headextras %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+$(document).ready( function () {
+  $('#echeTable').DataTable();
+} );
+</script>
+{% endblock %}
+
 {% block content %}
   <h1>{% block title %}Explore{% endblock %}</h1>
   <hr>
