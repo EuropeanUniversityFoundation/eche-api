@@ -28,4 +28,4 @@ known_keys.extend(processed_fields)
 try:
     os.makedirs(log_dir, mode=0o755, exist_ok=True)
 except OSError:
-    print(33, f'WARNING: Could not create logs directory: {log_dir}')
+    print(f'WARNING: Could not create logs directory: {log_dir}')

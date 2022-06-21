@@ -1,13 +1,16 @@
 
-from flask import flash, Markup, render_template, request, Response
+from flask import flash, Markup, render_template
 
-from echeapi import app, settings
-from echeapi.utils import api, doctree, eche
+from echeapi import app
+from echeapi.utils import doctree, eche
 
 
 @app.route("/")
 def index():
-    return render_template('page/home.html')
+    return render_template(
+        'page/home.html',
+        menu_parent='index',
+    )
 
 
 @app.route("/docs/")
@@ -15,6 +18,7 @@ def index():
 def docs(params=''):
     display, content = doctree.fetch(params.split('/'))
     htag = 'h1'
+    main = Markup(render_template('snippets/docs-placeholder.html'))
 
     if display == doctree.display_md:
         htag = 'h5'
@@ -26,10 +30,10 @@ def docs(params=''):
         )
 
     elif display == doctree.display_dir:
-        main = content
+        if params != '':
+            flash(content, category='warning')
 
     elif display == doctree.display_err:
-        main = ''
         flash(f'Path is invalid: {params}', category='error')
 
     else:
@@ -71,21 +75,3 @@ def explore():
 @app.route("/openapi/")
 def openapi():
     return render_template('redoc/index.html')
-
-
-@app.route("/api/", methods=['GET'])
-@app.route("/api/<string:key>/", methods=['GET'])
-@app.route("/api/<string:key>/<string:value>/", methods=['GET'])
-def api_(key=None, value=None):
-    fields = []
-    args = request.args
-    if 'fields' in args:
-        request_fields = args.get("fields").split(',')
-        fields = [f for f in request_fields if f in settings.known_keys]
-
-    if key in settings.known_keys:
-        body = api.list(filter=(key, value), fields=fields)
-    else:
-        body = api.list(fields=fields)
-
-    return Response(body, mimetype='application/json')

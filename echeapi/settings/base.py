@@ -52,3 +52,6 @@ docs_dir = 'docs'
 
 # Log files directory.
 log_dir = ''
+
+# Log format.
+log_format = '[%(asctime)s] [%(levelname)s] %(message)s'

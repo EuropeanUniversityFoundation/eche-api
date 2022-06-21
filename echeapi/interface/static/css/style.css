@@ -14,6 +14,11 @@ body {
   color: green;
 }
 
+.flash.warning {
+  border-color: darkorange;
+  color: #b44700;
+}
+
 .flash.error {
   border-color: red;
   color: red;
