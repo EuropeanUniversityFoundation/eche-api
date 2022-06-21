@@ -1,14 +1,15 @@
 
 import os
-from logging import FileHandler, WARNING
+import logging
 
 from flask import Flask
 from jinja_markdown import MarkdownExtension
 
 from echeapi import settings
 
-file_handler = FileHandler(os.path.join(settings.log_dir, 'app.log'))
-file_handler.setLevel(WARNING)
+file_handler = logging.FileHandler(os.path.join(settings.log_dir, 'app.log'))
+file_handler.setLevel(logging.WARNING)
+file_handler.setFormatter(logging.Formatter(settings.log_format))
 
 app = Flask(
     import_name=__name__,
