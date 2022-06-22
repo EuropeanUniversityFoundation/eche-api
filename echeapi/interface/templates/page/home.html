@@ -1,7 +1,55 @@
 {% extends 'base.html' %}
 {%- set active_page = menu_parent -%}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
-  <h1>{% block title %}Home{% endblock %}</h1>
-  <p><em>This is a work in progress...</em></p>
+  <h1>Welcome to the ECHE List API</h1>
+  <p class="lead">Higher education institutions holding an ECHE - 2021-2027</p>
+  <hr>
+  <div class="row">
+    <div class="col-md-6 d-flex">
+      <div class="card mb-4 flex-fill">
+        <div class="card-header">
+          <a class="text-decoration-none" href="/docs"><h2 class="card-heading h5">Documentation</h2></a>
+        </div>
+        <div class="card-body">
+          <p>This section collects all the documentation related to this application.</p>
+          <p>All the documentation files can be found in the <a href="https://github.com/EuropeanUniversityFoundation/eche-api" target="_blank">GitHub repository</a> as well.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="card mb-4 flex-fill">
+        <div class="card-header">
+          <a class="text-decoration-none" href="/explore"><h2 class="card-heading h5">Explore</h2></a>
+        </div>
+        <div class="card-body">
+          <p>Explore the data via the web UI.</p>
+          <p><em>Under active development.</em></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="card mb-4 flex-fill">
+        <div class="card-header">
+          <a class="text-decoration-none" href="/openapi" target="_blank"><h2 class="card-heading h5">Specification</h2></a>
+        </div>
+        <div class="card-body">
+          <p>Read the OpenAPI specification for the ECHE List API.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="card mb-4 flex-fill">
+        <div class="card-header">
+          <a class="text-decoration-none" href="/api" target="_blank"><h2 class="card-heading h5">API</h2></a>
+        </div>
+        <div class="card-body">
+          <p>Access the API.</p>
+          <p><em>Not user friendly.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
