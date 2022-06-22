@@ -36,11 +36,11 @@ def eche_list(key=None, value=None):
     fields = []
     if 'fields' in args:
         request_fields = args.get("fields").split(',')
-        fields = [f for f in request_fields if f in settings.known_keys]
+        fields = [f for f in request_fields if f in settings.DATA_FIELDS]
 
     filter = None
     if key is not None:
-        if key in settings.known_keys:
+        if key in settings.DATA_FIELDS:
             filter = (key, value)
         else:
             raise ApiError(404, 'Resource not found')

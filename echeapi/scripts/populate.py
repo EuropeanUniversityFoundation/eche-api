@@ -10,7 +10,7 @@ def main(*args):
     if args:
         fname = os.path.abspath(args[0])
     else:
-        fname = os.path.join(settings.data_dir, settings.eche_xlsx)
+        fname = os.path.join(settings.DATA_DIR, settings.DATA_FILENAME)
 
     if not os.path.isfile(fname):
         print(f'File not found: {fname}')
@@ -28,4 +28,4 @@ def main(*args):
 
         db.df_to_sql(df)
 
-        print(f'ECHE data loaded to {settings.db_filename}')
+        print(f'ECHE data loaded to {settings.DB_FILENAME}')

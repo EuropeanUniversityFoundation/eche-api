@@ -36,13 +36,13 @@ def clean(df):
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Nullify certain strings, like formula errors.
-    for s in settings.eche_null_str:
+    for s in settings.ECHE_NULL_STR:
         df.replace({s: None}, inplace=True)
 
     return df
 
 
-def headers(df, headers_dict=settings.eche_headers):
+def headers(df, headers_dict=settings.ECHE_FIELDS):
     """ Rename DataFrame headers.
     """
     columns = list(df)

@@ -1,9 +1,36 @@
 
 # Data directory.
-data_dir = 'data'
+DATA_DIR = 'data'
+
+# Schema directory.
+SCHEMA_DIR = 'schema'
+
+# Schema to install.
+SCHEMA_FILENAME = 'eche.sql'
+
+# Database directory.
+DB_DIR = ''
+
+# Database filename.
+DB_FILENAME = 'eche.db'
+
+# Primary database table.
+DB_TABLE = 'eche'
+
+# Docs directory.
+DOCS_DIR = 'docs'
+
+# Log files directory.
+LOG_DIR = ''
+
+# Log format.
+LOG_FORMAT = '[%(asctime)s] [%(levelname)s] %(message)s'
+
+# ECHE null strings.
+ECHE_NULL_STR = ['#N/A']
 
 # ECHE list headers and corresponding API keys.
-eche_headers = {
+ECHE_FIELDS = {
     'Proposal Number': 'proposalNumber',
     'Erasmus Code': 'erasmusCode',
     'PIC': 'pic',
@@ -18,40 +45,16 @@ eche_headers = {
     'ECHE End Date': 'echeEndDate',
 }
 
-# ECHE null strings.
-eche_null_str = ['#N/A']
-
-# Schema directory.
-schema_dir = 'schema'
-
-# Schema to install.
-schema_filename = 'eche.sql'
-
-# Database filename.
-db_filename = 'eche.db'
-
-# Primary database table.
-db_table = 'eche'
-
 # Date fields to be parsed when reading from the database.
-date_fields = [
+DATE_FIELDS = [
     'echeStartDate',
     'echeEndDate',
 ]
 
 # Processed fields.
-processed_fields = [
+PROCESSED_FIELDS = [
     'erasmusCodeNormalized',
     'erasmusCodePrefix',
     'erasmusCodeCountryCode',
     'countryCode',
 ]
-
-# Docs directory.
-docs_dir = 'docs'
-
-# Log files directory.
-log_dir = ''
-
-# Log format.
-log_format = '[%(asctime)s] [%(levelname)s] %(message)s'

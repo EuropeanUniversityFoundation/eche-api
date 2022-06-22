@@ -8,11 +8,11 @@ import pandas as pd
 from echeapi import settings
 
 
-def init(db_filename=settings.db_filename, schema=settings.schema_filename):
+def init(db_filename=settings.DB_FILENAME, schema=settings.SCHEMA_FILENAME):
     connection = sqlite3.connect(db_filename)
     c = connection.cursor()
 
-    schema_path = os.path.join(settings.schema_dir, schema)
+    schema_path = os.path.join(settings.SCHEMA_DIR, schema)
     with open(schema_path, "r") as f:
         schema_content = f.read()
 
@@ -22,12 +22,12 @@ def init(db_filename=settings.db_filename, schema=settings.schema_filename):
     return connection
 
 
-def df_to_sql(df, table=settings.db_table):
+def df_to_sql(df, table=settings.DB_TABLE):
     connection = init()
     df.to_sql(table, connection, if_exists='replace', index=False)
 
 
-def sql_to_df(query_params, date_fields=settings.date_fields):
+def sql_to_df(query_params, date_fields=settings.DATE_FIELDS):
     table = query_params['table']
 
     field_list = [f for f in query_params['fields']]

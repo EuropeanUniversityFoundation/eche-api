@@ -13,7 +13,7 @@ def list(table='eche', fields=None, filter=None):
 
     df = db.sql_to_df(query_params)
 
-    for field in settings.date_fields:
+    for field in settings.DATE_FIELDS:
         if field in df.columns:
             df[field] = df[field].dt.strftime('%Y-%m-%d')
 
