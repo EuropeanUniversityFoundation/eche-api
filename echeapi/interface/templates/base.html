@@ -29,7 +29,8 @@
               {%- set active_page = active_page -%}
               {%- for href, id, caption, blank in navigation_bar %}
               <li class="nav-item">
-                <a{% if id == active_page %} class="nav-link active"{% else %} class="nav-link"{% endif %} href="{{ href|e }}"{% if blank %} target="_blank"{% endif %}>{{ caption|e }}</a>
+                <a{% if id == active_page %} class="nav-link active"{% else %} class="nav-link"{% endif %} href="{{ href|e }}"{% if blank %} target="_blank" rel="noopener"{% endif %}>{{ caption|e }}
+                {%- if blank -%} <span class="visually-hidden-focusable">(opens in a new tab)</span>{%- endif -%}</a>
               </li>
               {%- endfor %}
             </ul>
