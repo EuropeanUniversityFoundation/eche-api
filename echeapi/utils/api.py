@@ -7,7 +7,7 @@ def as_json(fields=None, filter=None):
     """ Export a database table to a DataFrame and return it in JSON format.
     """
     df = db.fetch(fields=fields, filter=filter)
-    df = df[settings.DATA_FIELDS]
+    df = df[fields if fields else settings.DATA_FIELDS]
 
     for field in settings.DATE_FIELDS:
         if field in df.columns:
