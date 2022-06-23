@@ -31,22 +31,20 @@ def api_error(error):
 @app.route("/api/<string:key>/", methods=['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods=['GET'])
 def eche_list(key=None, value=None):
-    args = request.args
-
-    fields = []
-    if 'fields' in args:
-        request_fields = args.get("fields").split(',')
-        fields = [f for f in request_fields if f in settings.DATA_FIELDS]
+    fields = [
+        f.strip()
+        for f in request.args.get('fields', '').split(',')
+        if f.strip() in settings.DATA_FIELDS
+    ]
 
     filter = None
     if key is not None:
-        if key in settings.DATA_FIELDS:
-            filter = (key, value)
-        else:
+        if key not in settings.DATA_FIELDS:
             raise ApiError(404, 'Resource not found')
+        filter = (key, value)
 
     try:
-        body = api.list(fields=fields, filter=filter)
+        body = api.as_json(fields=fields, filter=filter)
     except Exception:
         app.logger.exception('Error while fetching API data')
         raise ApiError(500, 'Server error')

@@ -16,7 +16,7 @@ def fetch(args):
         content = f"This is a directory: docs/{os.path.relpath(path, settings.DOCS_DIR)}"
     elif os.path.isfile(path):
         display = display_md
-        with open(path, "r") as f:
+        with open(path) as f:
             content = f.read()
     else:
         display = display_err

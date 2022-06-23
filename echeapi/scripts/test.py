@@ -45,7 +45,7 @@ def test_erasmus():
         'LUX  CITY01',       # faulty, extra spaces
     ]
 
-    df = pd.DataFrame({erasmus.col_ref: mock_codes})
+    df = pd.DataFrame({erasmus.COL_REF: mock_codes})
 
     print('Erasmus code processing\n')
 
@@ -64,18 +64,18 @@ def test_erasmus():
     df = erasmus.process(df)
 
     print()
-    print(df[df[erasmus.col_norm] != ''])
+    print(df[df[erasmus.COL_NORM] != ''])
 
     input("\nPress Enter to see the unrecoverable codes...")
 
     print()
-    print(df[df[erasmus.col_norm] == ''])
+    print(df[df[erasmus.COL_NORM] == ''])
 
 
 def test_country():
-    countries = random.sample(list(country.cc_country.values()), 10)
+    countries = random.sample(list(country.CC_COUNTRY.values()), 10)
 
-    df = pd.DataFrame({country.col_ref: countries})
+    df = pd.DataFrame({country.COL_REF: countries})
 
     print('Country code processing\n')
 

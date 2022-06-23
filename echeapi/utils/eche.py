@@ -3,21 +3,20 @@ import pandas as pd
 from openpyxl import load_workbook
 
 from echeapi import settings
-from echeapi.utils import db
 
 
-def load(fname):
+def load(fname=settings.DATA_FILENAME):
     """ Load the first worksheet of an Excel file into a DataFrame.
     """
     # Load the Excel file.
     workbook = load_workbook(fname, data_only=True)
 
     # Load the first worksheet.
-    idx, sheet = next(enumerate(workbook.worksheets))
+    sheet = next(iter(workbook.worksheets))
     sheet_data = sheet.values
 
     # Get the headers from the first line of data.
-    columns = next(sheet_data)[0:]
+    columns = next(sheet_data)
 
     # Create a DataFrame based on the subsequent lines of data.
     df = pd.DataFrame(sheet_data, columns=columns)
@@ -29,50 +28,31 @@ def load(fname):
     return df
 
 
-def clean(df):
+def clean_values(df):
     """ Clean up whitespace and line characters from a DataFrame.
     """
     # Strip all strings from whitespace and line characters.
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Nullify certain strings, like formula errors.
-    for s in settings.ECHE_NULL_STR:
-        df.replace({s: None}, inplace=True)
+    df.replace(settings.ECHE_NULL_STR, value=None, inplace=True)
 
     return df
 
 
-def headers(df, headers_dict=settings.ECHE_FIELDS):
+def replace_headers(df):
     """ Rename DataFrame headers.
     """
-    columns = list(df)
-
     # Remove whitespace in column names.
-    for col in columns:
-        if col != col.strip():
-            df.rename(columns={col: col.strip()}, inplace=True)
+    df.rename(columns=lambda c: c.strip(), inplace=True)
 
     # Rename columns with machine names.
-    df.rename(columns=headers_dict, inplace=True)
+    df.rename(columns=settings.ECHE_FIELDS, inplace=True)
+
+    return df
 
 
-def to_html(table='eche', fields=None, filter=None, table_id='echeTable', classes=None):
-    """ Export a database table to a DataFrame and print it to HTML.
-    """
-    query_params = {
-        'table': table,
-        'fields': fields or [],
-    }
-    if filter is not None:
-        query_params['filter'] = filter
-
-    df = db.sql_to_df(query_params)
-
-    return df.to_html(
-        justify='inherit',
-        index=False,
-        na_rep='',
-        classes=classes,
-        table_id=table_id,
-        render_links=True,
-    )
+def normalize(df):
+    df = clean_values(df)
+    df = replace_headers(df)
+    return df

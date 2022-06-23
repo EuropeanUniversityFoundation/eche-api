@@ -2,7 +2,7 @@
 from flask import flash, Markup, render_template
 
 from echeapi import app
-from echeapi.utils import doctree, eche
+from echeapi.utils import api, doctree
 
 
 @app.route("/")
@@ -64,7 +64,10 @@ def docs(params=''):
 
 @app.route("/explore/")
 def explore():
-    content = Markup(eche.to_html(classes=['table', 'table-striped', 'small']))
+    content = Markup(api.as_html(
+        table_id='echeTable',
+        classes=['table', 'table-striped', 'small'],
+    ))
     return render_template(
         'page/explore.html',
         menu_parent='explore',
