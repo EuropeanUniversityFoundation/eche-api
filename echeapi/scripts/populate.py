@@ -1,5 +1,6 @@
 
 import os
+import sys
 
 from echeapi import cache, settings
 from echeapi.processing import country, erasmus
@@ -13,7 +14,7 @@ def main(*args):
         fname = settings.DATA_FILENAME
 
     if not os.path.isfile(fname):
-        print(f'File not found: {fname}')
+        sys.exit(f'File not found: {fname}')
     else:
         # Load the ECHE list data into a DataFrame.
         df = eche.load(fname)
@@ -26,6 +27,7 @@ def main(*args):
         # Process countries.
         df = country.process(df)
 
+        # Save DataFrame in the database.
         db.save(df)
 
         # Clear cached data.

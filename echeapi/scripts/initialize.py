@@ -4,6 +4,6 @@ from echeapi.utils import db
 
 
 def main(*args):
-    db.init()
+    db.initialize()
     cache.clear()
-    print(f'Created database {settings.DB_FILENAME}')
+    print(f'Created empty database {settings.DB_FILENAME}')

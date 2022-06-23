@@ -23,7 +23,7 @@ In order to run the app, some preparatory steps are needed:
     # check the local settings
     cp echeapi/settings/default.py echeapi/settings/local.py
     nano echeapi/settings/local.py
-    # create a database
+    # create empty database
     python echeapi/manage.py initialize
     # populate the database
     python echeapi/manage.py populate

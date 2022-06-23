@@ -1,28 +1,32 @@
 
 import sqlite3
+from datetime import datetime
 
 import pandas as pd
 
 from echeapi import settings
 
 
-def init():
-    connection = sqlite3.connect(settings.DB_FILENAME)
-    cursor = connection.cursor()
-
-    with open(settings.SCHEMA_FILENAME) as f:
-        schema_content = f.read()
-
-    cursor.execute(schema_content)
-    connection.commit()
-
-    return connection
+def get_connection(db=settings.DB_FILENAME):
+    return sqlite3.connect(db)
 
 
-def save(df, connection=None):
+def initialize(table=settings.DB_TABLE, connection=None):
+    df = pd.DataFrame([], columns=settings.DATA_FIELDS)
+    save(df, table=table, connection=connection)
+
+
+def save(df, table=settings.DB_TABLE, connection=None):
     if connection is None:
-        connection = init()
-    df.to_sql(settings.DB_TABLE, connection, if_exists='replace', index=False)
+        connection = get_connection()
+    df['created'] = datetime.now()
+    df.to_sql(
+        name=table,
+        con=connection,
+        if_exists='replace',
+        index=True,
+        index_label='id',
+    )
 
 
 def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
@@ -41,7 +45,7 @@ def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
         params = ()
 
     if connection is None:
-        connection = init()
+        connection = get_connection()
 
     return pd.read_sql_query(
         con=connection,
@@ -50,13 +54,3 @@ def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
         coerce_float=False,
         parse_dates=settings.DATE_FIELDS,
     )
-
-
-def fetchall(table=settings.DB_TABLE, connection=None):
-    if connection is None:
-        connection = init()
-
-    c = connection.cursor()
-    c.execute(f"SELECT * FROM {table}")
-
-    return c.fetchall()

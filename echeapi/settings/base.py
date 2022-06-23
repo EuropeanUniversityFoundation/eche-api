@@ -2,12 +2,6 @@
 # Data directory.
 DATA_DIR = 'data'
 
-# Schema directory.
-SCHEMA_DIR = 'schema'
-
-# Schema to install.
-SCHEMA_FILENAME = 'eche.sql'
-
 # Database directory.
 DB_DIR = ''
 
