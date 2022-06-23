@@ -100,3 +100,6 @@ VERIFIED_FIELDS = [
 
 # Database column prefix for verified fields.
 VERIFIED_KEY = '_verified'
+
+# Cache control max age for static pages.
+CACHE_CONTROL_MAX_AGE = 60 * 10  # 10 minutes

@@ -1,11 +1,13 @@
 
 from flask import flash, render_template
+from flask_cachecontrol import cache_for
 
 from echeapi import app, settings
 from echeapi.utils import api, db, doctree, issues
 
 
 @app.route("/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def index():
     return render_template(
         'page/home.html',
@@ -15,6 +17,7 @@ def index():
 
 @app.route("/docs/")
 @app.route("/docs/<path:params>")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def docs(params=''):
     if not params:
         params = settings.DOCS_DEFAULT
@@ -39,6 +42,7 @@ def docs(params=''):
 
 
 @app.route("/explore/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def explore():
     content = api.as_html(
         fields=settings.ECHE_KEYS,
@@ -53,6 +57,7 @@ def explore():
 
 
 @app.route("/report/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def report():
     issues_data = issues.detect_all(db.fetch())
     issues_items = []
@@ -74,5 +79,6 @@ def report():
 
 
 @app.route("/openapi/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def openapi():
     return render_template('redoc/index.html')
