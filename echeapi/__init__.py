@@ -1,11 +1,13 @@
 
-import os
 import logging
+import os
 
-from flask import Flask
 from jinja_markdown import MarkdownExtension
 
+from flask import Flask
+
 from echeapi import settings
+from echeapi.interface.views import discover
 
 file_handler = logging.FileHandler(os.path.join(settings.LOG_DIR, 'app.log'))
 file_handler.setLevel(logging.WARNING)
@@ -20,4 +22,4 @@ app.jinja_env.add_extension(MarkdownExtension)
 app.secret_key = settings.SECRET_KEY
 app.logger.addHandler(file_handler)
 
-from echeapi.interface.views import api, errors, pages
+discover()
