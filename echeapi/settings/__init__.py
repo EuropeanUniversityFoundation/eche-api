@@ -14,13 +14,11 @@ SRC_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__fil
 
 # Absolute directory paths
 DATA_DIR = os.path.join(SRC_DIR, DATA_DIR)
-SCHEMA_DIR = os.path.join(SRC_DIR, SCHEMA_DIR)
 DB_DIR = os.path.join(SRC_DIR, DB_DIR)
 DOCS_DIR = os.path.join(SRC_DIR, DOCS_DIR)
 LOG_DIR = os.path.join(SRC_DIR, LOG_DIR)
 
 # Absolute file names
-SCHEMA_FILENAME = os.path.join(SCHEMA_DIR, SCHEMA_FILENAME)
 DB_FILENAME = os.path.join(DB_DIR, DB_FILENAME)
 DATA_FILENAME =  os.path.join(DATA_DIR, DATA_FILENAME)
 
