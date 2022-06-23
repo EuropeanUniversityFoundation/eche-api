@@ -23,7 +23,7 @@ def docs(params=''):
     htag = 'h1'
     main = Markup(render_template('snippets/docs-placeholder.html'))
 
-    if display == doctree.DISPLAY_MD:
+    if display == doctree.Display.FILE:
         htag = 'h5'
         main = Markup(
             render_template(
@@ -32,11 +32,11 @@ def docs(params=''):
             ),
         )
 
-    elif display == doctree.DISPLAY_DIR:
+    elif display == doctree.Display.DIR:
         if params:
             flash(content, category='warning')
 
-    elif display == doctree.DISPLAY_ERR:
+    elif display == doctree.Display.ERROR:
         flash(f'Path is invalid: {params}', category='error')
 
     else:

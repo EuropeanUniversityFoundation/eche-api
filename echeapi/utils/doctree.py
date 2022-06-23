@@ -1,25 +1,28 @@
 
 import os
+from enum import Enum
 
 from echeapi import settings
 
-DISPLAY_DIR = 'DISPLAY_DIR'
-DISPLAY_MD = 'DISPLAY_MD'
-DISPLAY_ERR = 'display_error'
+
+class Display(Enum):
+    DIR = 'dir'
+    FILE = 'file'
+    ERROR = 'error'
 
 
 def fetch(args):
     path = os.path.join(settings.DOCS_DIR, *args)
 
     if os.path.isdir(path):
-        display = DISPLAY_DIR
+        display = Display.DIR
         content = f"This is a directory: docs/{os.path.relpath(path, settings.DOCS_DIR)}"
     elif os.path.isfile(path):
-        display = DISPLAY_MD
+        display = Display.FILE
         with open(path) as f:
             content = f.read()
     else:
-        display = DISPLAY_ERR
+        display = Display.ERROR
         content = "Cannot display the requested content."
 
     return display, content
