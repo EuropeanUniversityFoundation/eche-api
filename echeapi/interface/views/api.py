@@ -1,4 +1,6 @@
 
+from datetime import datetime
+
 from flask import jsonify, request, Response
 
 from echeapi import app, settings
@@ -41,6 +43,15 @@ def eche_list(key=None, value=None):
     if key is not None:
         if key not in settings.DATA_FIELDS:
             raise ApiError(404, 'Resource not found')
+
+        if key in settings.DATE_FIELDS and value is not None:
+            try:
+                dt = datetime.fromisoformat(value)
+            except Exception:
+                raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
+            else:
+                value = dt.strftime('%Y-%m-%d %H:%M:%S')
+
         filter = (key, value)
 
     try:

@@ -1,6 +1,5 @@
 
 import sqlite3
-from datetime import datetime
 
 import pandas as pd
 
@@ -35,9 +34,6 @@ def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
             query = f"SELECT {fields} FROM {table} WHERE {key} IS NULL"
             params = ()
         else:
-            if key in settings.DATE_FIELDS:
-                dt = datetime.fromisoformat(value)
-                value = dt.strftime('%Y-%m-%d %H:%M:%S')
             query = f"SELECT {fields} FROM {table} WHERE {key} = ?"
             params = (value,)
     else:
