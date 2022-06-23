@@ -6,7 +6,7 @@ from echeapi import settings
 
 
 def main(*args):
-    os.chdir(settings.src_dir)
+    os.chdir(settings.SRC_DIR)
 
     print('=== FLAKE8 ===')
     subprocess.run(['flake8'])

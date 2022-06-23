@@ -1,4 +1,6 @@
 
+from datetime import datetime
+
 from flask import jsonify, request, Response
 
 from echeapi import app, settings
@@ -31,22 +33,29 @@ def api_error(error):
 @app.route("/api/<string:key>/", methods=['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods=['GET'])
 def eche_list(key=None, value=None):
-    args = request.args
-
-    fields = []
-    if 'fields' in args:
-        request_fields = args.get("fields").split(',')
-        fields = [f for f in request_fields if f in settings.known_keys]
+    fields = [
+        f.strip()
+        for f in request.args.get('fields', '').split(',')
+        if f.strip() in settings.DATA_FIELDS
+    ]
 
     filter = None
     if key is not None:
-        if key in settings.known_keys:
-            filter = (key, value)
-        else:
+        if key not in settings.DATA_FIELDS:
             raise ApiError(404, 'Resource not found')
 
+        if key in settings.DATE_FIELDS and value is not None:
+            try:
+                dt = datetime.fromisoformat(value)
+            except Exception:
+                raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
+            else:
+                value = dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        filter = (key, value)
+
     try:
-        body = api.list(fields=fields, filter=filter)
+        body = api.as_json(fields=fields, filter=filter)
     except Exception:
         app.logger.exception('Error while fetching API data')
         raise ApiError(500, 'Server error')

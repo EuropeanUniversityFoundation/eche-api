@@ -1,6 +1,6 @@
 
 # Curated list of country codes and country names.
-cc_country = {
+CC_COUNTRY = {
     "AC": "Ascension Island",
     "AD": "Andorra",
     "AE": "United Arab Emirates",
@@ -262,25 +262,25 @@ cc_country = {
 }
 
 # Map names to codes.
-cc_country_by_name = {
-    name: cc for cc, name in cc_country.items()
+COUNTRY_TO_CC = {
+    name: cc for cc, name in CC_COUNTRY.items()
 }
 
 # Column names, as API keys.
-col_ref = 'country'
-col_cc = 'countryCode'
+COL_REF = 'country'
+COL_CC = 'countryCode'
 
 
-def get_cc(row, ref_col=col_ref, empty=''):
+def get_cc(row, col=COL_REF, empty=''):
     """ Extract country code from country name.
     """
-    item = row[ref_col]
-    return cc_country_by_name.get(item, empty)
+    item = row[col]
+    return COUNTRY_TO_CC.get(item, empty)
 
 
 def process(df):
     """ Complete processing.
     """
     # Store country codes from country names in new column.
-    df[col_cc] = df.apply(lambda row: get_cc(row), axis=1)
+    df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
     return df

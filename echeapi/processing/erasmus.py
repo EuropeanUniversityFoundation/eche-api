@@ -10,16 +10,16 @@ As such, it is necessary to check whether the Erasmus code is properly
 """
 
 # 3 letter country codes have no trailing spaces, so they must be defined.
-known3letter = ['LUX', 'IRL']
+KNOWN_3_LETTER = ['LUX', 'IRL']
 
 # Column names, as API keys.
-col_ref = 'erasmusCode'
-col_norm = 'erasmusCodeNormalized'
-col_na = 'erasmusCodePrefix'
-col_cc = 'erasmusCodeCountryCode'
+COL_REF = 'erasmusCode'
+COL_NORM = 'erasmusCodeNormalized'
+COL_PREFIX = 'erasmusCodePrefix'
+COL_CC = 'erasmusCodeCountryCode'
 
 # Match the known prefixes in Erasmus codes to ISO 3166 country codes.
-prefix_cc = {
+PREFIX_CC = {
     'A': 'AT',
     'B': 'BE',
     'D': 'DE',
@@ -36,10 +36,10 @@ prefix_cc = {
 }
 
 
-def normalize(row, ref_col=col_ref, empty=''):
+def normalize(row, col=COL_REF, empty=''):
     """ Normalize Erasmus Codes.
     """
-    item = row[ref_col]
+    item = row[col]
 
     code = item.strip() if item else ''
 
@@ -59,7 +59,7 @@ def normalize(row, ref_col=col_ref, empty=''):
             valid = False
 
         # Check if the first three characters are either known or contain a space.
-        if valid and not (' ' in code[0:3] or code[0:3] in known3letter):
+        if valid and not (' ' in code[0:3] or code[0:3] in KNOWN_3_LETTER):
             valid = False
 
         # Check if the last two characters are numbers.
@@ -83,7 +83,7 @@ def normalize(row, ref_col=col_ref, empty=''):
                 code = code[0:2] + ' ' + code[3:].strip()
 
             # Check if the first characters are a known 3 letter country ID.
-            if code[0:3] in known3letter:
+            if code[0:3] in KNOWN_3_LETTER:
                 code = code[0:3] + code[3:].strip()
 
             # Replace any special characters in the middle of the code with a dash.
@@ -118,33 +118,30 @@ def normalize(row, ref_col=col_ref, empty=''):
     return code
 
 
-def get_prefix(row, ref_col=col_norm):
-    """ Extract NA prefix from Erasmus code.
+def get_prefix(row, col=COL_NORM):
+    """ Extract NA prefix from normalized Erasmus code.
     """
-    item = row[ref_col]
-
-    prefix = item[0:3].strip() if item else ''
-
-    return prefix
+    item = row[col]
+    return item[0:3].strip() if item else ''
 
 
-def get_cc(row, ref_col=col_na):
+def get_cc(row, col=COL_PREFIX):
     """ Extract country code from prefix.
     """
-    item = row[ref_col]
-    return prefix_cc.get(item, item)
+    item = row[col]
+    return PREFIX_CC.get(item, item)
 
 
 def process(df):
     """ Complete processing.
     """
     # Store normalized Erasmus Codes in new column.
-    df[col_norm] = df.apply(lambda row: normalize(row), axis=1)
+    df[COL_NORM] = df.apply(lambda row: normalize(row), axis=1)
 
     # Store prefixes from normalized Erasmus Codes in new column.
-    df[col_na] = df.apply(lambda row: get_prefix(row), axis=1)
+    df[COL_PREFIX] = df.apply(lambda row: get_prefix(row), axis=1)
 
     # Store country codes from prefixes in new column.
-    df[col_cc] = df.apply(lambda row: get_cc(row), axis=1)
+    df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
 
     return df

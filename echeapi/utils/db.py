@@ -1,65 +1,62 @@
 
-import os
 import sqlite3
-from datetime import datetime
 
 import pandas as pd
 
 from echeapi import settings
 
 
-def init(db_filename=settings.db_filename, schema=settings.schema_filename):
-    connection = sqlite3.connect(db_filename)
-    c = connection.cursor()
+def init():
+    connection = sqlite3.connect(settings.DB_FILENAME)
+    cursor = connection.cursor()
 
-    schema_path = os.path.join(settings.schema_dir, schema)
-    with open(schema_path, "r") as f:
+    with open(settings.SCHEMA_FILENAME) as f:
         schema_content = f.read()
 
-    c.execute(schema_content)
+    cursor.execute(schema_content)
     connection.commit()
 
     return connection
 
 
-def df_to_sql(df, table=settings.db_table):
-    connection = init()
-    df.to_sql(table, connection, if_exists='replace', index=False)
+def save(df, connection=None):
+    if connection is None:
+        connection = init()
+    df.to_sql(settings.DB_TABLE, connection, if_exists='replace', index=False)
 
 
-def sql_to_df(query_params, date_fields=settings.date_fields):
-    table = query_params['table']
+def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
+    fields = ",".join(fields) if fields else "*"
 
-    field_list = [f for f in query_params['fields']]
-    fields = ",".join(field_list) if field_list else "*"
-
-    if 'filter' in query_params:
-        key, value = query_params['filter']
+    if filter is not None:
+        key, value = filter
         if value is None:
-            query = f"SELECT {fields} FROM {table} WHERE {key} IS NULL;"
+            query = f"SELECT {fields} FROM {table} WHERE {key} IS NULL"
             params = ()
         else:
-            if key in date_fields:
-                dt = datetime.fromisoformat(value)
-                value = dt.strftime('%Y-%m-%d %H:%M:%S')
-            query = f"SELECT {fields} FROM {table} WHERE {key} = ?;"
+            query = f"SELECT {fields} FROM {table} WHERE {key} = ?"
             params = (value,)
     else:
-        query = f"SELECT {fields} FROM {table};"
+        query = f"SELECT {fields} FROM {table}"
         params = ()
 
-    connection = init()
+    if connection is None:
+        connection = init()
 
-    df = pd.read_sql_query(query, connection, coerce_float=False, parse_dates=date_fields, params=params)
+    return pd.read_sql_query(
+        con=connection,
+        sql=query,
+        params=params,
+        coerce_float=False,
+        parse_dates=settings.DATE_FIELDS,
+    )
 
-    return df
 
-
-def fetchall(table='eche', connection=None):
+def fetchall(table=settings.DB_TABLE, connection=None):
     if connection is None:
         connection = init()
 
     c = connection.cursor()
-    c.execute(f"SELECT * FROM {table};")
+    c.execute(f"SELECT * FROM {table}")
 
     return c.fetchall()
