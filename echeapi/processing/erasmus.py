@@ -176,5 +176,3 @@ def process(df):
 
     # Nullify empty strings.
     df.replace('', value=None, inplace=True)
-
-    return df

@@ -21,9 +21,9 @@ def docs(params=''):
 
     display, content = doctree.fetch(params.split('/'))
 
-    if display == doctree.DISPLAY_DIR:
+    if display is doctree.Display.DIR:
         flash(f'This is a directory: docs/{params}', category='warning')
-    elif display == doctree.DISPLAY_ERR:
+    elif display is doctree.Display.ERROR:
         flash(f'Path is invalid: {params}', category='error')
 
     # Build the sidebar menu.
