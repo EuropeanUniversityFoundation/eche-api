@@ -1,0 +1,8 @@
+Flask
+Flask-CacheControl
+Flask-Caching
+jinja-markdown
+Markdown
+openpyxl
+pandas
+redis

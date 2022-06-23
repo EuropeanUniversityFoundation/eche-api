@@ -5,6 +5,7 @@ import os
 from jinja_markdown import MarkdownExtension
 
 from flask import Flask
+from flask_caching import Cache
 
 from echeapi import settings
 from echeapi.interface.views import discover
@@ -21,5 +22,11 @@ app = Flask(
 app.jinja_env.add_extension(MarkdownExtension)
 app.secret_key = settings.SECRET_KEY
 app.logger.addHandler(file_handler)
+
+cache = Cache(config={
+    'CACHE_KEY_PREFIX': __name__,
+    **settings.CACHE_CONFIG,
+})
+cache.init_app(app)
 
 discover()

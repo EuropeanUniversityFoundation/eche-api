@@ -60,3 +60,17 @@ PROCESSED_FIELDS = [
     'erasmusCodeCountryCode',
     'countryCode',
 ]
+
+# Cache control max age for static pages.
+CACHE_CONTROL_MAX_AGE = 600
+
+# Cache control max age for data pages.
+DATA_CACHE_TIMEOUT = 60 * 60 * 24 * 365
+
+# Cache configuration.
+CACHE_CONFIG = {
+    'CACHE_TYPE': 'SimpleCache',
+    # 'CACHE_TYPE': 'RedisCache',
+    # 'CACHE_REDIS_URL': 'redis://localhost:6379/0',
+    'CACHE_DEFAULT_TIMEOUT': 300,
+}
