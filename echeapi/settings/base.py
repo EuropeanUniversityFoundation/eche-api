@@ -20,6 +20,8 @@ DB_TABLE = 'eche'
 # Docs directory.
 DOCS_DIR = 'docs'
 
+DOCS_DEFAULT = '00_OVERVIEW.md'
+
 # Log files directory.
 LOG_DIR = ''
 

@@ -3,23 +3,23 @@ import os
 
 from echeapi import settings
 
-display_dir = 'display_dir'
-display_md = 'display_md'
-display_err = 'display_error'
+DISPLAY_DIR = 'DISPLAY_DIR'
+DISPLAY_MD = 'DISPLAY_MD'
+DISPLAY_ERR = 'display_error'
 
 
 def fetch(args):
     path = os.path.join(settings.DOCS_DIR, *args)
 
     if os.path.isdir(path):
-        display = display_dir
+        display = DISPLAY_DIR
         content = f"This is a directory: docs/{os.path.relpath(path, settings.DOCS_DIR)}"
     elif os.path.isfile(path):
-        display = display_md
+        display = DISPLAY_MD
         with open(path) as f:
             content = f.read()
     else:
-        display = display_err
+        display = DISPLAY_ERR
         content = "Cannot display the requested content."
 
     return display, content

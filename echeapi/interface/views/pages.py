@@ -1,7 +1,7 @@
 
 from flask import flash, Markup, render_template
 
-from echeapi import app
+from echeapi import app, settings
 from echeapi.utils import api, doctree
 
 
@@ -16,11 +16,14 @@ def index():
 @app.route("/docs/")
 @app.route("/docs/<path:params>")
 def docs(params=''):
+    if not params:
+        params = settings.DOCS_DEFAULT
+
     display, content = doctree.fetch(params.split('/'))
     htag = 'h1'
     main = Markup(render_template('snippets/docs-placeholder.html'))
 
-    if display == doctree.display_md:
+    if display == doctree.DISPLAY_MD:
         htag = 'h5'
         main = Markup(
             render_template(
@@ -29,11 +32,11 @@ def docs(params=''):
             ),
         )
 
-    elif display == doctree.display_dir:
-        if params != '':
+    elif display == doctree.DISPLAY_DIR:
+        if params:
             flash(content, category='warning')
 
-    elif display == doctree.display_err:
+    elif display == doctree.DISPLAY_ERR:
         flash(f'Path is invalid: {params}', category='error')
 
     else:
@@ -45,7 +48,7 @@ def docs(params=''):
         render_template(
             'components/list.html',
             element='ul',
-            dict={'docs': menu},
+            dict=menu,
             prefix='docs',
         ),
     )
@@ -59,7 +62,6 @@ def docs(params=''):
         sidebar=sidebar,
         card_title='Directory tree',
     )
-    # return render_template('page/placeholder.html', menu_parent='docs')
 
 
 @app.route("/explore/")
