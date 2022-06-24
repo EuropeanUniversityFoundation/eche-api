@@ -1,5 +1,6 @@
 
 from datetime import datetime
+from urllib.parse import unquote
 
 from flask import jsonify, request, Response
 
@@ -51,6 +52,9 @@ def eche_list(key=None, value=None):
                 raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
             else:
                 value = dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        if value:
+            value = unquote(value)
 
         filter = (key, value)
 
