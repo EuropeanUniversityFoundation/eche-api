@@ -1,5 +1,6 @@
 
 from datetime import datetime
+from urllib.parse import unquote
 
 from flask import jsonify, request, Response
 
@@ -52,8 +53,10 @@ def eche_list(key=None, value=None):
             else:
                 value = dt.strftime('%Y-%m-%d %H:%M:%S')
 
+        if value:
+            value = unquote(value)
+
         filter = (key, value)
-        app.logger.debug('Looking for key \'%s\' with value \'%s\'', key, value)
 
     try:
         body = api.as_json(fields=fields, filter=filter)
