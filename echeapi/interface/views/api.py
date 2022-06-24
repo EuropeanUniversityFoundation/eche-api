@@ -53,6 +53,7 @@ def eche_list(key=None, value=None):
                 value = dt.strftime('%Y-%m-%d %H:%M:%S')
 
         filter = (key, value)
+        app.logger.debug('Looking for key \'%s\' with value \'%s\'', key, value)
 
     try:
         body = api.as_json(fields=fields, filter=filter)
