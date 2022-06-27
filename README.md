@@ -1,12 +1,12 @@
-# ECHE API
+# ECHE List API
 
-This repository contains the specification of the ECHE API, along with its documentation.
+This repository contains the specification of the ECHE List API, along with its documentation.
 
 ## Introduction
 
-### What is the ECHE API?
+### What is the ECHE List API?
 
-The **ECHE API** is designed to expose the list of institutions holding the _Erasmus Charter for Higher Education_, as published by the European Commission, in a machine readable format.
+The **ECHE List API** is designed to expose the list of institutions holding the _Erasmus Charter for Higher Education_, as published by the European Commission, in a machine readable format.
 
 ## Installation
 

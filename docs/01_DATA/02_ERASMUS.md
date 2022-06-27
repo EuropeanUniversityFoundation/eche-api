@@ -6,7 +6,7 @@ In addition to the original ECHE list data, this script produces processed field
 
 The **Erasmus Code** identifier presents a challenge for client applications when used as a unique identifier due to the fact that it includes spaces (` `). Certain software is known for collapsing multiple consecutive space characters (i.e. web browsers, spreadsheet applications) leading to many known issues in real life client applications.
 
-As such, while the original Erasmus Codes are retained, the ECHE API also provides a normalized version of this identifier which follows a set of rules:
+As such, while the original Erasmus Codes are retained, the ECHE List API also provides a normalized version of this identifier which follows a set of rules:
 
 1. Normalized Erasmus Codes are all **uppercase**;
 2. Normalized Erasmus Codes always begin with a letter;
