@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   version: 0.1.0
-  title: ECHE API
+  title: ECHE List API
   termsOfService: 'https://example.com/terms/'
   contact:
     email: api.support@uni-foundation.eu

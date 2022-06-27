@@ -1,4 +1,4 @@
-# OpenAPI Definition for ECHE API
+# OpenAPI Definition for ECHE List API
 
 This tool is based on the OpenAPI Definition Starter project - see the original README below.
 
