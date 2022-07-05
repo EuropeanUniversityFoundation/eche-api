@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 from flask import jsonify, request, Response
 
-from echeapi import app, settings
+from echeapi import app, cache, settings
 from echeapi.utils import api
 
 
@@ -58,10 +58,15 @@ def eche_list(key=None, value=None):
 
         filter = (key, value)
 
-    try:
-        body = api.as_json(fields=fields, filter=filter)
-    except Exception:
-        app.logger.exception('Error while fetching API data')
-        raise ApiError(500, 'Server error')
+    _key = f'{",".join(fields)}:{key}:{value}'
+    body = cache.get(_key)
+    if body is None:
+        try:
+            body = api.as_json(fields=fields, filter=filter)
+        except Exception:
+            app.logger.exception('Error while fetching API data')
+            raise ApiError(500, 'Server error')
+        else:
+            cache.set(_key, body, timeout=settings.DATA_CACHE_TIMEOUT)
 
     return Response(body, mimetype='application/json')

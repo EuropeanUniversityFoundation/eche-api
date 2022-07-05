@@ -2,7 +2,7 @@
 import os
 import sys
 
-from echeapi import settings
+from echeapi import cache, settings
 from echeapi.processing import country, erasmus
 from echeapi.utils import db, eche
 
@@ -29,5 +29,8 @@ def main(*args):
 
         # Save DataFrame in the database.
         db.save(df)
+
+        # Clear cached data.
+        cache.clear()
 
         print(f'ECHE data loaded to {settings.DB_FILENAME}')

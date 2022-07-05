@@ -1,11 +1,13 @@
 
 from flask import flash, Markup, render_template
+from flask_cachecontrol import cache_for
 
-from echeapi import app, settings
+from echeapi import app, cache, settings
 from echeapi.utils import api, doctree
 
 
 @app.route("/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def index():
     return render_template(
         'page/home.html',
@@ -15,6 +17,7 @@ def index():
 
 @app.route("/docs/")
 @app.route("/docs/<path:params>")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def docs(params=''):
     if not params:
         params = settings.DOCS_DEFAULT
@@ -23,7 +26,7 @@ def docs(params=''):
     htag = 'h1'
     main = Markup(render_template('snippets/docs-placeholder.html'))
 
-    if display == doctree.DISPLAY_MD:
+    if display == doctree.Display.FILE:
         htag = 'h5'
         main = Markup(
             render_template(
@@ -32,11 +35,11 @@ def docs(params=''):
             ),
         )
 
-    elif display == doctree.DISPLAY_DIR:
+    elif display == doctree.Display.DIR:
         if params:
             flash(content, category='warning')
 
-    elif display == doctree.DISPLAY_ERR:
+    elif display == doctree.Display.ERROR:
         flash(f'Path is invalid: {params}', category='error')
 
     else:
@@ -65,18 +68,26 @@ def docs(params=''):
 
 
 @app.route("/explore/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def explore():
-    content = Markup(api.as_html(
-        table_id='echeTable',
-        classes=['table', 'table-striped', 'small'],
-    ))
+    _key = 'explore-table'
+
+    table = cache.get(_key)
+    if table is None:
+        table = Markup(api.as_html(
+            table_id='echeTable',
+            classes=['table', 'table-striped', 'small'],
+        ))
+        cache.set(_key, table, timeout=settings.DATA_CACHE_TIMEOUT)
+
     return render_template(
         'page/explore.html',
         menu_parent='explore',
-        content=content,
+        content=table,
     )
 
 
 @app.route("/openapi/")
+@cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def openapi():
     return render_template('redoc/index.html')
