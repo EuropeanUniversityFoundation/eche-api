@@ -47,7 +47,7 @@ def assign_types(df):
             # Convert float to int before converting to string.
             if df[key].dtypes == float:
                 df[key] = df[key].apply(int)
-            df[key] = df[key].apply(str)
+            df[key] = df[key].apply(lambda x: x if x is None else str(x))
 
     return df
 
