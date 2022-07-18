@@ -69,3 +69,20 @@ UNIQUE_FIELDS = {
     'organisationLegalName': 'info',
     'erasmusCodeNormalized': 'danger',
 }
+
+# Reference field headers for data attachment.
+REFERENCE_FIELDS = [
+    'erasmusCodeNormalized',
+    'pic',
+]
+
+# Verified data field headers for data attachment.
+VERIFIED_FIELDS = [
+    'organisationLegalName',
+    'organisationLegalNameLang',
+    'street',
+    'postalCode',
+    'city',
+    'cityLang',
+    'webpage',
+]
