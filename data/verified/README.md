@@ -12,7 +12,7 @@ The file name _should_ follow the pattern `verified.{countryCode}.csv`.
 
 ## File headers
 
-For effective data pairing, the verified data **must** contain two identifiers: `erasmusCodeNormalized` and `pic`. These will be used only to match data entries, _not_ to overwrite the identifiers in the original data set.
+For effective data pairing, the verified data **must** contain two identifiers: `erasmusCode` and `pic`. These will be used only to match data entries, _not_ to overwrite the identifiers in the original data set.
 
 The remaining columns may include any of the following:
 

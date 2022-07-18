@@ -2,6 +2,12 @@
 # Data directory.
 DATA_DIR = 'data'
 
+# Verified data subdirectory.
+VERIFIED_DIR = 'verified'
+
+VERIFIED_PREFIX = 'verified'
+VERIFIED_EXTENSION = 'csv'
+
 # Database directory.
 DB_DIR = ''
 
@@ -71,10 +77,10 @@ UNIQUE_FIELDS = {
 }
 
 # Reference field headers for data attachment.
-REFERENCE_FIELDS = [
-    'erasmusCodeNormalized',
-    'pic',
-]
+REFERENCE_FIELDS = {
+    'erasmusCode': 'erasmusCodeNormalized',
+    'pic': 'pic',
+}
 
 # Verified data field headers for data attachment.
 VERIFIED_FIELDS = [
@@ -86,3 +92,6 @@ VERIFIED_FIELDS = [
     'cityLang',
     'webpage',
 ]
+
+# Database column prefix for verified fields.
+VERIFIED_KEY = '_verified'
