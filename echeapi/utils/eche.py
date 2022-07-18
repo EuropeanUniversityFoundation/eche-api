@@ -21,10 +21,6 @@ def load(fname=settings.DATA_FILENAME):
     # Create a DataFrame based on the subsequent lines of data.
     df = pd.DataFrame(sheet_data, columns=columns)
 
-    # Drop empty rows and columns.
-    df.dropna(how='all', axis=0, inplace=True)
-    df.dropna(how='all', axis=1, inplace=True)
-
     return df
 
 
@@ -36,6 +32,31 @@ def clean_values(df):
 
     # Nullify certain strings, like formula errors.
     df.replace(settings.ECHE_NULL_STR, value=None, inplace=True)
+
+    # Nullify empty strings.
+    df.replace('', value=None, inplace=True)
+
+    return df
+
+
+def assign_types(df):
+    """ Assign string type to all columns except dates.
+    """
+    for key in df.columns.tolist():
+        if settings.ECHE_FIELDS[key] not in settings.DATE_FIELDS:
+            # Convert float to int before converting to string.
+            if df[key].dtypes == float:
+                df[key] = df[key].apply(int)
+            df[key] = df[key].apply(lambda x: x if x is None else str(x))
+
+    return df
+
+
+def reduce(df):
+    """Drop empty rows and columns.
+    """
+    df.dropna(how='all', axis=0, inplace=True)
+    df.dropna(how='all', axis=1, inplace=True)
 
     return df
 
@@ -54,5 +75,7 @@ def replace_headers(df):
 
 def normalize(df):
     df = clean_values(df)
+    df = reduce(df)
+    df = assign_types(df)
     df = replace_headers(df)
     return df

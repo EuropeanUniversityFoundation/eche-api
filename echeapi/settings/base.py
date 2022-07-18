@@ -23,7 +23,13 @@ LOG_DIR = ''
 LOG_FORMAT = '[%(asctime)s] [%(levelname)s] %(message)s'
 
 # ECHE null strings.
-ECHE_NULL_STR = ['#N/A']
+ECHE_NULL_STR = [
+    '#N/A',
+    'Not Found',
+    'Transitory Charter',
+    'Transitory Erasmus  Charter',
+    'Transitory Erasmus charter',
+]
 
 # ECHE list headers and corresponding API keys.
 ECHE_FIELDS = {
@@ -54,3 +60,12 @@ PROCESSED_FIELDS = [
     'erasmusCodeCountryCode',
     'countryCode',
 ]
+
+# Unique fields and severity of non-empty duplicates.
+UNIQUE_FIELDS = {
+    'proposalNumber': 'warning',
+    'pic': 'danger',
+    'oid': 'danger',
+    'organisationLegalName': 'info',
+    'erasmusCodeNormalized': 'danger',
+}
