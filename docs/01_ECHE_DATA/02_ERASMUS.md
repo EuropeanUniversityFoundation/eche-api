@@ -2,6 +2,8 @@
 
 In addition to the original ECHE list data, this script produces processed fields that convey normalized data points to be leveraged by client applications. The processed fields related to the **Erasmus Code** are described below.
 
+_All processed fields are saved with a prefix: `_processed.{field}`._
+
 ## Normalizing the Erasmus Code
 
 The **Erasmus Code** identifier presents a challenge for client applications when used as a unique identifier due to the fact that it includes spaces (` `). Certain software is known for collapsing multiple consecutive space characters (i.e. web browsers, spreadsheet applications) leading to many known issues in real life client applications.
