@@ -25,7 +25,7 @@ DATA_FILENAME =  os.path.join(DATA_DIR, DATA_FILENAME)
 # Known API keys.
 DATA_FIELDS = [
     *ECHE_FIELDS.values(),
-    *PROCESSED_FIELDS,
+    # *PROCESSED_FIELDS,
 ]
 
 try:
