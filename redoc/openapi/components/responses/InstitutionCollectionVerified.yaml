@@ -10,3 +10,11 @@
   webpage: 'https://example.com'
   echeStartDate: '2021-01-01'
   echeEndDate: '2029-12-31'
+  _verified:
+    organisationLegalName: 'Test Entry'
+    organisationLegalNameLang: 'en'
+    street: 'Main street 1'
+    postalCode: null
+    city: 'Ridley Beach'
+    cityLang: 'en'
+    webpage: 'https://example.com'

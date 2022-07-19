@@ -1,0 +1,24 @@
+erasmusCodeNormalized:
+  type: string
+  description: Normalized Erasmus Code
+  pattern: '^([A-Z]{3}|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]+[A-Z]\d{2,3}$'
+erasmusCodePrefix:
+  type: string
+  description: Erasmus Code prefix
+  pattern: '^[A-Z]{1,3}$'
+erasmusCodeCity:
+  type: string
+  description: Erasmus Code city component
+  pattern: '^[A-Z][A-Z-]+[A-Z]$'
+erasmusCodeNumber:
+  type: string
+  description: Erasmus Code number
+  pattern: '^\d{2,3}$'
+erasmusCodeCountryCode:
+  type: string
+  description: Country code from Erasmus Code prefix
+  pattern: '^[A-Z]{2}$'
+countryCode:
+  type: string
+  description: Country code from Country
+  pattern: '^[A-Z]{2}$'

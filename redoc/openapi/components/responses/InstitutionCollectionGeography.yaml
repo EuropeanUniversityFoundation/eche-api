@@ -1,0 +1,12 @@
+- erasmusCode: 'AQ TESTING99'
+  city: 'Ridley Beach'
+  country: 'Antarctica'
+  _processed:
+    erasmusCodeNormalized: 'AQ TESTING99'
+    erasmusCodePrefix: 'AQ'
+    erasmusCodeCity: 'TESTING'
+    erasmusCodeCountryCode: 'AQ'
+    countryCode: 'AQ'
+  _verified:
+    city: 'Ridley Beach'
+    cityLang: 'en'

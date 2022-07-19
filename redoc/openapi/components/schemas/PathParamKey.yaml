@@ -15,8 +15,17 @@ schema:
     - webpage
     - echeStartDate
     - echeEndDate
-    - erasmusCodeNormalized
-    - erasmusCodePrefix
-    - erasmusCodeCountryCode
-    - countryCode
+    - _processed.erasmusCodeNormalized
+    - _processed.erasmusCodePrefix
+    - _processed.erasmusCodeCity
+    - _processed.erasmusCodeNumber
+    - _processed.erasmusCodeCountryCode
+    - _processed.countryCode
+    - _verified.organisationLegalName
+    - _verified.organisationLegalNameLang
+    - _verified.street
+    - _verified.postalCode
+    - _verified.city
+    - _verified.cityLang
+    - _verified.webpage
 description: The field to filter by.

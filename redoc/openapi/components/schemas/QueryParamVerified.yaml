@@ -1,0 +1,20 @@
+in: query
+name: verified
+style: form
+explode: true
+schema:
+  type: array
+  items:
+    type: string
+    enum:
+      - all
+      - organisationLegalName
+      - organisationLegalNameLang
+      - street
+      - postalCode
+      - city
+      - cityLang
+      - webpage
+description: |
+  The verified fields to include in the response.
+   If `all` is specified, all verified fields will be included in the response.

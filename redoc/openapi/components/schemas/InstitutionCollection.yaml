@@ -3,7 +3,7 @@ description: List of _Institution_ resources.
 items:
   type: object
   required:
-    - proposalNumber
+    # - proposalNumber
     - erasmusCode
     - pic
     # - oid
@@ -15,6 +15,5 @@ items:
     # - webpage
     - echeStartDate
     - echeEndDate
-    - countryCode
   properties:
     $ref: ./InstitutionData.yaml
