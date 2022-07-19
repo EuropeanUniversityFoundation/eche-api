@@ -5,7 +5,7 @@ from urllib.parse import unquote
 from flask import jsonify, request, Response
 
 from echeapi import app, settings
-from echeapi.utils import api
+from echeapi.utils import api, nesting
 
 
 class ApiError(Exception):
@@ -87,5 +87,7 @@ def eche_list(key=None, value=None, processed=[], verified=[]):
     except Exception:
         app.logger.exception('Error while fetching API data')
         raise ApiError(500, 'Server error')
+
+    body = nesting.process(body)
 
     return Response(body, mimetype='application/json')
