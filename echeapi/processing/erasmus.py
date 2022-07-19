@@ -1,7 +1,6 @@
 
 from echeapi import settings
 
-
 """
 Handle Erasmus codes.
 

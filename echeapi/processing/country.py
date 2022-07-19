@@ -1,7 +1,6 @@
 
 from echeapi import settings
 
-
 # Curated list of country codes and country names.
 CC_COUNTRY = {
     "AC": "Ascension Island",
