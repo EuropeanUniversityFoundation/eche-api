@@ -22,11 +22,29 @@ LOG_DIR = os.path.join(SRC_DIR, LOG_DIR)
 DB_FILENAME = os.path.join(DB_DIR, DB_FILENAME)
 DATA_FILENAME =  os.path.join(DATA_DIR, DATA_FILENAME)
 
-# Known API keys.
-DATA_FIELDS = [
-    *ECHE_FIELDS.values(),
-    # *PROCESSED_FIELDS,
+# ECHE data API keys.
+ECHE_KEYS = [*ECHE_FIELDS.values()]
+
+# Processed data API keys.
+PROCESSED_KEYS = ['.'.join([PROCESSED_KEY, f]) for f in PROCESSED_FIELDS]
+
+# Verified data API keys.
+VERIFIED_KEYS = ['.'.join([VERIFIED_KEY, f]) for f in VERIFIED_FIELDS]
+
+# All known API keys
+KNOWN_KEYS = [
+    *ECHE_KEYS,
+    *PROCESSED_KEYS,
+    *VERIFIED_KEYS,
 ]
+
+# All known API keys
+KNOWN_FIELDS = [
+    *ECHE_KEYS,
+    *PROCESSED_FIELDS,
+    *VERIFIED_FIELDS,
+]
+
 
 try:
     os.makedirs(LOG_DIR, mode=0o755, exist_ok=True)
