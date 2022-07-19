@@ -63,9 +63,14 @@ DATE_FIELDS = [
 PROCESSED_FIELDS = [
     'erasmusCodeNormalized',
     'erasmusCodePrefix',
+    'erasmusCodeCity',
+    'erasmusCodeNumber',
     'erasmusCodeCountryCode',
     'countryCode',
 ]
+
+# Database column prefix for verified fields.
+PROCESSED_KEY = '_processed'
 
 # Unique fields and severity of non-empty duplicates.
 UNIQUE_FIELDS = {
@@ -73,12 +78,12 @@ UNIQUE_FIELDS = {
     'pic': 'danger',
     'oid': 'danger',
     'organisationLegalName': 'info',
-    'erasmusCodeNormalized': 'danger',
+    '.'.join([PROCESSED_KEY, 'erasmusCodeNormalized']): 'danger',
 }
 
 # Reference field headers for data attachment.
 REFERENCE_FIELDS = {
-    'erasmusCode': 'erasmusCodeNormalized',
+    'erasmusCode': '.'.join([PROCESSED_KEY, 'erasmusCodeNormalized']),
     'pic': 'pic',
 }
 

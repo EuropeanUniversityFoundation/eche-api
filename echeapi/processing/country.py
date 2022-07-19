@@ -1,4 +1,7 @@
 
+from echeapi import settings
+
+
 # Curated list of country codes and country names.
 CC_COUNTRY = {
     "AC": "Ascension Island",
@@ -268,7 +271,7 @@ COUNTRY_TO_CC = {
 
 # Column names, as API keys.
 COL_REF = 'country'
-COL_CC = 'countryCode'
+COL_CC = '.'.join([settings.PROCESSED_KEY, 'countryCode'])
 
 
 def get_cc(row, col=COL_REF, empty=''):
