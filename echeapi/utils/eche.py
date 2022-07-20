@@ -1,4 +1,6 @@
 
+import unicodedata
+
 import pandas as pd
 from openpyxl import load_workbook
 
@@ -29,6 +31,9 @@ def clean_values(df):
     """
     # Strip all strings from whitespace and line characters.
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+
+    # Unicode normalization.
+    df = df.applymap(lambda x: unicodedata.normalize('NFKC', x) if isinstance(x, str) else x)
 
     # Nullify certain strings, like formula errors.
     df.replace(settings.ECHE_NULL_STR, value=None, inplace=True)
