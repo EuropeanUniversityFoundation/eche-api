@@ -169,4 +169,7 @@ def process(df):
     # Store country codes from prefixes in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
 
+    # Nullify empty strings.
+    df.replace('', value=None, inplace=True)
+
     return df
