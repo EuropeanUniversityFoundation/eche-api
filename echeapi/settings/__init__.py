@@ -14,6 +14,7 @@ SRC_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__fil
 
 # Absolute directory paths
 DATA_DIR = os.path.join(SRC_DIR, DATA_DIR)
+VERIFIED_DIR = os.path.join(DATA_DIR, VERIFIED_DIR)
 DB_DIR = os.path.join(SRC_DIR, DB_DIR)
 DOCS_DIR = os.path.join(SRC_DIR, DOCS_DIR)
 LOG_DIR = os.path.join(SRC_DIR, LOG_DIR)
@@ -26,10 +27,10 @@ DATA_FILENAME =  os.path.join(DATA_DIR, DATA_FILENAME)
 ECHE_KEYS = [*ECHE_FIELDS.values()]
 
 # Processed data API keys.
-PROCESSED_KEYS = ['.'.join([PROCESSED_KEY, f]) for f in PROCESSED_FIELDS]
+PROCESSED_KEYS = [f'{PROCESSED_KEY}.{f}' for f in PROCESSED_FIELDS]
 
 # Verified data API keys.
-VERIFIED_KEYS = ['.'.join([VERIFIED_KEY, f]) for f in VERIFIED_FIELDS]
+VERIFIED_KEYS = [f'{VERIFIED_KEY}.{f}' for f in VERIFIED_FIELDS]
 
 # All known API keys
 KNOWN_KEYS = [

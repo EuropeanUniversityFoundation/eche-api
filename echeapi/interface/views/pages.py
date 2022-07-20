@@ -67,6 +67,7 @@ def docs(params=''):
 @app.route("/explore/")
 def explore():
     content = Markup(api.as_html(
+        fields=settings.ECHE_KEYS,
         table_id='echeTable',
         classes=['table', 'table-striped', 'small'],
     ))

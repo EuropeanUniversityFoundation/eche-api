@@ -17,11 +17,11 @@ KNOWN_3_LETTER = ['LUX', 'IRL']
 
 # Column names, as API keys.
 COL_REF = 'erasmusCode'
-COL_NORM = '.'.join([settings.PROCESSED_KEY, 'erasmusCodeNormalized'])
-COL_PREFIX = '.'.join([settings.PROCESSED_KEY, 'erasmusCodePrefix'])
-COL_CITY = '.'.join([settings.PROCESSED_KEY, 'erasmusCodeCity'])
-COL_NUMBER = '.'.join([settings.PROCESSED_KEY, 'erasmusCodeNumber'])
-COL_CC = '.'.join([settings.PROCESSED_KEY, 'erasmusCodeCountryCode'])
+COL_NORM = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
+COL_PREFIX = f'{settings.PROCESSED_KEY}.erasmusCodePrefix'
+COL_CITY = f'{settings.PROCESSED_KEY}.erasmusCodeCity'
+COL_NUMBER = f'{settings.PROCESSED_KEY}.erasmusCodeNumber'
+COL_CC = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCode'
 
 # Match the known prefixes in Erasmus codes to ISO 3166 country codes.
 PREFIX_CC = {
@@ -168,5 +168,3 @@ def process(df):
 
     # Store country codes from prefixes in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
-
-    return df

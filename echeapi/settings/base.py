@@ -78,12 +78,12 @@ UNIQUE_FIELDS = {
     'pic': 'danger',
     'oid': 'danger',
     'organisationLegalName': 'info',
-    '.'.join([PROCESSED_KEY, 'erasmusCodeNormalized']): 'danger',
+    f'{PROCESSED_KEY}.erasmusCodeNormalized': 'danger',
 }
 
 # Reference field headers for data attachment.
 REFERENCE_FIELDS = {
-    'erasmusCode': '.'.join([PROCESSED_KEY, 'erasmusCodeNormalized']),
+    'erasmusCode': f'{PROCESSED_KEY}.erasmusCodeNormalized',
     'pic': 'pic',
 }
 
