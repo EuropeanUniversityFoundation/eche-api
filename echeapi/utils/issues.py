@@ -29,11 +29,12 @@ def unique(df, debug=False):
     issues = []
 
     for field, severity in settings.UNIQUE_FIELDS.items():
-        issue_msg = f'Duplicates found in {field}.'
-        clean_msg = f'No duplicates found in {field}.'
+        issue_msg = f'Duplicates found in \"{field}\".'
+        clean_msg = f'No duplicates found in \"{field}\".'
 
         df_dups = dups(df, subset=[field])
         df_dups.replace({np.nan: None}, inplace=True)
+        df_dups = df_dups[settings.UNIQUE_FIELDS.keys()].sort_values(field).copy()
 
         if not df_dups.empty:
             msg = issue_msg
@@ -41,7 +42,7 @@ def unique(df, debug=False):
             if debug:
                 print(f'\n{issue_msg}')
                 print(f'Severity: {severity}\n')
-                print(df_dups[settings.UNIQUE_FIELDS.keys()].sort_values(field))
+                print(df_dups)
         else:
             msg = clean_msg
             severity = 'success'
@@ -59,17 +60,15 @@ def proc(df, original, processed, null=False, debug=False):
     """
     issues = []
 
-    processed_col = f'{settings.PROCESSED_KEY}.{processed}'
-
-    df_diff = diff(df, original, processed_col)
+    df_diff = diff(df, original, processed)
 
     if null:
-        issue_msg = f'Empty values in {processed}.'
-        clean_msg = f'No empty values in {processed}.'
+        issue_msg = f'Empty values in \"{processed}\".'
+        clean_msg = f'No empty values in \"{processed}\".'
 
         severity = 'warning'
 
-        df_null = df_diff[df_diff[processed_col].isnull()].copy()
+        df_null = df_diff[df_diff[processed].isnull()].copy()
         df_null.replace({np.nan: None}, inplace=True)
 
         if not df_null.empty:
@@ -89,12 +88,12 @@ def proc(df, original, processed, null=False, debug=False):
         return msg, processed, severity, df_null
 
     else:
-        issue_msg = f'Differences between {original} and {processed}.'
-        clean_msg = f'No differences between {original} and {processed}.'
+        issue_msg = f'Differences between \"{original}\" and \"{processed}\".'
+        clean_msg = f'No differences between \"{original}\" and \"{processed}\".'
 
         severity = 'info'
 
-        df_processed = df_diff[df_diff[processed_col].notnull()].copy()
+        df_processed = df_diff[df_diff[processed].notnull()].copy()
         df_processed.replace({np.nan: None}, inplace=True)
 
         if not df_processed.empty:
@@ -117,7 +116,7 @@ def proc(df, original, processed, null=False, debug=False):
 def protocol(df, debug=False):
     issues = unique(df, debug=debug)
     original = 'erasmusCode'
-    processed = 'erasmusCodeNormalized'
+    processed = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
     issues.append(proc(df, original, processed, debug=debug))
     issues.append(proc(df, original, processed, null=True, debug=debug))
 

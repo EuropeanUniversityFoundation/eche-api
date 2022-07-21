@@ -76,7 +76,7 @@ PROCESSED_KEY = '_processed'
 UNIQUE_FIELDS = {
     'proposalNumber': 'warning',
     'pic': 'danger',
-    'oid': 'danger',
+    'oid': 'warning',
     'organisationLegalName': 'info',
     '.'.join([PROCESSED_KEY, 'erasmusCodeNormalized']): 'danger',
 }

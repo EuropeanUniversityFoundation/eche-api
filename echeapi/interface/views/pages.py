@@ -2,7 +2,7 @@
 from flask import flash, Markup, render_template
 
 from echeapi import app, settings
-from echeapi.utils import api, doctree
+from echeapi.utils import api, doctree, issues, db
 
 
 @app.route("/")
@@ -74,6 +74,39 @@ def explore():
         'page/explore.html',
         menu_parent='explore',
         content=content,
+    )
+
+
+@app.route("/report/")
+def report():
+    issues_markup = ''
+    issues_data = issues.protocol(db.fetch())
+
+    for msg, field, severity, df in issues_data:
+        alert = render_template(
+            'components/alert.html',
+            msg=msg,
+            count=len(df.index),
+            severity=severity
+        )
+
+        table = df.to_html(
+            justify='inherit',
+            index=False,
+            na_rep='',
+            classes=['table', 'table-striped', 'small'],
+        ) if not df.empty else ''
+
+        issues_markup += render_template(
+            'components/issue.html',
+            alert=Markup(alert),
+            table=Markup(table)
+        )
+
+    return render_template(
+        'page/report.html',
+        menu_parent='report',
+        issues=Markup(issues_markup),
     )
 
 
