@@ -2,11 +2,9 @@
 import os
 import sys
 
-import numpy as np
-
 from echeapi import settings
 from echeapi.processing import country, erasmus
-from echeapi.utils import db, eche, verified, issues
+from echeapi.utils import db, eche, issues, verified
 
 
 def main(*args):

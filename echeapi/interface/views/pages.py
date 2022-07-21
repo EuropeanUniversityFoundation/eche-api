@@ -2,7 +2,7 @@
 from flask import flash, Markup, render_template
 
 from echeapi import app, settings
-from echeapi.utils import api, doctree, issues, db
+from echeapi.utils import api, db, doctree, issues
 
 
 @app.route("/")

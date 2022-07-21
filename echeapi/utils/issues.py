@@ -58,8 +58,6 @@ def unique(df, debug=False):
 def proc(df, original, processed, null=False, debug=False):
     """ Find issues with processed fields.
     """
-    issues = []
-
     df_diff = diff(df, original, processed)
 
     if null:
