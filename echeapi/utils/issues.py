@@ -29,19 +29,27 @@ def unique(df, debug=False):
     issues = []
 
     for field, severity in settings.UNIQUE_FIELDS.items():
+        issue_msg = f'Duplicates found in {field}.'
+        clean_msg = f'No duplicates found in {field}.'
+
         df_dups = dups(df, subset=[field])
         df_dups.replace({np.nan: None}, inplace=True)
 
-        if debug:
-            if not df_dups.empty:
-                print(f'\nDuplicates in {field}')
+        if not df_dups.empty:
+            msg = issue_msg
+
+            if debug:
+                print(f'\n{issue_msg}')
                 print(f'Severity: {severity}\n')
                 print(df_dups[settings.UNIQUE_FIELDS.keys()].sort_values(field))
-                print()
-            else:
-                print(f'\nNo duplicates found in {field}.\n')
+        else:
+            msg = clean_msg
+            severity = 'success'
 
-        issues.append((field, severity, df_dups))
+            if debug:
+                print(f'\n{clean_msg}')
+
+        issues.append((msg, field, severity, df_dups))
 
     return issues
 
@@ -56,38 +64,54 @@ def proc(df, original, processed, null=False, debug=False):
     df_diff = diff(df, original, processed_col)
 
     if null:
+        issue_msg = f'Empty values in {processed}.'
+        clean_msg = f'No empty values in {processed}.'
+
         severity = 'warning'
+
         df_null = df_diff[df_diff[processed_col].isnull()].copy()
         df_null.replace({np.nan: None}, inplace=True)
 
+        if not df_null.empty:
+            msg = issue_msg
 
-        if debug:
-            if not df_null.empty:
-                print(f'\nEmpty values in {processed}')
+            if debug:
+                print(f'\n{issue_msg}')
                 print(f'Severity: {severity}\n')
                 print(df_null)
-                print()
-            else:
-                print(f'\nNo empty values in {processed}.\n')
+        else:
+            msg = clean_msg
+            severity = 'success'
 
-        return processed, severity, df_null
+            if debug:
+                print(f'\n{clean_msg}')
+
+        return msg, processed, severity, df_null
 
     else:
+        issue_msg = f'Differences between {original} and {processed}.'
+        clean_msg = f'No differences between {original} and {processed}.'
+
         severity = 'info'
+
         df_processed = df_diff[df_diff[processed_col].notnull()].copy()
         df_processed.replace({np.nan: None}, inplace=True)
 
+        if not df_processed.empty:
+            msg = issue_msg
 
-        if debug:
-            if not df_processed.empty:
-                print(f'\nDifferences between {original} and {processed}')
+            if debug:
+                print(f'\n{issue_msg}')
                 print(f'Severity: {severity}\n')
                 print(df_processed)
-                print()
-            else:
-                print(f'\nNo differences between {original} and {processed}.\n')
+        else:
+            msg = clean_msg
+            severity = 'success'
 
-        return processed, severity, df_processed
+            if debug:
+                print(f'\n{clean_msg}')
+
+        return msg, processed, severity, df_processed
 
 
 def protocol(df, debug=False):
