@@ -4,6 +4,10 @@ In addition to the original ECHE list data, this script produces processed field
 
 _All processed fields are saved with a prefix: `_processed.{field}`._
 
+## Unicode normalization
+
+All **original** values are normalized according to the Unicode standard form `NFKC` - [read more](https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize). This is the only change applied to the original data, whereas all other operations described below are applied to a new data point.
+
 ## Normalizing the Erasmus Code
 
 The **Erasmus Code** identifier presents a challenge for client applications when used as a unique identifier due to the fact that it includes spaces (` `). Certain software is known for collapsing multiple consecutive space characters (i.e. web browsers, spreadsheet applications) leading to many known issues in real life client applications.
@@ -31,7 +35,7 @@ As such, while the original Erasmus Codes are retained, the ECHE List API also p
 The following regular expression encapsulates all of the above:
 
 ```
-^([IRL]|[LUX]|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]+[A-Z]\d{2,3}$
+^(IRL|LUX|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]+[A-Z]\d{2,3}$
 ```
 
 ### Known differences between original and normalized Erasmus Codes

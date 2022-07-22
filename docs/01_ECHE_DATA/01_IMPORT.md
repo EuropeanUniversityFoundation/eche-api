@@ -26,10 +26,6 @@ The new _DataFrame_ undergoes some basic data cleaning, where preceding and trai
 
 Additionally, certain known strings are replaced with empty strings (i.e. errors from the `.xlsx` formulas) - the latter are listed as `eche_null_str` in `echeapi/settings/base.py`.
 
-## Unicode normalization
-
-All text values are normalized according to the Unicode standard form `NFKC` - [read more](https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize).
-
 ## Renaming columns
 
 Once the _DataFrame_ is clean, the columns are renamed according to the `eche_headers` _Dictionary_ in `echeapi/settings/base.py`. From that point on, all columns are named like the API keys.

@@ -1,7 +1,6 @@
 
 import os
 
-import numpy as np
 import pandas as pd
 
 from echeapi import settings
@@ -44,10 +43,6 @@ def normalize(df):
     """ Format DataFrame content.
     """
     eche.clean_values(df)
-
-    # Nullify NaN.
-    df.replace(np.nan, value=None, inplace=True)
-
     eche.reduce(df)
     eche.assign_types(df)
 

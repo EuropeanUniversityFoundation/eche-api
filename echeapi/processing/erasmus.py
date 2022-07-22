@@ -1,4 +1,6 @@
 
+import unicodedata
+
 from echeapi import settings
 
 """
@@ -154,6 +156,9 @@ def get_cc(row, col=COL_PREFIX):
 def process(df):
     """ Complete processing.
     """
+    # Unicode normalization.
+    df[COL_REF] = df[COL_REF].apply(lambda x: unicodedata.normalize('NFKC', x) if isinstance(x, str) else x)
+
     # Store normalized Erasmus Codes in new column.
     df[COL_NORM] = df.apply(lambda row: normalize(row), axis=1)
 

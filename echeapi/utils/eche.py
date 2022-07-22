@@ -1,6 +1,5 @@
 
-import unicodedata
-
+import numpy as np
 import pandas as pd
 from openpyxl import load_workbook
 
@@ -41,9 +40,6 @@ def clean_values(df):
     for col in df.columns.tolist():
         df[col] = df[col].apply(lambda x: x.strip() if isinstance(x, str) else x)
 
-    # Unicode normalization.
-    df = df.applymap(lambda x: unicodedata.normalize('NFKC', x) if isinstance(x, str) else x)
-
     # Nullify certain strings, like formula errors.
     df.replace(settings.ECHE_NULL_STR, value=None, inplace=True)
 
@@ -61,6 +57,9 @@ def reduce(df):
 def assign_types(df):
     """ Assign string type to all columns except dates.
     """
+    # Nullify NaN.
+    df.replace(np.nan, value=None, inplace=True)
+
     for col in df.columns.tolist():
         if col in settings.DATE_FIELDS:
             continue
