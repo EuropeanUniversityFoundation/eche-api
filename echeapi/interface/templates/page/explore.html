@@ -12,10 +12,12 @@ $(document).ready( function () {
 </script>
 {% endblock %}
 
+{% block title %}Explore{% endblock %}
+
 {% block content %}
-  <h1>{% block title %}Explore{% endblock %}</h1>
+  <h1>Explore</h1>
   <hr>
   <section class="table-wrapper">
-  {{ content }}
+  {{ content|safe }}
   </section>
 {% endblock %}
