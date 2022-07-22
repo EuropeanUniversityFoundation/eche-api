@@ -79,34 +79,22 @@ def explore():
 
 @app.route("/report/")
 def report():
-    issues_markup = ''
     issues_data = issues.protocol(db.fetch())
+    issues_items = []
 
     for msg, field, severity, df in issues_data:
-        alert = render_template(
-            'components/alert.html',
-            msg=msg,
-            count=len(df.index),
-            severity=severity
-        )
-
         table = df.to_html(
             justify='inherit',
             index=False,
             na_rep='',
             classes=['table', 'table-striped', 'small'],
         ) if not df.empty else ''
-
-        issues_markup += render_template(
-            'components/issue.html',
-            alert=Markup(alert),
-            table=Markup(table)
-        )
+        issues_items.append((msg, severity, len(df.index), table))
 
     return render_template(
         'page/report.html',
         menu_parent='report',
-        issues=Markup(issues_markup),
+        issues=issues_items,
     )
 
 

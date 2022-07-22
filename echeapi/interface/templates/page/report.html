@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 {%- set active_page = menu_parent -%}
 
+{% block title %}Status report{% endblock %}
+
 {% block content %}
-  <h1>{% block title %}Status report{% endblock %}</h1>
+  <h1>Status report</h1>
   <p class="lead">Displays any issues detected during data processing.</p>
   <hr>
-  {{ issues }}
+    {% for msg, severity, count, table in issues %}
+      <div class="issue mb-5">
+        {% include 'components/alert.html' %}
+        {% if table %}{{ table|safe }}{% endif %}
+      </div>
+    {% endfor %}
   <hr>
   <h2>Legend</h2>
   <br>
