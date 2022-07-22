@@ -21,16 +21,25 @@ def load(fname=settings.DATA_FILENAME):
     columns = next(sheet_data)
 
     # Create a DataFrame based on the subsequent lines of data.
-    df = pd.DataFrame(sheet_data, columns=columns)
+    return pd.DataFrame(sheet_data, columns=columns)
 
-    return df
+
+def replace_headers(df):
+    """ Rename DataFrame headers.
+    """
+    # Remove whitespace in column names.
+    df.rename(columns=lambda c: c.strip() if isinstance(c, str) else c, inplace=True)
+
+    # Rename columns with machine names.
+    df.rename(columns=settings.ECHE_FIELDS, inplace=True)
 
 
 def clean_values(df):
     """ Clean up whitespace and line characters from a DataFrame.
     """
     # Strip all strings from whitespace and line characters.
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    for col in df.columns.tolist():
+        df[col] = df[col].apply(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Unicode normalization.
     df = df.applymap(lambda x: unicodedata.normalize('NFKC', x) if isinstance(x, str) else x)
@@ -41,46 +50,28 @@ def clean_values(df):
     # Nullify empty strings.
     df.replace('', value=None, inplace=True)
 
-    return df
+
+def reduce(df):
+    """Drop empty rows and columns.
+    """
+    df.dropna(axis=0, how='all', inplace=True)
+    df.dropna(axis=1, how='all', inplace=True)
 
 
 def assign_types(df):
     """ Assign string type to all columns except dates.
     """
-    for key in df.columns.tolist():
-        if settings.ECHE_FIELDS[key] not in settings.DATE_FIELDS:
-            # Convert float to int before converting to string.
-            if df[key].dtypes == float:
-                df[key] = df[key].apply(int)
-            df[key] = df[key].apply(lambda x: x if x is None else str(x))
-
-    return df
-
-
-def reduce(df):
-    """Drop empty rows and columns.
-    """
-    df.dropna(how='all', axis=0, inplace=True)
-    df.dropna(how='all', axis=1, inplace=True)
-
-    return df
-
-
-def replace_headers(df):
-    """ Rename DataFrame headers.
-    """
-    # Remove whitespace in column names.
-    df.rename(columns=lambda c: c.strip(), inplace=True)
-
-    # Rename columns with machine names.
-    df.rename(columns=settings.ECHE_FIELDS, inplace=True)
-
-    return df
+    for col in df.columns.tolist():
+        if col in settings.DATE_FIELDS:
+            continue
+        # Convert float to int before converting to string.
+        if df[col].dtypes == float:
+            df[col] = df[col].apply(int)
+        df[col] = df[col].apply(lambda x: x if x is None else str(x))
 
 
 def normalize(df):
-    df = clean_values(df)
-    df = reduce(df)
-    df = assign_types(df)
-    df = replace_headers(df)
-    return df
+    replace_headers(df)
+    clean_values(df)
+    reduce(df)
+    assign_types(df)

@@ -5,7 +5,7 @@ from urllib.parse import unquote
 from flask import jsonify, request, Response
 
 from echeapi import app, settings
-from echeapi.utils import api, nesting
+from echeapi.utils import api
 
 
 class ApiError(Exception):
@@ -33,36 +33,43 @@ def api_error(error):
 @app.route("/api/", methods=['GET'])
 @app.route("/api/<string:key>/", methods=['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods=['GET'])
-def eche_list(key=None, value=None, processed=[], verified=[]):
-    fields = [
-        f.strip()
-        for f in request.args.get('fields', '').split(',')
-        if f.strip() in settings.ECHE_KEYS
-    ]
+def eche_list(key=None, value=None):
+    if 'fields' in request.args:
+        fields = [
+            f.strip()
+            for f in request.args['fields'].split(',')
+            if f.strip() in settings.ECHE_KEYS
+        ]
+    else:
+        fields = settings.ECHE_KEYS
 
-    if processed is not []:
+    if 'processed' in request.args:
         processed = [
             p.strip()
-            for p in request.args.get('processed', '').split(',')
+            for p in request.args['processed'].split(',')
             if p.strip() in [*settings.PROCESSED_FIELDS, 'all']
         ]
 
         if 'all' not in processed:
-            processed = ['.'.join([settings.PROCESSED_KEY, p]) for p in processed]
+            processed = [f'{settings.PROCESSED_KEY}.{p}' for p in processed]
         else:
             processed = settings.PROCESSED_KEYS
+    else:
+        processed = []
 
-    if verified is not []:
+    if 'verified' in request.args:
         verified = [
             v.strip()
-            for v in request.args.get('verified', '').split(',')
+            for v in request.args['verified'].split(',')
             if v.strip() in [*settings.VERIFIED_FIELDS, 'all']
         ]
 
         if 'all' not in verified:
-            verified = ['.'.join([settings.VERIFIED_KEY, v]) for v in verified]
+            verified = [f'{settings.VERIFIED_KEY}.{v}' for v in verified]
         else:
             verified = settings.VERIFIED_KEYS
+    else:
+        verified = []
 
     filter = None
     if key is not None:
@@ -83,11 +90,13 @@ def eche_list(key=None, value=None, processed=[], verified=[]):
         filter = (key, value)
 
     try:
-        body = api.as_json(fields=[*fields, *processed, *verified], filter=filter)
+        body = api.as_json(
+            fields=[*fields, *processed, *verified],
+            filter=filter,
+            nested=True,
+        )
     except Exception:
         app.logger.exception('Error while fetching API data')
         raise ApiError(500, 'Server error')
-
-    body = nesting.process(body)
 
     return Response(body, mimetype='application/json')

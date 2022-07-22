@@ -3,6 +3,7 @@ import random
 
 import pandas as pd
 
+from echeapi import settings
 from echeapi.processing import country, erasmus
 from echeapi.utils import api, doctree
 
@@ -21,7 +22,20 @@ def test_doctree():
 
 
 def test_api():
-    api.list()
+    data = api.as_dataframe(settings.ECHE_KEYS)
+    start, batch = 0, 10
+
+    print('\nAPI data preview\n')
+    while True:
+        try:
+            input(f"\nPress Enter to print next {batch} items or Ctrl+C to exit ...")
+            print()
+            print(data[start:start + batch])
+            start += batch
+            print()
+        except (KeyboardInterrupt, EOFError):
+            print()
+            break
 
 
 def test_erasmus():
@@ -61,7 +75,7 @@ def test_erasmus():
 
     input("\nPress Enter to see the normalized codes...")
 
-    df = erasmus.process(df)
+    erasmus.process(df)
 
     print()
     print(df[df[erasmus.COL_NORM] != ''])
@@ -88,7 +102,7 @@ def test_country():
 
     input("\nPress Enter to see the country codes...")
 
-    df = country.process(df)
+    country.process(df)
 
     print()
     print(df)

@@ -20,12 +20,12 @@ def main(*args):
         df = eche.load(fname)
 
         # Clean up the data and normalize ECHE list headers.
-        df = eche.normalize(df)
+        eche.normalize(df)
 
         # Process Erasmus Codes.
-        df = erasmus.process(df)
+        erasmus.process(df)
         # Process countries.
-        df = country.process(df)
+        country.process(df)
 
         # Print issues in the console.
         detected = issues.detect_all(df)
@@ -35,7 +35,7 @@ def main(*args):
                 print(f'{_df}\n')
 
         # Attach verified data.
-        df = verified.attach(df)
+        verified.attach(df)
 
         # Save DataFrame in the database.
         db.save(df)
