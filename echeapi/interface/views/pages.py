@@ -79,10 +79,10 @@ def explore():
 
 @app.route("/report/")
 def report():
-    issues_data = issues.protocol(db.fetch())
+    issues_data = issues.detect_all(db.fetch())
     issues_items = []
 
-    for msg, field, severity, df in issues_data:
+    for msg, severity, df in issues_data:
         table = df.to_html(
             justify='inherit',
             index=False,
