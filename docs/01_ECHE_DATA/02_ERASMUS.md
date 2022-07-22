@@ -56,7 +56,9 @@ element {
 
 After an Erasmus Code has been normalized as described above, it is possible to extract the prefix, also referred to as the _country_ component. This prefix consists of **one, two or three letters** and contains **no spaces**.
 
-This API key may be useful for grouping entries without the need to process the Erasmus Codes, either original or normalized.
+The _city_ component and the _number_ component are also extracted from the normalized Erasmus Code.
+
+These API keys may be useful for grouping entries without the need to process the Erasmus Codes, either original or normalized.
 
 ## Matching an Erasmus Code to a Country Code
 
