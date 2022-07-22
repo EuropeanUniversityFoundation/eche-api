@@ -28,7 +28,11 @@ def main(*args):
         df = country.process(df)
 
         # Print issues in the console.
-        issues.protocol(df, debug=True)
+        detected = issues.detect_all(df)
+        for msg, severity, _df in detected:
+            print(f'\n[{severity.upper()}] {msg}\n')
+            if not _df.empty:
+                print(f'{_df}\n')
 
         # Attach verified data.
         df = verified.attach(df)
