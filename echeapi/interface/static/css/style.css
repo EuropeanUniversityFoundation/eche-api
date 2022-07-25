@@ -57,11 +57,3 @@ body {
 table.dataframe {
   white-space: pre-wrap;
 }
-
-.card-header a {
-  color: #0262ef;
-}
-
-.card-header a:hover {
-  color: #024dbc;
-}
