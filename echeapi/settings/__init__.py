@@ -39,13 +39,6 @@ KNOWN_KEYS = [
     *VERIFIED_KEYS,
 ]
 
-# All known API keys
-KNOWN_FIELDS = [
-    *ECHE_KEYS,
-    *PROCESSED_FIELDS,
-    *VERIFIED_FIELDS,
-]
-
 
 try:
     os.makedirs(LOG_DIR, mode=0o755, exist_ok=True)
