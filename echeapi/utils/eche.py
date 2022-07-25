@@ -32,6 +32,9 @@ def replace_headers(df):
     # Rename columns with machine names.
     df.rename(columns=settings.ECHE_FIELDS, inplace=True)
 
+    # Drop unrecognized columns.
+    df.drop(columns=df.columns.difference(settings.ECHE_KEYS), inplace=True)
+
 
 def clean_values(df):
     """ Clean up whitespace and line characters from a DataFrame.
@@ -48,10 +51,9 @@ def clean_values(df):
 
 
 def reduce(df):
-    """Drop empty rows and columns.
+    """Drop empty rows.
     """
     df.dropna(axis=0, how='all', inplace=True)
-    df.dropna(axis=1, how='all', inplace=True)
 
 
 def assign_types(df):

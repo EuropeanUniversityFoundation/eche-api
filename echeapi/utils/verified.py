@@ -75,6 +75,7 @@ def join(df_base, df_verified):
 def attach(df_base):
     for fname in lookup():
         df_verified = load(fname)
-        normalize(df_verified)
-        erasmus.process(df_verified)
-        join(df_base, df_verified)
+        if not df_verified.empty:
+            normalize(df_verified)
+            erasmus.process(df_verified)
+            join(df_base, df_verified)

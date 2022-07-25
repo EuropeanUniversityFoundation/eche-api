@@ -19,6 +19,9 @@ def main(*args):
         # Load the ECHE list data into a DataFrame.
         df = eche.load(fname)
 
+        if df.empty:
+            sys.exit(f'File "{fname}" does not contain any data!')
+
         # Clean up the data and normalize ECHE list headers.
         eche.normalize(df)
 
@@ -28,11 +31,12 @@ def main(*args):
         country.process(df)
 
         # Print issues in the console.
-        detected = issues.detect_all(df)
-        for msg, severity, _df in detected:
-            print(f'\n[{severity.upper()}] {msg}\n')
-            if not _df.empty:
-                print(f'{_df}\n')
+        detected = [d for d in issues.detect_all(df) if not d[2].empty]
+        if detected:
+            for msg, severity, _df in detected:
+                print(f'\n[{severity.upper()}] {msg}\n\n{_df}\n')
+        else:
+            print('No issues with data found.')
 
         # Attach verified data.
         verified.attach(df)
@@ -40,4 +44,8 @@ def main(*args):
         # Save DataFrame in the database.
         db.save(df)
 
-        print(f'ECHE data loaded to {settings.DB_FILENAME}')
+        print(f'\nLoaded ECHE data from:\n  - {fname}')
+        print('\nAttached verified data from:')
+        for _fname in verified.lookup():
+            print(f'  - {_fname}')
+        print(f'\nData loaded to "{settings.DB_FILENAME}"')
