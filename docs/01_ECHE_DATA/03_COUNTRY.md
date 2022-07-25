@@ -2,6 +2,8 @@
 
 In addition to the original ECHE list data, this script produces processed fields that convey normalized data points to be leveraged by client applications. The processed field related to the **Country** is described below.
 
+_All processed fields are saved with a prefix: `_processed.{field}`._
+
 ## Matching a Country to a Country Code
 
 The **Country** field contains country names in English, which are converted to an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code according with the applicable standards.

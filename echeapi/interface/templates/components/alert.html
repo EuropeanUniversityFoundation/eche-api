@@ -1,0 +1,4 @@
+<div class="flash {{ severity }} mb-0" role="alert">
+  <strong>{{ severity|title }}</strong>: {{ msg }}
+  {% if count > 0 %}<div class="badge {{ severity }}">{{ count }}</div>{% endif %}
+</div>

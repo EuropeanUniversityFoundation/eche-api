@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{%- set active_page = menu_parent -%}
+
+{% block title %}Status report{% endblock %}
+
+{% block content %}
+  <h1>Status report</h1>
+  <p class="lead">Displays any issues detected during data processing.</p>
+  <hr>
+    {% for msg, severity, count, table in issues %}
+      <div class="issue mb-5">
+        {% include 'components/alert.html' %}
+        {% if table %}{{ table|safe }}{% endif %}
+      </div>
+    {% endfor %}
+  <hr>
+  <h2>Legend</h2>
+  <br>
+  <div class="flash success"><strong>Success</strong>: No issues found.</div>
+  <div class="flash warning"><strong>Warning</strong>: These issues may cause unexpected behaviour in client applications.</div>
+  <div class="flash danger"><strong>Danger</strong>: These issues may cause client applications to fail.</div>
+  <div class="flash info"><strong>Info</strong>: For informational purposes only.</div>
+{% endblock %}

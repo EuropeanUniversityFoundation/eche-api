@@ -1,4 +1,6 @@
 
+from echeapi import settings
+
 # Curated list of country codes and country names.
 CC_COUNTRY = {
     "AC": "Ascension Island",
@@ -268,7 +270,7 @@ COUNTRY_TO_CC = {
 
 # Column names, as API keys.
 COL_REF = 'country'
-COL_CC = 'countryCode'
+COL_CC = f'{settings.PROCESSED_KEY}.countryCode'
 
 
 def get_cc(row, col=COL_REF, empty=''):
@@ -283,4 +285,3 @@ def process(df):
     """
     # Store country codes from country names in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
-    return df

@@ -1,0 +1,6 @@
+Flask
+Flask-CacheControl
+jinja-markdown
+numpy
+openpyxl
+pandas

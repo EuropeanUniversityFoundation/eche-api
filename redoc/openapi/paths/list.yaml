@@ -7,6 +7,8 @@ get:
   operationId: getList
   parameters:
     - $ref: ../components/schemas/QueryParamFields.yaml
+    - $ref: ../components/schemas/QueryParamProcessed.yaml
+    - $ref: ../components/schemas/QueryParamVerified.yaml
   responses:
     '200':
       description: OK
@@ -20,7 +22,22 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/InstitutionCollection.yaml
-          example:
-            $ref: ../components/responses/InstitutionCollection.yaml
+          examples:
+            default:
+              summary: Default response
+              value:
+                $ref: ../components/responses/InstitutionCollection.yaml
+            processed:
+              summary: Response with processed fields
+              value:
+                $ref: ../components/responses/InstitutionCollectionProcessed.yaml
+            verified:
+              summary: Response with verified fields
+              value:
+                $ref: ../components/responses/InstitutionCollectionVerified.yaml
+            geography:
+              summary: Combining `fields`, `processed` and `verified`
+              value:
+                $ref: ../components/responses/InstitutionCollectionGeography.yaml
     '400':
       $ref: ../components/responses/Problem.yaml

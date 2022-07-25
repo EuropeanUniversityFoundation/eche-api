@@ -11,7 +11,24 @@ body {
   border-width: 1px;
   border-left-width: 10px;
   border-color: green;
-  color: green;
+  color: #006700;
+}
+
+.flash > .badge {
+  float: right;
+}
+
+.badge {
+  background-color: #006700;
+}
+
+.flash.info {
+  border-color: teal;
+  color: #006767;
+}
+
+.badge.info {
+  background-color: #006767;
 }
 
 .flash.warning {
@@ -19,9 +36,18 @@ body {
   color: #b44700;
 }
 
+.badge.warning {
+  background-color: #b44700;
+}
+
+.flash.danger,
 .flash.error {
   border-color: red;
-  color: red;
+  color: #e60000;
+}
+
+.badge.danger {
+  background-color: #e60000;
 }
 
 .table-wrapper {

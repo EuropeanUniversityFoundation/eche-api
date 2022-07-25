@@ -1,3 +1,8 @@
+
+import unicodedata
+
+from echeapi import settings
+
 """
 Handle Erasmus codes.
 
@@ -14,9 +19,11 @@ KNOWN_3_LETTER = ['LUX', 'IRL']
 
 # Column names, as API keys.
 COL_REF = 'erasmusCode'
-COL_NORM = 'erasmusCodeNormalized'
-COL_PREFIX = 'erasmusCodePrefix'
-COL_CC = 'erasmusCodeCountryCode'
+COL_NORM = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
+COL_PREFIX = f'{settings.PROCESSED_KEY}.erasmusCodePrefix'
+COL_CITY = f'{settings.PROCESSED_KEY}.erasmusCodeCity'
+COL_NUMBER = f'{settings.PROCESSED_KEY}.erasmusCodeNumber'
+COL_CC = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCode'
 
 # Match the known prefixes in Erasmus codes to ISO 3166 country codes.
 PREFIX_CC = {
@@ -125,6 +132,20 @@ def get_prefix(row, col=COL_NORM):
     return item[0:3].strip() if item else ''
 
 
+def get_city(row, col=COL_NORM):
+    """ Extract city component from normalized Erasmus code.
+    """
+    item = row[col]
+    return ''.join([i for i in item[3:] if not i.isdigit()]) if item else ''
+
+
+def get_number(row, col=COL_NORM):
+    """ Extract number from normalized Erasmus code.
+    """
+    item = row[col]
+    return ''.join(filter(lambda i: i.isdigit(), item)) if item else ''
+
+
 def get_cc(row, col=COL_PREFIX):
     """ Extract country code from prefix.
     """
@@ -135,13 +156,23 @@ def get_cc(row, col=COL_PREFIX):
 def process(df):
     """ Complete processing.
     """
+    # Unicode normalization.
+    df[COL_REF] = df[COL_REF].apply(lambda x: unicodedata.normalize('NFKC', x) if isinstance(x, str) else x)
+
     # Store normalized Erasmus Codes in new column.
     df[COL_NORM] = df.apply(lambda row: normalize(row), axis=1)
 
     # Store prefixes from normalized Erasmus Codes in new column.
     df[COL_PREFIX] = df.apply(lambda row: get_prefix(row), axis=1)
 
+    # Store city components from normalized Erasmus Codes in new column.
+    df[COL_CITY] = df.apply(lambda row: get_city(row), axis=1)
+
+    # Store numbers from normalized Erasmus Codes in new column.
+    df[COL_NUMBER] = df.apply(lambda row: get_number(row), axis=1)
+
     # Store country codes from prefixes in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
 
-    return df
+    # Nullify empty strings.
+    df.replace('', value=None, inplace=True)

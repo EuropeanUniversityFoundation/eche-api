@@ -12,7 +12,7 @@ def get_connection(db=settings.DB_FILENAME):
 
 
 def initialize(table=settings.DB_TABLE, connection=None):
-    df = pd.DataFrame([], columns=settings.DATA_FIELDS)
+    df = pd.DataFrame([], columns=settings.KNOWN_KEYS)
     save(df, table=table, connection=connection)
 
 
@@ -30,15 +30,15 @@ def save(df, table=settings.DB_TABLE, connection=None):
 
 
 def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
-    fields = ",".join(fields) if fields else "*"
+    fields = ",".join([f'\"{f}\"' for f in fields]) if fields else "*"
 
     if filter is not None:
         key, value = filter
         if value is None:
-            query = f"SELECT {fields} FROM {table} WHERE {key} IS NULL"
+            query = f"SELECT {fields} FROM {table} WHERE \"{key}\" IS NULL"
             params = ()
         else:
-            query = f"SELECT {fields} FROM {table} WHERE {key} = ?"
+            query = f"SELECT {fields} FROM {table} WHERE \"{key}\" = ? COLLATE NOCASE"
             params = (value,)
     else:
         query = f"SELECT {fields} FROM {table}"

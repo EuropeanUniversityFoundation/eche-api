@@ -34,15 +34,46 @@ def api_error(error):
 @app.route("/api/<string:key>/", methods=['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods=['GET'])
 def eche_list(key=None, value=None):
-    fields = [
-        f.strip()
-        for f in request.args.get('fields', '').split(',')
-        if f.strip() in settings.DATA_FIELDS
-    ]
+    if 'fields' in request.args:
+        fields = [
+            f.strip()
+            for f in request.args['fields'].split(',')
+            if f.strip() in settings.ECHE_KEYS
+        ]
+    else:
+        fields = settings.ECHE_KEYS
+
+    if 'processed' in request.args:
+        processed = [
+            p.strip()
+            for p in request.args['processed'].split(',')
+            if p.strip() in [*settings.PROCESSED_FIELDS, 'all']
+        ]
+
+        if 'all' not in processed:
+            processed = [f'{settings.PROCESSED_KEY}.{p}' for p in processed]
+        else:
+            processed = settings.PROCESSED_KEYS
+    else:
+        processed = []
+
+    if 'verified' in request.args:
+        verified = [
+            v.strip()
+            for v in request.args['verified'].split(',')
+            if v.strip() in [*settings.VERIFIED_FIELDS, 'all']
+        ]
+
+        if 'all' not in verified:
+            verified = [f'{settings.VERIFIED_KEY}.{v}' for v in verified]
+        else:
+            verified = settings.VERIFIED_KEYS
+    else:
+        verified = []
 
     filter = None
     if key is not None:
-        if key not in settings.DATA_FIELDS:
+        if key not in settings.KNOWN_KEYS:
             raise ApiError(404, 'Resource not found')
 
         if key in settings.DATE_FIELDS and value is not None:
@@ -59,7 +90,11 @@ def eche_list(key=None, value=None):
         filter = (key, value)
 
     try:
-        body = api.as_json(fields=fields, filter=filter)
+        body = api.as_json(
+            fields=[*fields, *processed, *verified],
+            filter=filter,
+            nested=True,
+        )
     except Exception:
         app.logger.exception('Error while fetching API data')
         raise ApiError(500, 'Server error')
