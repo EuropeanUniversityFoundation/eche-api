@@ -38,7 +38,7 @@ def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
             query = f"SELECT {fields} FROM {table} WHERE \"{key}\" IS NULL"
             params = ()
         else:
-            query = f"SELECT {fields} FROM {table} WHERE \"{key}\" = ?"
+            query = f"SELECT {fields} FROM {table} WHERE \"{key}\" = ? COLLATE NOCASE"
             params = (value,)
     else:
         query = f"SELECT {fields} FROM {table}"
