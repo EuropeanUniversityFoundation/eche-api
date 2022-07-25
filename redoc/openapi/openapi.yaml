@@ -17,8 +17,10 @@ tags:
   - name: Institutions
     description: See all _Institutions_ in the ECHE list, with optional filtering.
 servers:
-  - url: '/api/v0.1'
-    description: Sandbox server (example data)
+  - url: 'https://eche-list.erasmuswithoutpaper.eu/api'
+    description: Production server
+  - url: '/api'
+    description: Current server
 paths:
   /:
     $ref: paths/list.yaml
