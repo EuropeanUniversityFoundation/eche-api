@@ -22,7 +22,7 @@ def detect_duplicates(df):
             msg = f'No duplicates found in "{field}".'
             severity = 'success'
 
-        issues.append((msg, severity, df_dups))
+        issues.append((msg, severity, df_dups, 'duplicates'))
 
     return issues
 
@@ -32,6 +32,7 @@ def detect_empty(df, field):
     """
     df_null = df[df[field].isnull()].copy()
     df_null.replace({np.nan: None}, inplace=True)
+    df_null = df_null[settings.UNIQUE_FIELDS.keys()]
 
     if not df_null.empty:
         msg = f'Empty values in "{field}".'
@@ -40,7 +41,7 @@ def detect_empty(df, field):
         msg = f'No empty values in "{field}".'
         severity = 'success'
 
-    return msg, severity, df_null
+    return msg, severity, df_null, 'empty'
 
 
 def detect_different(df, first, second):
@@ -50,6 +51,7 @@ def detect_different(df, first, second):
     df_diff = df_diff[df_diff[first] != df_diff[second]]
     df_diff = df_diff[df_diff[second].notnull()]
     df_diff.replace({np.nan: None}, inplace=True)
+    df_diff = df_diff.sort_values(second)
 
     if not df_diff.empty:
         msg = f'Differences between "{first}" and "{second}".'
@@ -58,7 +60,7 @@ def detect_different(df, first, second):
         msg = f'No differences between "{first}" and "{second}".'
         severity = 'success'
 
-    return msg, severity, df_diff
+    return msg, severity, df_diff, 'different'
 
 
 def detect_all(df):

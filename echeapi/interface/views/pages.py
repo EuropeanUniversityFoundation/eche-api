@@ -62,12 +62,12 @@ def report():
     issues_data = issues.detect_all(db.fetch())
     issues_items = []
 
-    for msg, severity, df in issues_data:
+    for msg, severity, df, issue_class in issues_data:
         table = df.to_html(
             justify='inherit',
             index=False,
             na_rep='',
-            classes=['table', 'table-striped', 'small'],
+            classes=['table', 'table-striped', 'small', 'issues', issue_class],
         ) if not df.empty else ''
         issues_items.append((msg, severity, len(df.index), table))
 
