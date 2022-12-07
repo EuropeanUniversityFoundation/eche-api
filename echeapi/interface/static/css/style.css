@@ -57,3 +57,9 @@ body {
 table.dataframe {
   white-space: pre-wrap;
 }
+
+table.dataframe.issues.duplicates td:nth-of-type(5),
+table.dataframe.issues.different td,
+table.dataframe.issues.empty td:nth-of-type(5) {
+  font-family: monospace;
+}

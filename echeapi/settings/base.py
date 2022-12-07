@@ -31,10 +31,12 @@ LOG_FORMAT = '[%(asctime)s] [%(levelname)s] %(message)s'
 # ECHE null strings.
 ECHE_NULL_STR = [
     '#N/A',
+    '#VALUE!',
     'Not Found',
     'Transitory Charter',
     'Transitory Erasmus  Charter',
     'Transitory Erasmus charter',
+    'Transitory Erasmus Charter',
 ]
 
 # ECHE list headers and corresponding API keys.

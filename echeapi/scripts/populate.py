@@ -33,7 +33,7 @@ def main(*args):
         # Print issues in the console.
         detected = [d for d in issues.detect_all(df) if not d[2].empty]
         if detected:
-            for msg, severity, _df in detected:
+            for msg, severity, _df, issue_class in detected:
                 print(f'\n[{severity.upper()}] {msg}\n\n{_df}\n')
         else:
             print('No issues with data found.')
