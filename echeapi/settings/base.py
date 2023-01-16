@@ -39,6 +39,12 @@ ECHE_NULL_STR = [
     'Transitory Erasmus Charter',
 ]
 
+# ECHE country names to be replaced.
+ECHE_COUNTRY_NAMES = {
+    'Turkije': 'Turkiye',
+    'Turkey': 'Turkiye',
+}
+
 # ECHE list headers and corresponding API keys.
 ECHE_FIELDS = {
     'Proposal Number': 'proposalNumber',
