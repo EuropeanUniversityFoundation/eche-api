@@ -235,7 +235,9 @@ CC_COUNTRY = {
     "TM": "Turkmenistan",
     "TN": "Tunisia",
     "TO": "Tonga",
-    "TR": "Turkey",
+    # Country's latest official name change sparked this issue.
+    # "TR": "Turkey",
+    "TR": "Turkiye",
     "TT": "Trinidad & Tobago",
     "TV": "Tuvalu",
     "TW": "Taiwan",
@@ -283,5 +285,7 @@ def get_cc(row, col=COL_REF, empty=''):
 def process(df):
     """ Complete processing.
     """
+    # Replace country names.
+    df.replace(settings.ECHE_COUNTRY_NAMES, inplace=True)
     # Store country codes from country names in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
