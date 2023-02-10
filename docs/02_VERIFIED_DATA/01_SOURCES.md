@@ -6,7 +6,7 @@ _All verified fields are saved with a prefix: `_verified.{field}`._
 
 ## Included sources
 
-_as of 2022.07.19_
+_as of 2022-07-19_
 
 - **Country**: Poland
 - **Entity**: Ministry of Education and Science

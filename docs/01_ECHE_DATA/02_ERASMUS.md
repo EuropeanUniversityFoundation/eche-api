@@ -48,10 +48,10 @@ This script will add a leading zero to **any** _number_ component with a single 
 
 ### Advice on displaying Erasmus Codes in HTML
 
-Since web browsers usually collapse multiple consecutive spaces, Erasmus Codes may appear differently than how they are present in the actual markup. To avoid this effect, the following CSS rule should be applied to the `<element>` containing the Erasmus Code:
+Since web browsers usually collapse multiple consecutive spaces, Erasmus Codes may appear differently than how they are present in the actual markup. To avoid this effect, the following CSS rule should be applied to the HTML element containing the Erasmus Code:
 
 ```
-element {
+selector {
   white-space: pre-wrap;
 }
 ```
