@@ -1,4 +1,6 @@
 
+import datetime
+
 import numpy as np
 import pandas as pd
 from openpyxl import load_workbook
@@ -71,8 +73,23 @@ def assign_types(df):
         df[col] = df[col].apply(lambda x: x if x is None else str(x))
 
 
+def set_datetime(df):
+    """ Convert strings with dates into datetime type.
+    """
+    # Known date format found in string (2023-01-12).
+    format = "%d/%m/%Y"
+
+    for col in df.columns.tolist():
+        if col in settings.DATE_FIELDS:
+            # Isolate the strings in datetime column.
+            df_str = df[df[col].apply(lambda x: isinstance(x, str))]
+            for i, row in df_str.iterrows():
+                df.iloc[i][col] = datetime.datetime.strptime(row[col], format)
+
+
 def normalize(df):
     replace_headers(df)
     clean_values(df)
     reduce(df)
     assign_types(df)
+    set_datetime(df)
