@@ -47,8 +47,10 @@ ECHE_COUNTRY_NAMES = {
 
 # ECHE list headers and corresponding API keys.
 ECHE_FIELDS = {
-    'Proposal Number': 'proposalNumber',
-    'Erasmus Code': 'erasmusCode',
+    # 'Proposal Number': 'proposalNumber',
+    'Proposal ID': 'proposalNumber',
+    # 'Erasmus Code': 'erasmusCode',
+    'Erasmus code': 'erasmusCode',
     'PIC': 'pic',
     'OID': 'oid',
     'Organisation Legal Name': 'organisationLegalName',
