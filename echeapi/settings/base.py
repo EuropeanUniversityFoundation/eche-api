@@ -37,6 +37,7 @@ ECHE_NULL_STR = [
     'Transitory Erasmus  Charter',
     'Transitory Erasmus charter',
     'Transitory Erasmus Charter',
+    'Erasmus Charter Awarded',
 ]
 
 # ECHE country names to be replaced.
@@ -45,12 +46,19 @@ ECHE_COUNTRY_NAMES = {
     'Turkey': 'Turkiye',
 }
 
+# ECHE country codes to be replaced.
+ECHE_COUNTRY_CODES = {
+    'EL': 'GR',
+    'SF': 'FI',
+}
+
 # ECHE list headers and corresponding API keys.
 ECHE_FIELDS = {
-    # 'Proposal Number': 'proposalNumber',
-    'Proposal ID': 'proposalNumber',
+    'Proposal Number': 'proposalNumber',
+    # 'Proposal ID': 'proposalNumber',
     # 'Erasmus Code': 'erasmusCode',
-    'Erasmus code': 'erasmusCode',
+    # 'Erasmus code': 'erasmusCode',
+    None: 'erasmusCode',
     'PIC': 'pic',
     'OID': 'oid',
     'Organisation Legal Name': 'organisationLegalName',
@@ -76,7 +84,8 @@ PROCESSED_FIELDS = [
     'erasmusCodeCity',
     'erasmusCodeNumber',
     'erasmusCodeCountryCode',
-    'countryCode',
+    # 'countryCode',
+    'countryName',
 ]
 
 # Database column prefix for verified fields.

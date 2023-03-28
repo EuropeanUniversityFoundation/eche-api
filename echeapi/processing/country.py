@@ -272,7 +272,8 @@ COUNTRY_TO_CC = {
 
 # Column names, as API keys.
 COL_REF = 'country'
-COL_CC = f'{settings.PROCESSED_KEY}.countryCode'
+# COL_CC = f'{settings.PROCESSED_KEY}.countryCode'
+COL_CNAME = f'{settings.PROCESSED_KEY}.countryName'
 
 
 def get_cc(row, col=COL_REF, empty=''):
@@ -282,10 +283,22 @@ def get_cc(row, col=COL_REF, empty=''):
     return COUNTRY_TO_CC.get(item, empty)
 
 
+def get_cname(row, col=COL_REF, empty=''):
+    """ Extract country name from country code.
+    """
+    item = row[col]
+    return CC_COUNTRY.get(item, empty)
+
+
 def process(df):
     """ Complete processing.
     """
     # Replace country names.
-    df.replace(settings.ECHE_COUNTRY_NAMES, inplace=True)
+    # df.replace(settings.ECHE_COUNTRY_NAMES, inplace=True)
     # Store country codes from country names in new column.
-    df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
+    # df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
+
+    # Replace country codes.
+    df.replace(settings.ECHE_COUNTRY_CODES, inplace=True)
+    # Store country codes from country names in new column.
+    df[COL_CNAME] = df.apply(lambda row: get_cname(row), axis=1)
