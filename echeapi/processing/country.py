@@ -300,5 +300,5 @@ def process(df):
 
     # Replace country codes.
     df.replace(settings.ECHE_COUNTRY_CODES, inplace=True)
-    # Store country codes from country names in new column.
+    # Store country names from country codes in new column.
     df[COL_CNAME] = df.apply(lambda row: get_cname(row), axis=1)

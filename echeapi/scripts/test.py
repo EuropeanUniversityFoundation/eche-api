@@ -87,20 +87,21 @@ def test_erasmus():
 
 
 def test_country():
-    countries = random.sample(list(country.CC_COUNTRY.values()), 10)
+    # countries = random.sample(list(country.CC_COUNTRY.values()), 10)
+    countries = random.sample(list(country.CC_COUNTRY.keys()), 10)
 
     df = pd.DataFrame({country.COL_REF: countries})
 
     print('Country code processing\n')
 
-    print('This script will load random countries and get their country codes.')
+    print('This script will load a random sample of countries and process them.')
 
     input("\nPress Enter to see the countries...")
 
     print()
     print(df)
 
-    input("\nPress Enter to see the country codes...")
+    input("\nPress Enter to see the processed data...")
 
     country.process(df)
 

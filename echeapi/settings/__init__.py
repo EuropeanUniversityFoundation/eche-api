@@ -39,6 +39,8 @@ KNOWN_KEYS = [
     *VERIFIED_KEYS,
 ]
 
+# Set of unique columns to drop duplicates by.
+UNIQUE_COLS = [*UNIQUE_FIELDS.keys()]
 
 try:
     os.makedirs(LOG_DIR, mode=0o755, exist_ok=True)
