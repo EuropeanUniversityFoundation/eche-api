@@ -5,6 +5,8 @@ from flask_cachecontrol import cache_for
 from echeapi import app, settings
 from echeapi.utils import api, db, doctree, issues
 
+DISPLAY_FILENAME=settings.DATA_FILENAME.split("/")[-1]
+
 
 @app.route("/")
 @cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
@@ -12,6 +14,7 @@ def index():
     return render_template(
         'page/home.html',
         menu_parent='index',
+        data_filename=DISPLAY_FILENAME,
     )
 
 
@@ -38,6 +41,7 @@ def docs(params=''):
         menu_parent='docs',
         content=content,
         menu=menu,
+        data_filename=DISPLAY_FILENAME,
     )
 
 
@@ -53,6 +57,7 @@ def explore():
         'page/explore.html',
         menu_parent='explore',
         content=content,
+        data_filename=DISPLAY_FILENAME,
     )
 
 
@@ -75,6 +80,7 @@ def report():
         'page/report.html',
         menu_parent='report',
         issues=issues_items,
+        data_filename=DISPLAY_FILENAME,
     )
 
 
