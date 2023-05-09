@@ -16,10 +16,8 @@ The first _worksheet_ in the _workbook_ is considered to be the active one.
 
 The first row of the active _worksheet_ is used to retrieve the column headers. These headers should match the expected values as seen in the list below, so that they can be correctly mapped to the API keys.
 
-_Updated to reflect changes introduced on 2023-01-12_
-
-- ~~Proposal Number~~ Proposal ID (`proposalNumber`)
-- ~~Erasmus Code~~ Erasmus code (`erasmusCode`)
+- Proposal Number (`proposalNumber`)
+- Erasmus Code (`erasmusCode`)
 - PIC (`pic`)
 - OID (`oid`)
 - Organisation Legal Name (`organisationLegalName`)

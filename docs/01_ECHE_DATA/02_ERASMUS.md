@@ -66,7 +66,7 @@ These API keys may be useful for grouping entries without the need to process th
 
 ## Matching an Erasmus Code to a Country Code
 
-The _country_ component, or prefix of a normalized Erasmus Code is also converted to an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code, according to a known correspondence list.
+The _country_ component, or prefix of a normalized Erasmus Code is also converted both to an [Interinstitutional Style Guide](http://publications.europa.eu/code/en/en-5000600.htm) country code and to an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code, according to a known correspondence list.
 
 This API key may be useful for grouping entries without the need to process the Erasmus Codes, either original or normalized.
 
