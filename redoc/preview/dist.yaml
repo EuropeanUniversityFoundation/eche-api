@@ -87,12 +87,15 @@ paths:
                       echeStartDate: '2021-01-01'
                       echeEndDate: '2029-12-31'
                       _processed:
+                        countryCode: AQ
+                        countryCodeIso: AQ
+                        countryName: Antarctica
                         erasmusCodeNormalized: AQ TESTING99
                         erasmusCodePrefix: AQ
                         erasmusCodeCity: TESTING
                         erasmusCodeNumber: '99'
                         erasmusCodeCountryCode: AQ
-                        countryCode: AQ
+                        erasmusCodeCountryCodeIso: AQ
                 verified:
                   summary: Response with verified fields
                   value:
@@ -123,11 +126,14 @@ paths:
                       city: Ridley Beach
                       country: Antarctica
                       _processed:
+                        countryCode: AQ
+                        countryCodeIso: AQ
+                        countryName: AQ
                         erasmusCodeNormalized: AQ TESTING99
                         erasmusCodePrefix: AQ
                         erasmusCodeCity: TESTING
                         erasmusCodeCountryCode: AQ
-                        countryCode: AQ
+                        erasmusCodeCountryCodeIso: AQ
                       _verified:
                         city: Ridley Beach
                         cityLang: en
@@ -192,12 +198,15 @@ paths:
                       echeStartDate: '2021-01-01'
                       echeEndDate: '2029-12-31'
                       _processed:
+                        countryCode: AQ
+                        countryCodeIso: AQ
+                        countryName: Antarctica
                         erasmusCodeNormalized: AQ TESTING99
                         erasmusCodePrefix: AQ
                         erasmusCodeCity: TESTING
                         erasmusCodeNumber: '99'
                         erasmusCodeCountryCode: AQ
-                        countryCode: AQ
+                        erasmusCodeCountryCodeIso: AQ
                 verified:
                   summary: Response with verified fields
                   value:
@@ -228,11 +237,14 @@ paths:
                       city: Ridley Beach
                       country: Antarctica
                       _processed:
+                        countryCode: AQ
+                        countryCodeIso: AQ
+                        countryName: AQ
                         erasmusCodeNormalized: AQ TESTING99
                         erasmusCodePrefix: AQ
                         erasmusCodeCity: TESTING
                         erasmusCodeCountryCode: AQ
-                        countryCode: AQ
+                        erasmusCodeCountryCodeIso: AQ
                       _verified:
                         city: Ridley Beach
                         cityLang: en
@@ -296,12 +308,15 @@ paths:
                       echeStartDate: '2021-01-01'
                       echeEndDate: '2029-12-31'
                       _processed:
+                        countryCode: AQ
+                        countryCodeIso: AQ
+                        countryName: Antarctica
                         erasmusCodeNormalized: AQ TESTING99
                         erasmusCodePrefix: AQ
                         erasmusCodeCity: TESTING
                         erasmusCodeNumber: '99'
                         erasmusCodeCountryCode: AQ
-                        countryCode: AQ
+                        erasmusCodeCountryCodeIso: AQ
                 verified:
                   summary: Response with verified fields
                   value:
@@ -332,11 +347,14 @@ paths:
                       city: Ridley Beach
                       country: Antarctica
                       _processed:
+                        countryCode: AQ
+                        countryCodeIso: AQ
+                        countryName: AQ
                         erasmusCodeNormalized: AQ TESTING99
                         erasmusCodePrefix: AQ
                         erasmusCodeCity: TESTING
                         erasmusCodeCountryCode: AQ
-                        countryCode: AQ
+                        erasmusCodeCountryCodeIso: AQ
                       _verified:
                         city: Ridley Beach
                         cityLang: en
@@ -380,12 +398,15 @@ components:
           type: string
           enum:
             - all
+            - countryCode
+            - countryCodeIso
+            - countryName
             - erasmusCodeNormalized
             - erasmusCodePrefix
             - erasmusCodeCity
             - erasmusCodeNumber
             - erasmusCodeCountryCode
-            - countryCode
+            - erasmusCodeCountryCodeIso
       description: |
         The processed fields to include in the response.
          If `all` is specified, all processed fields will be included in the response.
@@ -428,12 +449,15 @@ components:
           - webpage
           - echeStartDate
           - echeEndDate
+          - _processed.countryCode
+          - _processed.countryCodeIso
+          - _processed.countryName
           - _processed.erasmusCodeNormalized
           - _processed.erasmusCodePrefix
           - _processed.erasmusCodeCity
           - _processed.erasmusCodeNumber
           - _processed.erasmusCodeCountryCode
-          - _processed.countryCode
+          - _processed.erasmusCodeCountryCodeIso
           - _verified.organisationLegalName
           - _verified.organisationLegalNameLang
           - _verified.street
@@ -508,6 +532,18 @@ components:
             type: object
             description: Processed fields
             properties:
+              countryCode:
+                type: string
+                description: Country code from Country
+                pattern: ^[A-Z]{2}$
+              countryCodeIso:
+                type: string
+                description: Country code (ISO 3166-1 alpha-2) from Country
+                pattern: ^[A-Z]{2}$
+              countryName:
+                type: string
+                description: Country name from Country
+                pattern: ^[A-Z]{2}$
               erasmusCodeNormalized:
                 type: string
                 description: Normalized Erasmus Code
@@ -530,9 +566,11 @@ components:
                 type: string
                 description: Country code from Erasmus Code prefix
                 pattern: ^[A-Z]{2}$
-              countryCode:
+              erasmusCodeCountryCodeIso:
                 type: string
-                description: Country code from Country
+                description: >-
+                  Country code (ISO 3166-1 alpha-2) from Erasmus Code country
+                  code
                 pattern: ^[A-Z]{2}$
           _verified:
             type: object

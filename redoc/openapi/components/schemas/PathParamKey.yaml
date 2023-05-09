@@ -15,12 +15,15 @@ schema:
     - webpage
     - echeStartDate
     - echeEndDate
+    - _processed.countryCode
+    - _processed.countryCodeIso
+    - _processed.countryName
     - _processed.erasmusCodeNormalized
     - _processed.erasmusCodePrefix
     - _processed.erasmusCodeCity
     - _processed.erasmusCodeNumber
     - _processed.erasmusCodeCountryCode
-    - _processed.countryCode
+    - _processed.erasmusCodeCountryCodeIso
     - _verified.organisationLegalName
     - _verified.organisationLegalNameLang
     - _verified.street

@@ -2,11 +2,14 @@
   city: 'Ridley Beach'
   country: 'Antarctica'
   _processed:
+    countryCode: 'AQ'
+    countryCodeIso: 'AQ'
+    countryName: 'AQ'
     erasmusCodeNormalized: 'AQ TESTING99'
     erasmusCodePrefix: 'AQ'
     erasmusCodeCity: 'TESTING'
     erasmusCodeCountryCode: 'AQ'
-    countryCode: 'AQ'
+    erasmusCodeCountryCodeIso: 'AQ'
   _verified:
     city: 'Ridley Beach'
     cityLang: 'en'
