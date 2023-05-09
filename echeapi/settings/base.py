@@ -42,23 +42,26 @@ ECHE_NULL_STR = [
 
 # ECHE country names to be replaced.
 ECHE_COUNTRY_NAMES = {
-    'Turkije': 'Turkiye',
-    'Turkey': 'Turkiye',
+    'Turkiye': 'Türkiye',
+    'Turkije': 'Türkiye',
+    'Turkey': 'Türkiye',
 }
 
 # ECHE country codes to be replaced.
 ECHE_COUNTRY_CODES = {
-    'EL': 'GR',
     'SF': 'FI',
+}
+
+# Country codes to ISO 3166-1 alpha-2 country codes.
+CC_TO_ISO = {
+    "EL": "GR",
+    "UK": "GB",
 }
 
 # ECHE list headers and corresponding API keys.
 ECHE_FIELDS = {
     'Proposal Number': 'proposalNumber',
-    # 'Proposal ID': 'proposalNumber',
-    # 'Erasmus Code': 'erasmusCode',
-    # 'Erasmus code': 'erasmusCode',
-    None: 'erasmusCode',
+    'Erasmus Code': 'erasmusCode',
     'PIC': 'pic',
     'OID': 'oid',
     'Organisation Legal Name': 'organisationLegalName',
@@ -79,13 +82,15 @@ DATE_FIELDS = [
 
 # Processed fields.
 PROCESSED_FIELDS = [
+    'countryCode',
+    'countryCodeIso',
+    'countryName',
     'erasmusCodeNormalized',
     'erasmusCodePrefix',
     'erasmusCodeCity',
     'erasmusCodeNumber',
     'erasmusCodeCountryCode',
-    # 'countryCode',
-    'countryName',
+    'erasmusCodeCountryCodeIso',
 ]
 
 # Database column prefix for verified fields.

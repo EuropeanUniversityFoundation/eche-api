@@ -24,8 +24,9 @@ COL_PREFIX = f'{settings.PROCESSED_KEY}.erasmusCodePrefix'
 COL_CITY = f'{settings.PROCESSED_KEY}.erasmusCodeCity'
 COL_NUMBER = f'{settings.PROCESSED_KEY}.erasmusCodeNumber'
 COL_CC = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCode'
+COL_CC_ISO = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCodeIso'
 
-# Match the known prefixes in Erasmus codes to ISO 3166 country codes.
+# Match the known prefixes in Erasmus codes to country codes.
 PREFIX_CC = {
     'A': 'AT',
     'B': 'BE',
@@ -33,7 +34,7 @@ PREFIX_CC = {
     'E': 'ES',
     'SF': 'FI',
     'F': 'FR',
-    'G': 'GR',
+    'G': 'EL',
     'IRL': 'IE',
     'I': 'IT',
     'LUX': 'LU',
@@ -173,6 +174,11 @@ def process(df):
 
     # Store country codes from prefixes in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
+
+    # Duplicate the country code column.
+    df[COL_CC_ISO] = df.loc[:, COL_CC]
+    # Replace country codes with ISO 3166-1 alpha-2 country codes.
+    df[COL_CC_ISO].replace(settings.CC_TO_ISO, inplace=True)
 
     # Nullify empty strings.
     df.replace('', value=None, inplace=True)
