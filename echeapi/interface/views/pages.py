@@ -5,7 +5,7 @@ from flask_cachecontrol import cache_for
 from echeapi import app, settings
 from echeapi.utils import api, db, doctree, issues
 
-DISPLAY_FILENAME=settings.DATA_FILENAME.split("/")[-1]
+DISPLAY_FILENAME = settings.DATA_FILENAME.split("/")[-1]
 
 
 @app.route("/")
