@@ -92,4 +92,4 @@ def normalize(df):
     clean_values(df)
     reduce(df)
     assign_types(df)
-    # set_datetime(df)
+    set_datetime(df)
