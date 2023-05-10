@@ -2,7 +2,7 @@
 
 In addition to the original ECHE list data, this script produces processed fields that convey normalized data points to be leveraged by client applications. The processed field related to the **Country** is described below.
 
-_All processed fields are saved with a prefix: `_processed.{field}`._
+_Processed fields are exposed the same way as the original fields._
 
 ## Matching a Country value to a Country Code or Country Name
 
