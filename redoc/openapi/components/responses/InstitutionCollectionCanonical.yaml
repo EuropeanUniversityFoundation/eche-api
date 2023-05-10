@@ -10,13 +10,3 @@
   webpage: 'https://example.com'
   echeStartDate: '2021-01-01'
   echeEndDate: '2029-12-31'
-  _processed:
-    countryCode: 'AQ'
-    countryCodeIso: 'AQ'
-    countryName: 'Antarctica'
-    erasmusCodeNormalized: 'AQ TESTING99'
-    erasmusCodePrefix: 'AQ'
-    erasmusCodeCity: 'TESTING'
-    erasmusCodeNumber: '99'
-    erasmusCodeCountryCode: 'AQ'
-    erasmusCodeCountryCodeIso: 'AQ'

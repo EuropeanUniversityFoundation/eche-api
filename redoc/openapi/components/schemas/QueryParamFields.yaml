@@ -19,6 +19,15 @@ schema:
       - webpage
       - echeStartDate
       - echeEndDate
+      - countryCode
+      - countryCodeIso
+      - countryName
+      - erasmusCodeNormalized
+      - erasmusCodePrefix
+      - erasmusCodeCity
+      - erasmusCodeNumber
+      - erasmusCodeCountryCode
+      - erasmusCodeCountryCodeIso
 description: |
   The fields to include in the response.
    If not specified, all fields will be included in the response.
