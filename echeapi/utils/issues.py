@@ -64,7 +64,7 @@ def detect_different(df, first, second):
 
 
 def detect_all(df):
-    _field = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
+    _field = 'erasmusCodeNormalized'
     return [
         *detect_duplicates(df),
         detect_different(df, 'erasmusCode', _field),

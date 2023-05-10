@@ -19,12 +19,12 @@ KNOWN_3_LETTER = ['LUX', 'IRL']
 
 # Column names, as API keys.
 COL_REF = 'erasmusCode'
-COL_NORM = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
-COL_PREFIX = f'{settings.PROCESSED_KEY}.erasmusCodePrefix'
-COL_CITY = f'{settings.PROCESSED_KEY}.erasmusCodeCity'
-COL_NUMBER = f'{settings.PROCESSED_KEY}.erasmusCodeNumber'
-COL_CC = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCode'
-COL_CC_ISO = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCodeIso'
+COL_NORM = 'erasmusCodeNormalized'
+COL_PREFIX = 'erasmusCodePrefix'
+COL_CITY = 'erasmusCodeCity'
+COL_NUMBER = 'erasmusCodeNumber'
+COL_CC = 'erasmusCodeCountryCode'
+COL_CC_ISO = 'erasmusCodeCountryCodeIso'
 
 # Match the known prefixes in Erasmus codes to country codes.
 PREFIX_CC = {

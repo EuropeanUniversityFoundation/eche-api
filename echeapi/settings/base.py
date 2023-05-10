@@ -93,21 +93,18 @@ PROCESSED_FIELDS = [
     'erasmusCodeCountryCodeIso',
 ]
 
-# Database column prefix for verified fields.
-PROCESSED_KEY = '_processed'
-
 # Unique fields and severity of non-empty duplicates.
 UNIQUE_FIELDS = {
     'proposalNumber': 'warning',
     'pic': 'danger',
     'oid': 'warning',
     'organisationLegalName': 'info',
-    f'{PROCESSED_KEY}.erasmusCodeNormalized': 'danger',
+    'erasmusCodeNormalized': 'danger',
 }
 
 # Reference field headers for data attachment.
 REFERENCE_FIELDS = {
-    'erasmusCode': f'{PROCESSED_KEY}.erasmusCodeNormalized',
+    'erasmusCode': 'erasmusCodeNormalized',
     'pic': 'pic',
 }
 

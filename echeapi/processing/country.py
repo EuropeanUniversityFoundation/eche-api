@@ -261,9 +261,9 @@ COUNTRY_TO_CC = {
 
 # Column names, as API keys.
 COL_REF = 'country'
-COL_CC = f'{settings.PROCESSED_KEY}.countryCode'
-COL_CC_ISO = f'{settings.PROCESSED_KEY}.countryCodeIso'
-COL_CNAME = f'{settings.PROCESSED_KEY}.countryName'
+COL_CC = 'countryCode'
+COL_CC_ISO = 'countryCodeIso'
+COL_CNAME = 'countryName'
 
 
 def get_cc(row, col=COL_REF, empty=''):

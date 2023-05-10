@@ -24,18 +24,22 @@ DB_FILENAME = os.path.join(DB_DIR, DB_FILENAME)
 DATA_FILENAME =  os.path.join(DATA_DIR, DATA_FILENAME)
 
 # ECHE data API keys.
-ECHE_KEYS = [*ECHE_FIELDS.values()]
+ECHE_FIELD_KEYS = [*ECHE_FIELDS.values()]
+# Remove duplicates while preserving the original order.
+ECHE_KEYS = sorted(set(ECHE_FIELD_KEYS), key=lambda x: ECHE_FIELD_KEYS.index(x))
 
-# Processed data API keys.
-PROCESSED_KEYS = [f'{PROCESSED_KEY}.{f}' for f in PROCESSED_FIELDS]
+# Default API keys.
+DEFAULT_KEYS = [
+    *ECHE_KEYS,
+    *PROCESSED_FIELDS,
+]
 
 # Verified data API keys.
 VERIFIED_KEYS = [f'{VERIFIED_KEY}.{f}' for f in VERIFIED_FIELDS]
 
 # All known API keys
 KNOWN_KEYS = [
-    *ECHE_KEYS,
-    *PROCESSED_KEYS,
+    *DEFAULT_KEYS,
     *VERIFIED_KEYS,
 ]
 

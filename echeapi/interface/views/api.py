@@ -38,24 +38,10 @@ def eche_list(key=None, value=None):
         fields = [
             f.strip()
             for f in request.args['fields'].split(',')
-            if f.strip() in settings.ECHE_KEYS
+            if f.strip() in settings.DEFAULT_KEYS
         ]
     else:
-        fields = settings.ECHE_KEYS
-
-    if 'processed' in request.args:
-        processed = [
-            p.strip()
-            for p in request.args['processed'].split(',')
-            if p.strip() in [*settings.PROCESSED_FIELDS, 'all']
-        ]
-
-        if 'all' not in processed:
-            processed = [f'{settings.PROCESSED_KEY}.{p}' for p in processed]
-        else:
-            processed = settings.PROCESSED_KEYS
-    else:
-        processed = []
+        fields = settings.DEFAULT_KEYS
 
     if 'verified' in request.args:
         verified = [
@@ -91,7 +77,7 @@ def eche_list(key=None, value=None):
 
     try:
         body = api.as_json(
-            fields=[*fields, *processed, *verified],
+            fields=[*fields, *verified],
             filter=filter,
             nested=True,
         )
