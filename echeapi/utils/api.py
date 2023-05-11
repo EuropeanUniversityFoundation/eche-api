@@ -15,7 +15,9 @@ def as_dataframe(fields, filter=None):
         if field in df.columns:
             df[field] = df[field].dt.strftime('%Y-%m-%d')
 
-    df['hasVerifiedData'] = df['hasVerifiedData'].astype('bool')
+    _verified = 'hasVerifiedData'
+    if _verified in fields:
+        df[_verified] = df[_verified].astype('bool')
 
     return df
 
