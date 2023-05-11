@@ -3,18 +3,27 @@ description: List of _Institution_ resources.
 items:
   type: object
   required:
-    # - proposalNumber
+    - proposalNumber
     - erasmusCode
     - pic
-    # - oid
+    - oid
     - organisationLegalName
     - street
-    # - postalCode
+    - postalCode
     - city
     - country
-    # - webpage
+    - webpage
     - echeStartDate
     - echeEndDate
+    - countryCode
+    - countryCodeIso
+    - countryName
+    - erasmusCodeNormalized
+    - erasmusCodePrefix
+    - erasmusCodeCity
+    - erasmusCodeNumber
+    - erasmusCodeCountryCode
+    - erasmusCodeCountryCodeIso
     - hasVerifiedData
   properties:
     $ref: ./InstitutionData.yaml
