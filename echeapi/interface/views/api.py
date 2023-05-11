@@ -73,6 +73,14 @@ def eche_list(key=None, value=None):
         if value:
             value = unquote(value)
 
+        if key == 'hasVerifiedData' and value is not None:
+            if str(value).lower() in ['true', '1']:
+                value = True
+            elif str(value).lower() in ['false', '0']:
+                value = False
+            else:
+                raise ApiError(400, 'Bad request', detail='Invalid format. Boolean expected.')
+
         filter = (key, value)
 
     try:

@@ -42,6 +42,7 @@ def main(*args):
             print('No issues with data found.')
 
         # Attach verified data.
+        df['hasVerifiedData'] = False
         verified.attach(df)
 
         # Save DataFrame in the database.

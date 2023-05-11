@@ -67,6 +67,7 @@ def join(df_base, df_verified):
         for i, row in df_verified.iterrows():
             if row[field] is not None:
                 df_base.loc[df_base[id] == row[id], new_field] = row[field]
+                df_base.loc[df_base[id] == row[id], 'hasVerifiedData'] = True
 
     for df in [df_base, df_verified]:
         del df[id]

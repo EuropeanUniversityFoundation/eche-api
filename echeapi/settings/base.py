@@ -91,6 +91,7 @@ PROCESSED_FIELDS = [
     'erasmusCodeNumber',
     'erasmusCodeCountryCode',
     'erasmusCodeCountryCodeIso',
+    'hasVerifiedData',
 ]
 
 # Unique fields and severity of non-empty duplicates.
