@@ -19,6 +19,7 @@
   erasmusCodeNumber: '99'
   erasmusCodeCountryCode: 'AQ'
   erasmusCodeCountryCodeIso: 'AQ'
+  hasVerifiedData: true
   _verified:
     organisationLegalName: 'Test Entry'
     organisationLegalNameLang: 'en'

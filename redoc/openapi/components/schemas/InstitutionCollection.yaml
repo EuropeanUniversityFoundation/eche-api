@@ -15,5 +15,6 @@ items:
     # - webpage
     - echeStartDate
     - echeEndDate
+    - hasVerifiedData
   properties:
     $ref: ./InstitutionData.yaml

@@ -74,6 +74,9 @@ erasmusCodeCountryCodeIso:
   type: string
   description: Country code (ISO 3166-1 alpha-2) from Erasmus Code country code
   pattern: '^[A-Z]{2}$'
+hasVerifiedData:
+  type: bool
+  description: Returns `true` if there is any verified data, `false` otherwise
 _verified:
   type: object
   description: Verified fields

@@ -79,6 +79,7 @@ paths:
                       erasmusCodeNumber: '99'
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                 canonical:
                   summary: Response with original ECHE fields only
                   value:
@@ -118,6 +119,7 @@ paths:
                       erasmusCodeNumber: '99'
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                       _verified:
                         organisationLegalName: Test Entry
                         organisationLegalNameLang: en
@@ -140,6 +142,7 @@ paths:
                       erasmusCodeCity: TESTING
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                       _verified:
                         city: Ridley Beach
                         cityLang: en
@@ -196,6 +199,7 @@ paths:
                       erasmusCodeNumber: '99'
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                 canonical:
                   summary: Response with original ECHE fields only
                   value:
@@ -235,6 +239,7 @@ paths:
                       erasmusCodeNumber: '99'
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                       _verified:
                         organisationLegalName: Test Entry
                         organisationLegalNameLang: en
@@ -257,6 +262,7 @@ paths:
                       erasmusCodeCity: TESTING
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                       _verified:
                         city: Ridley Beach
                         cityLang: en
@@ -312,6 +318,7 @@ paths:
                       erasmusCodeNumber: '99'
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                 canonical:
                   summary: Response with original ECHE fields only
                   value:
@@ -351,6 +358,7 @@ paths:
                       erasmusCodeNumber: '99'
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                       _verified:
                         organisationLegalName: Test Entry
                         organisationLegalNameLang: en
@@ -373,6 +381,7 @@ paths:
                       erasmusCodeCity: TESTING
                       erasmusCodeCountryCode: AQ
                       erasmusCodeCountryCodeIso: AQ
+                      hasVerifiedData: true
                       _verified:
                         city: Ridley Beach
                         cityLang: en
@@ -411,6 +420,7 @@ components:
             - erasmusCodeNumber
             - erasmusCodeCountryCode
             - erasmusCodeCountryCodeIso
+            - hasVerifiedData
       description: |
         The fields to include in the response.
          If not specified, all fields will be included in the response.
@@ -462,6 +472,7 @@ components:
           - erasmusCodeNumber
           - erasmusCodeCountryCode
           - erasmusCodeCountryCodeIso
+          - hasVerifiedData
           - _verified.organisationLegalName
           - _verified.organisationLegalNameLang
           - _verified.street
@@ -491,6 +502,7 @@ components:
           - country
           - echeStartDate
           - echeEndDate
+          - hasVerifiedData
         properties:
           proposalNumber:
             type: string
@@ -568,6 +580,9 @@ components:
             type: string
             description: Country code (ISO 3166-1 alpha-2) from Erasmus Code country code
             pattern: ^[A-Z]{2}$
+          hasVerifiedData:
+            type: bool
+            description: Returns `true` if there is any verified data, `false` otherwise
           _verified:
             type: object
             description: Verified fields

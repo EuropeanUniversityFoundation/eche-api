@@ -9,6 +9,7 @@
   erasmusCodeCity: 'TESTING'
   erasmusCodeCountryCode: 'AQ'
   erasmusCodeCountryCodeIso: 'AQ'
+  hasVerifiedData: true
   _verified:
     city: 'Ridley Beach'
     cityLang: 'en'

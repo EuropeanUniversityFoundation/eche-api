@@ -24,6 +24,7 @@ schema:
     - erasmusCodeNumber
     - erasmusCodeCountryCode
     - erasmusCodeCountryCodeIso
+    - hasVerifiedData
     - _verified.organisationLegalName
     - _verified.organisationLegalNameLang
     - _verified.street
