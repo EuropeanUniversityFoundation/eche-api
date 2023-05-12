@@ -58,12 +58,17 @@ def eche_list(key=None, value=None):
     # For compatibility with in-path parameters.
     params = {**request.args}
     if key is not None:
+        if key not in settings.ALL_API_KEYS:
+            raise ApiError(404, 'Resource not found')
         params[key] = value
 
     filter = {}
     for _key, _value in params.items():
-        if _key not in settings.ALL_API_KEYS:
+        if _key in ['fields', 'verified']:
             continue
+
+        if _key not in settings.ALL_API_KEYS:
+            raise ApiError(400, f'Invalid parameter: {_key}')
 
         if _value is None or not _value.strip():
             filter[_key] = None
