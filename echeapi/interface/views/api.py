@@ -49,7 +49,6 @@ def eche_list(key=None, value=None):
             for v in request.args['verified'].split(',')
             if v.strip() in [*settings.VERIFIED_FIELDS, 'all']
         ]
-
         if 'all' not in verified:
             verified = [f'{settings.VERIFIED_KEY}.{v}' for v in verified]
         else:
@@ -62,24 +61,24 @@ def eche_list(key=None, value=None):
         if key not in settings.KNOWN_KEYS:
             raise ApiError(404, 'Resource not found')
 
-        if key in settings.DATE_FIELDS and value is not None:
-            try:
-                dt = datetime.fromisoformat(value)
-            except Exception:
-                raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
-            else:
-                value = dt.strftime('%Y-%m-%d %H:%M:%S')
-
-        if value:
+        if value is not None:
             value = unquote(value)
 
-        if key == 'hasVerifiedData' and value is not None:
-            if str(value).lower() in ['true', '1']:
-                value = True
-            elif str(value).lower() in ['false', '0']:
-                value = False
-            else:
-                raise ApiError(400, 'Bad request', detail='Invalid format. Boolean expected.')
+            if key in settings.DATE_FIELDS:
+                try:
+                    dt = datetime.fromisoformat(value)
+                except Exception:
+                    raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
+                else:
+                    value = dt.strftime('%Y-%m-%d %H:%M:%S')
+
+            elif key == 'hasVerifiedData':
+                if str(value).lower() in ['true', '1']:
+                    value = True
+                elif str(value).lower() in ['false', '0']:
+                    value = False
+                else:
+                    raise ApiError(400, 'Bad request', detail='Invalid format. Boolean expected.')
 
         filter = (key, value)
 

@@ -1,8 +1,3 @@
-
-import unicodedata
-
-from echeapi import settings
-
 """
 Handle Erasmus codes.
 
@@ -14,7 +9,11 @@ As such, it is necessary to check whether the Erasmus code is properly
   formatted with the correct number of spaces.
 """
 
-# 3 letter country codes have no trailing spaces, so they must be defined.
+import unicodedata
+
+from echeapi import settings
+
+# 3-letter country codes have no trailing spaces, so they must be defined.
 KNOWN_3_LETTER = ['LUX', 'IRL']
 
 # Column names, as API keys.
@@ -80,9 +79,9 @@ def normalize(row, col=COL_REF, empty=''):
 
         # If no errors were found at this point, do some cleaning.
         if valid:
-            # Check if the 2nd character is a space, meaning a 1 letter country code.
+            # Check if the 2nd character is a space, meaning a 1-letter country code.
             if code[1:2].isspace():
-                # Impose a second space for 1 letter codes, remove whitespace from the rest.
+                # Impose a second space for 1-letter codes, remove whitespace from the rest.
                 code = code[0:2] + ' ' + code[2:].strip()
 
             # Check if the 2nd character is a letter and the 3rd character is a space.
@@ -90,7 +89,7 @@ def normalize(row, col=COL_REF, empty=''):
                 # Remove whitespace from the rest.
                 code = code[0:2] + ' ' + code[3:].strip()
 
-            # Check if the first characters are a known 3 letter country ID.
+            # Check if the first characters are a known 3-letter country ID.
             if code[0:3] in KNOWN_3_LETTER:
                 code = code[0:3] + code[3:].strip()
 

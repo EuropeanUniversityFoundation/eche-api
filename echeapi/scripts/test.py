@@ -87,8 +87,10 @@ def test_erasmus():
 
 
 def test_country():
-    # countries = random.sample(list(country.CC_COUNTRY.values()), 10)
-    countries = random.sample(list(country.CC_COUNTRY.keys()), 10)
+    if settings.COUNTRY_CONTAINS == 'countryCode':
+        countries = random.sample(list(country.CC_COUNTRY.keys()), 10)
+    else:
+        countries = random.sample(list(country.CC_COUNTRY.values()), 10)
 
     df = pd.DataFrame({country.COL_REF: countries})
 

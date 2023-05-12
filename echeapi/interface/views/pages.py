@@ -1,21 +1,18 @@
 
-from flask import flash, render_template
+from flask import flash
 from flask_cachecontrol import cache_for
 
 from echeapi import app, settings
+from echeapi.interface.utils import render_to_string
 from echeapi.utils import api, db, doctree, issues
-
-DISPLAY_FILENAME = settings.DATA_FILENAME.split("/")[-1]
 
 
 @app.route("/")
 @cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def index():
-    return render_template(
-        'page/home.html',
-        menu_parent='index',
-        data_filename=DISPLAY_FILENAME,
-    )
+    return render_to_string('page/home.html', {
+        'menu_parent': 'index',
+    })
 
 
 @app.route("/docs/")
@@ -36,13 +33,11 @@ def docs(params=''):
     menu = doctree.tree()
 
     # Build the page.
-    return render_template(
-        'page/docs.html',
-        menu_parent='docs',
-        content=content,
-        menu=menu,
-        data_filename=DISPLAY_FILENAME,
-    )
+    return render_to_string('page/docs.html', {
+        'menu_parent': 'docs',
+        'content': content,
+        'menu': menu,
+    })
 
 
 @app.route("/explore/")
@@ -53,12 +48,10 @@ def explore():
         table_id='echeTable',
         classes=['table', 'table-striped', 'small'],
     )
-    return render_template(
-        'page/explore.html',
-        menu_parent='explore',
-        content=content,
-        data_filename=DISPLAY_FILENAME,
-    )
+    return render_to_string('page/explore.html', {
+        'menu_parent': 'explore',
+        'content': content,
+    })
 
 
 @app.route("/report/")
@@ -76,15 +69,13 @@ def report():
         ) if not df.empty else ''
         issues_items.append((msg, severity, len(df.index), table))
 
-    return render_template(
-        'page/report.html',
-        menu_parent='report',
-        issues=issues_items,
-        data_filename=DISPLAY_FILENAME,
-    )
+    return render_to_string('page/report.html', {
+        'menu_parent': 'report',
+        'issues': issues_items,
+    })
 
 
 @app.route("/openapi/")
 @cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def openapi():
-    return render_template('redoc/index.html')
+    return render_to_string('redoc/index.html')

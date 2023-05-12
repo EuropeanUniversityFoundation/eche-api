@@ -74,6 +74,7 @@ def join(df_base, df_verified):
 
 
 def attach(df_base):
+    df_base['hasVerifiedData'] = False
     for fname in lookup():
         df_verified = load(fname)
         if not df_verified.empty:

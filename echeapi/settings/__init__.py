@@ -24,9 +24,7 @@ DB_FILENAME = os.path.join(DB_DIR, DB_FILENAME)
 DATA_FILENAME =  os.path.join(DATA_DIR, DATA_FILENAME)
 
 # ECHE data API keys.
-ECHE_FIELD_KEYS = [*ECHE_FIELDS.values()]
-# Remove duplicates while preserving the original order.
-ECHE_KEYS = sorted(set(ECHE_FIELD_KEYS), key=lambda x: ECHE_FIELD_KEYS.index(x))
+ECHE_KEYS = [*dict.fromkeys(ECHE_FIELDS.values())]  # Remove duplicates while preserving the original order
 
 # Default API keys.
 DEFAULT_KEYS = [
