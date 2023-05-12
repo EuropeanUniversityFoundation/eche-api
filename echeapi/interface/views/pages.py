@@ -20,7 +20,7 @@ def index():
 @cache_for(seconds=settings.CACHE_CONTROL_MAX_AGE)
 def docs(params=''):
     if not params:
-        params = settings.DOCS_DEFAULT
+        params = settings.DOCS_DEFAULT_PAGE
 
     display, content = doctree.fetch(params.split('/'))
 

@@ -38,27 +38,26 @@ def eche_list(key=None, value=None):
         fields = [
             f.strip()
             for f in request.args['fields'].split(',')
-            if f.strip() in settings.DEFAULT_KEYS
+            if f.strip() in settings.DEFAULT_API_KEYS
         ]
     else:
-        fields = settings.DEFAULT_KEYS
+        fields = settings.DEFAULT_API_KEYS
 
     if 'verified' in request.args:
         verified = [
             v.strip()
             for v in request.args['verified'].split(',')
-            if v.strip() in [*settings.VERIFIED_FIELDS, 'all']
+            if v.strip() in [*settings.VERIFIED_BASE_KEYS, 'all']
         ]
-        if 'all' not in verified:
-            verified = [f'{settings.VERIFIED_KEY}.{v}' for v in verified]
-        else:
-            verified = settings.VERIFIED_KEYS
+        if 'all' in verified:
+            verified = settings.VERIFIED_BASE_KEYS
+        verified = [f'{settings.VERIFIED_KEY_PREFIX}.{v}' for v in verified]
     else:
         verified = []
 
     filter = None
     if key is not None:
-        if key not in settings.KNOWN_KEYS:
+        if key not in settings.ALL_API_KEYS:
             raise ApiError(404, 'Resource not found')
 
         if value is not None:

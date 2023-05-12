@@ -283,22 +283,22 @@ def get_cname(row, col=COL_REF, empty=''):
 def process(df):
     """ Complete processing.
     """
-    if settings.COUNTRY_CONTAINS == 'countryCode':
+    if settings.ECHE_COUNTRY_FIELD_TYPE == 'countryCode':
         # Copy the country codes to another column.
         df[COL_CC] = df.loc[:, COL_REF]
         # Replace country codes.
-        df[COL_CC].replace(settings.ECHE_COUNTRY_CODES, inplace=True)
+        df[COL_CC].replace(settings.COUNTRY_CODES_MAP, inplace=True)
         # Store country names from country codes in new column.
         df[COL_CNAME] = df.apply(lambda row: get_cname(row, col=COL_CC), axis=1)
     else:
         # Copy the country names to another column.
         df[COL_CNAME] = df.loc[:, COL_REF]
         # Replace country names.
-        df[COL_CNAME].replace(settings.ECHE_COUNTRY_NAMES, inplace=True)
+        df[COL_CNAME].replace(settings.COUNTRY_NAMES_MAP, inplace=True)
         # Store country codes from country names in new column.
         df[COL_CC] = df.apply(lambda row: get_cc(row, col=COL_CNAME), axis=1)
 
     # Duplicate the country code column.
     df[COL_CC_ISO] = df.loc[:, COL_CC]
     # Replace country codes with ISO 3166-1 alpha-2 country codes.
-    df[COL_CC_ISO].replace(settings.CC_TO_ISO, inplace=True)
+    df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP, inplace=True)

@@ -177,7 +177,7 @@ def process(df):
     # Duplicate the country code column.
     df[COL_CC_ISO] = df.loc[:, COL_CC]
     # Replace country codes with ISO 3166-1 alpha-2 country codes.
-    df[COL_CC_ISO].replace(settings.CC_TO_ISO, inplace=True)
+    df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP, inplace=True)
 
     # Nullify empty strings.
     df.replace('', value=None, inplace=True)

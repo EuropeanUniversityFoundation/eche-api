@@ -12,7 +12,7 @@ def get_connection(db=settings.DB_FILENAME):
 
 
 def initialize(table=settings.DB_TABLE, connection=None):
-    df = pd.DataFrame([], columns=settings.KNOWN_KEYS)
+    df = pd.DataFrame([], columns=settings.ALL_API_KEYS)
     save(df, table=table, connection=connection)
 
 

@@ -32,10 +32,10 @@ def replace_headers(df):
     df.rename(columns=lambda c: c.strip() if isinstance(c, str) else c, inplace=True)
 
     # Rename columns with machine names.
-    df.rename(columns=settings.ECHE_FIELDS, inplace=True)
+    df.rename(columns=settings.ECHE_HEADERS_MAP, inplace=True)
 
     # Drop unrecognized columns.
-    df.drop(columns=df.columns.difference(settings.ECHE_KEYS), inplace=True)
+    df.drop(columns=df.columns.difference(settings.ECHE_HEADERS_MAP.values()), inplace=True)
 
 
 def clean_values(df):

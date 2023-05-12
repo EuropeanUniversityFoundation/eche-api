@@ -1,6 +1,5 @@
 
 import logging
-import os
 
 from jinja_markdown import MarkdownExtension
 
@@ -9,7 +8,7 @@ from flask import Flask
 from echeapi import settings
 from echeapi.interface.views import discover
 
-file_handler = logging.FileHandler(os.path.join(settings.LOG_DIR, 'app.log'))
+file_handler = logging.FileHandler(settings.LOG_FILENAME)
 file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(logging.Formatter(settings.LOG_FORMAT))
 

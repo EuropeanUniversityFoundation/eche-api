@@ -87,7 +87,7 @@ def test_erasmus():
 
 
 def test_country():
-    if settings.COUNTRY_CONTAINS == 'countryCode':
+    if settings.ECHE_COUNTRY_FIELD_TYPE == 'countryCode':
         countries = random.sample(list(country.CC_COUNTRY.keys()), 10)
     else:
         countries = random.sample(list(country.CC_COUNTRY.values()), 10)

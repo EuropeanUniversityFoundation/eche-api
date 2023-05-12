@@ -31,7 +31,7 @@ def main(*args):
         country.process(df)
 
         # Drop duplicated rows based on unique field columns.
-        df.drop_duplicates(subset=settings.UNIQUE_COLS, inplace=True, ignore_index=True)
+        df.drop_duplicates(subset=settings.UNIQUE_KEYS, inplace=True, ignore_index=True)
 
         # Print issues in the console.
         detected = [d for d in issues.detect_all(df) if not d[2].empty]
