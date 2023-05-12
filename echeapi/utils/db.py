@@ -32,17 +32,19 @@ def save(df, table=settings.DB_TABLE, connection=None):
 def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
     fields = ",".join([f'\"{f}\"' for f in fields]) if fields else "*"
 
-    if filter is not None:
-        key, value = filter
+    where = []
+    params = []
+
+    for key, value in (filter or {}).items():
         if value is None:
-            query = f"SELECT {fields} FROM {table} WHERE \"{key}\" IS NULL"
-            params = ()
+            where.append(f'"{key}" IS NULL')
         else:
-            query = f"SELECT {fields} FROM {table} WHERE \"{key}\" = ? COLLATE NOCASE"
-            params = (value,)
-    else:
-        query = f"SELECT {fields} FROM {table}"
-        params = ()
+            where.append(f'"{key}" = ? COLLATE NOCASE')
+            params.append(value)
+
+    query = f'SELECT {fields} FROM {table}'
+    if where:
+        query = f'{query} WHERE {" AND ".join(where)}'
 
     if connection is None:
         connection = get_connection()
