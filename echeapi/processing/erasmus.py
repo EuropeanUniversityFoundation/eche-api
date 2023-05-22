@@ -1,8 +1,3 @@
-
-import unicodedata
-
-from echeapi import settings
-
 """
 Handle Erasmus codes.
 
@@ -14,18 +9,23 @@ As such, it is necessary to check whether the Erasmus code is properly
   formatted with the correct number of spaces.
 """
 
-# 3 letter country codes have no trailing spaces, so they must be defined.
+import unicodedata
+
+from echeapi import settings
+
+# 3-letter country codes have no trailing spaces, so they must be defined.
 KNOWN_3_LETTER = ['LUX', 'IRL']
 
 # Column names, as API keys.
 COL_REF = 'erasmusCode'
-COL_NORM = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
-COL_PREFIX = f'{settings.PROCESSED_KEY}.erasmusCodePrefix'
-COL_CITY = f'{settings.PROCESSED_KEY}.erasmusCodeCity'
-COL_NUMBER = f'{settings.PROCESSED_KEY}.erasmusCodeNumber'
-COL_CC = f'{settings.PROCESSED_KEY}.erasmusCodeCountryCode'
+COL_NORM = 'erasmusCodeNormalized'
+COL_PREFIX = 'erasmusCodePrefix'
+COL_CITY = 'erasmusCodeCity'
+COL_NUMBER = 'erasmusCodeNumber'
+COL_CC = 'erasmusCodeCountryCode'
+COL_CC_ISO = 'erasmusCodeCountryCodeIso'
 
-# Match the known prefixes in Erasmus codes to ISO 3166 country codes.
+# Match the known prefixes in Erasmus codes to country codes.
 PREFIX_CC = {
     'A': 'AT',
     'B': 'BE',
@@ -33,7 +33,7 @@ PREFIX_CC = {
     'E': 'ES',
     'SF': 'FI',
     'F': 'FR',
-    'G': 'GR',
+    'G': 'EL',
     'IRL': 'IE',
     'I': 'IT',
     'LUX': 'LU',
@@ -79,9 +79,9 @@ def normalize(row, col=COL_REF, empty=''):
 
         # If no errors were found at this point, do some cleaning.
         if valid:
-            # Check if the 2nd character is a space, meaning a 1 letter country code.
+            # Check if the 2nd character is a space, meaning a 1-letter country code.
             if code[1:2].isspace():
-                # Impose a second space for 1 letter codes, remove whitespace from the rest.
+                # Impose a second space for 1-letter codes, remove whitespace from the rest.
                 code = code[0:2] + ' ' + code[2:].strip()
 
             # Check if the 2nd character is a letter and the 3rd character is a space.
@@ -89,7 +89,7 @@ def normalize(row, col=COL_REF, empty=''):
                 # Remove whitespace from the rest.
                 code = code[0:2] + ' ' + code[3:].strip()
 
-            # Check if the first characters are a known 3 letter country ID.
+            # Check if the first characters are a known 3-letter country ID.
             if code[0:3] in KNOWN_3_LETTER:
                 code = code[0:3] + code[3:].strip()
 
@@ -173,6 +173,11 @@ def process(df):
 
     # Store country codes from prefixes in new column.
     df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
+
+    # Duplicate the country code column.
+    df[COL_CC_ISO] = df.loc[:, COL_CC]
+    # Replace country codes with ISO 3166-1 alpha-2 country codes.
+    df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP, inplace=True)
 
     # Nullify empty strings.
     df.replace('', value=None, inplace=True)

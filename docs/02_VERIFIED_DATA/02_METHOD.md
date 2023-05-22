@@ -10,7 +10,7 @@ The verified data **must** be provided in CSV format, using commas as separators
 
 ## File naming convention
 
-The file name _should_ follow the pattern `verified.{countryCode}.csv`.
+The file name **must** follow the pattern `verified.{countryCode}.csv`.
 
 ## File headers
 
@@ -29,3 +29,7 @@ The remaining columns may include any of the following:
 ## Data handling
 
 The data handling will **ignore** empty cells, so verified data cannot be used to nullify existing data.
+
+## Further information
+
+When verified data is attached to an entry, the `hasVerifiedData` value will switch to `True` in order to provide an additional indication for client applications. Refer to the API specification for details.

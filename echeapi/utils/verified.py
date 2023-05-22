@@ -12,11 +12,10 @@ def lookup():
     """ Lookup files with verified data.
     """
     fnames = []
-    for item in sorted(os.listdir(settings.VERIFIED_DIR)):
-        if '.' in item:
-            parts = item.split('.')
-            if parts[0] == settings.VERIFIED_PREFIX and parts[-1] == settings.VERIFIED_EXTENSION:
-                fnames.append(os.path.join(settings.VERIFIED_DIR, item))
+    for fname in sorted(os.listdir(settings.VERIFIED_DIR)):
+        base, ext = os.path.splitext(fname)
+        if base.startswith(settings.VERIFIED_FILE_PREFIX) and ext == settings.VERIFIED_FILE_EXT:
+            fnames.append(os.path.join(settings.VERIFIED_DIR, fname))
     return fnames
 
 
@@ -26,17 +25,17 @@ def load(fname):
     df = pd.read_csv(fname)
 
     headers = set(df.columns.tolist())
-    ref_cols = set(settings.REFERENCE_FIELDS.keys())
+    required = set(settings.VERIFIED_REQUIRED_FIELDS)
 
     # Check that all reference headers are present.
-    if not ref_cols.issubset(headers):
-        raise KeyError(f'Missing reference headers: {", ".join(ref_cols - headers)}')
+    if not required.issubset(headers):
+        raise KeyError(f'Missing reference headers: {", ".join(required - headers)}')
 
-    for field in settings.VERIFIED_FIELDS:
+    for field in settings.VERIFIED_BASE_KEYS:
         if field not in headers:
             df[field] = None
 
-    return df[[*ref_cols, *settings.VERIFIED_FIELDS]].copy()
+    return df[[*required, *settings.VERIFIED_BASE_KEYS]].copy()
 
 
 def normalize(df):
@@ -51,28 +50,30 @@ def join(df_base, df_verified):
     """ Join a DataFrame with partial data to a base DataFrame.
     """
     # Combine two identifiers to decrease the odds of catching duplicates.
-    ref_cols = list(settings.REFERENCE_FIELDS.values())
-    id = '|'.join(ref_cols)
+    join_cols = settings.VERIFIED_JOIN_BY_FIELDS
+    id = '|'.join(join_cols)
 
     # Create the columns in the DataFrames for comparison.
     for df in [df_base, df_verified]:
         df[id] = ''
-        for _col in ref_cols:
+        for _col in join_cols:
             df[id] = df[id] + '|' + df[_col].map(str)
 
-    for field in settings.VERIFIED_FIELDS:
-        new_field = f'{settings.VERIFIED_KEY}.{field}'
+    for field in settings.VERIFIED_BASE_KEYS:
+        new_field = f'{settings.VERIFIED_KEY_PREFIX}.{field}'
         df_base[new_field] = None
 
         for i, row in df_verified.iterrows():
             if row[field] is not None:
                 df_base.loc[df_base[id] == row[id], new_field] = row[field]
+                df_base.loc[df_base[id] == row[id], 'hasVerifiedData'] = True
 
     for df in [df_base, df_verified]:
         del df[id]
 
 
 def attach(df_base):
+    df_base['hasVerifiedData'] = False
     for fname in lookup():
         df_verified = load(fname)
         if not df_verified.empty:

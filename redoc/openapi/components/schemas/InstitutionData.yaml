@@ -1,50 +1,127 @@
 proposalNumber:
-  type: string
-  description: Proposal Number
+  type:
+    - "string"
+    - "null"
+  description: '[ECHE list] Proposal Number'
 erasmusCode:
   type: string
-  description: Erasmus Code
+  description: '[ECHE list] Erasmus Code'
 pic:
   type: string
-  description: PIC
+  description: '[ECHE list] PIC'
   pattern: '^\d{9}$'
 oid:
-  type: string
-  description: OID
+  type:
+    - "string"
+    - "null"
+  description: '[ECHE list] OID'
   pattern: '^E\d{8}$'
 organisationLegalName:
   type: string
-  description: Organisation Legal Name
+  description: '[ECHE list] Organisation Legal Name'
 street:
   type: string
-  description: Street
+  description: '[ECHE list] Street'
 postalCode:
-  type: string
-  description: Postal Code
+  type:
+    - "string"
+    - "null"
+  description: '[ECHE list] Postal Code'
 city:
   type: string
-  description: City
+  description: '[ECHE list] City'
 country:
   type: string
-  description: Country
+  description: '[ECHE list] Country'
 webpage:
-  type: string
-  description: Webpage
+  type:
+    - "string"
+    - "null"
+  description: '[ECHE list] Webpage'
 echeStartDate:
   type: string
-  description: ECHE Start Date
+  description: '[ECHE list] ECHE Start Date'
   format: date
 echeEndDate:
   type: string
-  description: ECHE End Date
+  description: '[ECHE list] ECHE End Date'
   format: date
-_processed:
-  type: object
-  description: Processed fields
-  properties:
-    $ref: ./ProcessedData.yaml
+countryCode:
+  type: string
+  description: Country code from Country
+  pattern: '^[A-Z]{2}$'
+countryCodeIso:
+  type: string
+  description: Country code (ISO 3166-1 alpha-2) from Country
+  pattern: '^[A-Z]{2}$'
+countryName:
+  type: string
+  description: Country name from Country
+  pattern: '^[A-Z]{2}$'
+erasmusCodeNormalized:
+  type:
+    - "string"
+    - "null"
+  description: Normalized Erasmus Code
+  pattern: '^([A-Z]{3}|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]+[A-Z]\d{2,3}$'
+erasmusCodePrefix:
+  type:
+    - "string"
+    - "null"
+  description: |
+    Erasmus Code prefix
+
+     (depends on Normalized Erasmus Code)
+  pattern: '^[A-Z]{1,3}$'
+erasmusCodeCity:
+  type:
+    - "string"
+    - "null"
+  description: |
+    Erasmus Code city component
+
+     (depends on Normalized Erasmus Code)
+  pattern: '^[A-Z][A-Z-]+[A-Z]$'
+erasmusCodeNumber:
+  type:
+    - "string"
+    - "null"
+  description: |
+    Erasmus Code number
+
+     (depends on Normalized Erasmus Code)
+  pattern: '^\d{2,3}$'
+erasmusCodeCountryCode:
+  type:
+    - "string"
+    - "null"
+  description: |
+    Country code from Erasmus Code
+
+     (depends on Erasmus Code prefix)
+  pattern: '^[A-Z]{2}$'
+erasmusCodeCountryCodeIso:
+  type:
+    - "string"
+    - "null"
+  description: |
+    Country code (ISO 3166-1 alpha-2) from Erasmus Code
+
+     (depends on Country code from Erasmus Code)
+  pattern: '^[A-Z]{2}$'
+hasVerifiedData:
+  type: boolean
+  description: Returns `true` if at least one verified field is not `null`
 _verified:
   type: object
   description: Verified fields
+  required:
+    - organisationLegalName
+    - organisationLegalNameLang
+    - street
+    - postalCode
+    - city
+    - cityLang
+    - webpage
   properties:
     $ref: ./VerifiedData.yaml

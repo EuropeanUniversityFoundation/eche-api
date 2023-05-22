@@ -38,60 +38,52 @@ def eche_list(key=None, value=None):
         fields = [
             f.strip()
             for f in request.args['fields'].split(',')
-            if f.strip() in settings.ECHE_KEYS
+            if f.strip() in settings.DEFAULT_API_KEYS
         ]
     else:
-        fields = settings.ECHE_KEYS
-
-    if 'processed' in request.args:
-        processed = [
-            p.strip()
-            for p in request.args['processed'].split(',')
-            if p.strip() in [*settings.PROCESSED_FIELDS, 'all']
-        ]
-
-        if 'all' not in processed:
-            processed = [f'{settings.PROCESSED_KEY}.{p}' for p in processed]
-        else:
-            processed = settings.PROCESSED_KEYS
-    else:
-        processed = []
+        fields = settings.DEFAULT_API_KEYS
 
     if 'verified' in request.args:
         verified = [
             v.strip()
             for v in request.args['verified'].split(',')
-            if v.strip() in [*settings.VERIFIED_FIELDS, 'all']
+            if v.strip() in [*settings.VERIFIED_BASE_KEYS, 'all']
         ]
-
-        if 'all' not in verified:
-            verified = [f'{settings.VERIFIED_KEY}.{v}' for v in verified]
-        else:
-            verified = settings.VERIFIED_KEYS
+        if 'all' in verified:
+            verified = settings.VERIFIED_BASE_KEYS
+        verified = [f'{settings.VERIFIED_KEY_PREFIX}.{v}' for v in verified]
     else:
         verified = []
 
     filter = None
     if key is not None:
-        if key not in settings.KNOWN_KEYS:
+        if key not in settings.ALL_API_KEYS:
             raise ApiError(404, 'Resource not found')
 
-        if key in settings.DATE_FIELDS and value is not None:
-            try:
-                dt = datetime.fromisoformat(value)
-            except Exception:
-                raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
-            else:
-                value = dt.strftime('%Y-%m-%d %H:%M:%S')
-
-        if value:
+        if value is not None:
             value = unquote(value)
+
+            if key in settings.DATE_FIELDS:
+                try:
+                    dt = datetime.fromisoformat(value)
+                except Exception:
+                    raise ApiError(400, 'Bad request', detail='Invalid date format. ISO format expected.')
+                else:
+                    value = dt.strftime('%Y-%m-%d %H:%M:%S')
+
+            elif key == 'hasVerifiedData':
+                if str(value).lower() in ['true', '1']:
+                    value = True
+                elif str(value).lower() in ['false', '0']:
+                    value = False
+                else:
+                    raise ApiError(400, 'Bad request', detail='Invalid format. Boolean expected.')
 
         filter = (key, value)
 
     try:
         body = api.as_json(
-            fields=[*fields, *processed, *verified],
+            fields=[*fields, *verified],
             filter=filter,
             nested=True,
         )

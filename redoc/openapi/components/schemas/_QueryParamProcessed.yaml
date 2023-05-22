@@ -8,12 +8,15 @@ schema:
     type: string
     enum:
       - all
+      - countryCode
+      - countryCodeIso
+      - countryName
       - erasmusCodeNormalized
       - erasmusCodePrefix
       - erasmusCodeCity
       - erasmusCodeNumber
       - erasmusCodeCountryCode
-      - countryCode
+      - erasmusCodeCountryCodeIso
 description: |
   The processed fields to include in the response.
    If `all` is specified, all processed fields will be included in the response.

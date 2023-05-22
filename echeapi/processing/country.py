@@ -2,16 +2,15 @@
 from echeapi import settings
 
 # Curated list of country codes and country names.
+# See http://publications.europa.eu/code/en/en-5000600.htm for details.
 CC_COUNTRY = {
-    "AC": "Ascension Island",
     "AD": "Andorra",
     "AE": "United Arab Emirates",
     "AF": "Afghanistan",
-    "AG": "Antigua & Barbuda",
+    "AG": "Antigua and Barbuda",
     "AI": "Anguilla",
     "AL": "Albania",
     "AM": "Armenia",
-    "AN": "Netherlands Antilles",
     "AO": "Angola",
     "AQ": "Antarctica",
     "AR": "Argentina",
@@ -21,7 +20,7 @@ CC_COUNTRY = {
     "AW": "Aruba",
     "AX": "Åland Islands",
     "AZ": "Azerbaijan",
-    "BA": "Bosnia & Herzegovina",
+    "BA": "Bosnia and Herzegovina",
     "BB": "Barbados",
     "BD": "Bangladesh",
     "BE": "Belgium",
@@ -30,11 +29,10 @@ CC_COUNTRY = {
     "BH": "Bahrain",
     "BI": "Burundi",
     "BJ": "Benin",
-    "BL": "St. Barthélemy",
+    "BL": "Saint Barthélemy",
     "BM": "Bermuda",
     "BN": "Brunei",
     "BO": "Bolivia",
-    "BQ": "Caribbean Netherlands",
     "BR": "Brazil",
     "BS": "Bahamas",
     "BT": "Bhutan",
@@ -44,9 +42,9 @@ CC_COUNTRY = {
     "BZ": "Belize",
     "CA": "Canada",
     "CC": "Cocos (Keeling) Islands",
-    "CD": "Congo - Kinshasa",
+    "CD": "Democratic Republic of the Congo",
     "CF": "Central African Republic",
-    "CG": "Congo - Brazzaville",
+    "CG": "Congo",
     "CH": "Switzerland",
     "CI": "Côte d’Ivoire",
     "CK": "Cook Islands",
@@ -54,26 +52,25 @@ CC_COUNTRY = {
     "CM": "Cameroon",
     "CN": "China",
     "CO": "Colombia",
-    "CP": "Clipperton Island",
+    "CP": "Clipperton",
     "CR": "Costa Rica",
     "CU": "Cuba",
-    "CV": "Cape Verde",
+    "CV": "Cabo Verde",
     "CW": "Curaçao",
     "CX": "Christmas Island",
     "CY": "Cyprus",
     "CZ": "Czechia",
     "DE": "Germany",
-    "DG": "Diego Garcia",
     "DJ": "Djibouti",
     "DK": "Denmark",
     "DM": "Dominica",
     "DO": "Dominican Republic",
     "DZ": "Algeria",
-    "EA": "Ceuta & Melilla",
     "EC": "Ecuador",
     "EE": "Estonia",
     "EG": "Egypt",
     "EH": "Western Sahara",
+    "EL": "Greece",
     "ER": "Eritrea",
     "ES": "Spain",
     "ET": "Ethiopia",
@@ -81,10 +78,9 @@ CC_COUNTRY = {
     "FJ": "Fiji",
     "FK": "Falkland Islands",
     "FM": "Micronesia",
-    "FO": "Faroe Islands",
+    "FO": "Faroes",
     "FR": "France",
     "GA": "Gabon",
-    "GB": "United Kingdom",
     "GD": "Grenada",
     "GE": "Georgia",
     "GF": "French Guiana",
@@ -92,23 +88,21 @@ CC_COUNTRY = {
     "GH": "Ghana",
     "GI": "Gibraltar",
     "GL": "Greenland",
-    "GM": "Gambia",
+    "GM": "The Gambia",
     "GN": "Guinea",
     "GP": "Guadeloupe",
     "GQ": "Equatorial Guinea",
-    "GR": "Greece",
-    "GS": "South Georgia & South Sandwich Islands",
+    "GS": "South Georgia and the South Sandwich Islands",
     "GT": "Guatemala",
     "GU": "Guam",
     "GW": "Guinea-Bissau",
     "GY": "Guyana",
-    "HK": "Hong Kong SAR China",
-    "HM": "Heard & McDonald Islands",
+    "HK": "Hong Kong",
+    "HM": "Heard Island and McDonald Islands",
     "HN": "Honduras",
     "HR": "Croatia",
     "HT": "Haiti",
     "HU": "Hungary",
-    "IC": "Canary Islands",
     "ID": "Indonesia",
     "IE": "Ireland",
     "IL": "Israel",
@@ -128,7 +122,7 @@ CC_COUNTRY = {
     "KH": "Cambodia",
     "KI": "Kiribati",
     "KM": "Comoros",
-    "KN": "St. Kitts & Nevis",
+    "KN": "Saint Kitts and Nevis",
     "KP": "North Korea",
     "KR": "South Korea",
     "KW": "Kuwait",
@@ -136,7 +130,7 @@ CC_COUNTRY = {
     "KZ": "Kazakhstan",
     "LA": "Laos",
     "LB": "Lebanon",
-    "LC": "St. Lucia",
+    "LC": "Saint Lucia",
     "LI": "Liechtenstein",
     "LK": "Sri Lanka",
     "LR": "Liberia",
@@ -149,14 +143,14 @@ CC_COUNTRY = {
     "MC": "Monaco",
     "MD": "Moldova",
     "ME": "Montenegro",
-    "MF": "St. Martin",
+    "MF": "Saint Martin",
     "MG": "Madagascar",
     "MH": "Marshall Islands",
     "MK": "North Macedonia",
     "ML": "Mali",
-    "MM": "Myanmar (Burma)",
+    "MM": "Myanmar/Burma",
     "MN": "Mongolia",
-    "MO": "Macao SAR China",
+    "MO": "Macao",
     "MP": "Northern Mariana Islands",
     "MQ": "Martinique",
     "MR": "Mauritania",
@@ -188,15 +182,13 @@ CC_COUNTRY = {
     "PH": "Philippines",
     "PK": "Pakistan",
     "PL": "Poland",
-    "PM": "St. Pierre & Miquelon",
+    "PM": "Saint Pierre and Miquelon",
     "PN": "Pitcairn Islands",
     "PR": "Puerto Rico",
-    "PS": "Palestinian Territories",
     "PT": "Portugal",
     "PW": "Palau",
     "PY": "Paraguay",
     "QA": "Qatar",
-    "QO": "Outlying Oceania",
     "RE": "Réunion",
     "RO": "Romania",
     "RS": "Serbia",
@@ -208,9 +200,9 @@ CC_COUNTRY = {
     "SD": "Sudan",
     "SE": "Sweden",
     "SG": "Singapore",
-    "SH": "St. Helena",
+    "SH": "Saint Helena, Ascension and Tristan da Cunha",
     "SI": "Slovenia",
-    "SJ": "Svalbard & Jan Mayen",
+    "SJ": "Svalbard and Jan Mayen",
     "SK": "Slovakia",
     "SL": "Sierra Leone",
     "SM": "San Marino",
@@ -218,15 +210,14 @@ CC_COUNTRY = {
     "SO": "Somalia",
     "SR": "Suriname",
     "SS": "South Sudan",
-    "ST": "São Tomé & Príncipe",
+    "ST": "São Tomé and Príncipe",
     "SV": "El Salvador",
     "SX": "Sint Maarten",
     "SY": "Syria",
     "SZ": "Eswatini",
-    "TA": "Tristan da Cunha",
-    "TC": "Turks & Caicos Islands",
+    "TC": "Turks and Caicos Islands",
     "TD": "Chad",
-    "TF": "French Southern Territories",
+    "TF": "French Southern and Antarctic Lands",
     "TG": "Togo",
     "TH": "Thailand",
     "TJ": "Tajikistan",
@@ -235,29 +226,27 @@ CC_COUNTRY = {
     "TM": "Turkmenistan",
     "TN": "Tunisia",
     "TO": "Tonga",
-    # Country's latest official name change sparked this issue.
-    # "TR": "Turkey",
-    "TR": "Turkiye",
-    "TT": "Trinidad & Tobago",
+    "TR": "Türkiye",
+    "TT": "Trinidad and Tobago",
     "TV": "Tuvalu",
     "TW": "Taiwan",
     "TZ": "Tanzania",
     "UA": "Ukraine",
     "UG": "Uganda",
-    "UM": "U.S. Outlying Islands",
+    "UK": "United Kingdom",
+    "UM": "United States Minor Outlying Islands",
     "US": "United States",
     "UY": "Uruguay",
     "UZ": "Uzbekistan",
-    "VA": "Vatican City",
-    "VC": "St. Vincent & Grenadines",
+    "VA": "Holy See/Vatican City",
+    "VC": "Saint Vincent and the Grenadines",
     "VE": "Venezuela",
     "VG": "British Virgin Islands",
-    "VI": "U.S. Virgin Islands",
+    "VI": "US Virgin Islands",
     "VN": "Vietnam",
     "VU": "Vanuatu",
-    "WF": "Wallis & Futuna",
+    "WF": "Wallis and Futuna",
     "WS": "Samoa",
-    "XK": "Kosovo",
     "YE": "Yemen",
     "YT": "Mayotte",
     "ZA": "South Africa",
@@ -272,7 +261,9 @@ COUNTRY_TO_CC = {
 
 # Column names, as API keys.
 COL_REF = 'country'
-COL_CC = f'{settings.PROCESSED_KEY}.countryCode'
+COL_CC = 'countryCode'
+COL_CC_ISO = 'countryCodeIso'
+COL_CNAME = 'countryName'
 
 
 def get_cc(row, col=COL_REF, empty=''):
@@ -282,10 +273,32 @@ def get_cc(row, col=COL_REF, empty=''):
     return COUNTRY_TO_CC.get(item, empty)
 
 
+def get_cname(row, col=COL_REF, empty=''):
+    """ Extract country name from country code.
+    """
+    item = row[col]
+    return CC_COUNTRY.get(item, empty)
+
+
 def process(df):
     """ Complete processing.
     """
-    # Replace country names.
-    df.replace(settings.ECHE_COUNTRY_NAMES, inplace=True)
-    # Store country codes from country names in new column.
-    df[COL_CC] = df.apply(lambda row: get_cc(row), axis=1)
+    if settings.ECHE_COUNTRY_FIELD_TYPE == 'countryCode':
+        # Copy the country codes to another column.
+        df[COL_CC] = df.loc[:, COL_REF]
+        # Replace country codes.
+        df[COL_CC].replace(settings.COUNTRY_CODES_MAP, inplace=True)
+        # Store country names from country codes in new column.
+        df[COL_CNAME] = df.apply(lambda row: get_cname(row, col=COL_CC), axis=1)
+    else:
+        # Copy the country names to another column.
+        df[COL_CNAME] = df.loc[:, COL_REF]
+        # Replace country names.
+        df[COL_CNAME].replace(settings.COUNTRY_NAMES_MAP, inplace=True)
+        # Store country codes from country names in new column.
+        df[COL_CC] = df.apply(lambda row: get_cc(row, col=COL_CNAME), axis=1)
+
+    # Duplicate the country code column.
+    df[COL_CC_ISO] = df.loc[:, COL_CC]
+    # Replace country codes with ISO 3166-1 alpha-2 country codes.
+    df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP, inplace=True)

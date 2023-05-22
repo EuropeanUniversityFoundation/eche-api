@@ -8,7 +8,6 @@ get:
   parameters:
     - $ref: ../components/schemas/PathParamKey.yaml
     - $ref: ../components/schemas/QueryParamFields.yaml
-    - $ref: ../components/schemas/QueryParamProcessed.yaml
     - $ref: ../components/schemas/QueryParamVerified.yaml
   responses:
     '200':
@@ -28,16 +27,16 @@ get:
               summary: Default response
               value:
                 $ref: ../components/responses/InstitutionCollection.yaml
-            processed:
-              summary: Response with processed fields
+            canonical:
+              summary: Response with original ECHE fields only
               value:
-                $ref: ../components/responses/InstitutionCollectionProcessed.yaml
+                $ref: ../components/responses/InstitutionCollectionCanonical.yaml
             verified:
               summary: Response with verified fields
               value:
                 $ref: ../components/responses/InstitutionCollectionVerified.yaml
             geography:
-              summary: Combining `fields`, `processed` and `verified`
+              summary: Combining `fields` and `verified`
               value:
                 $ref: ../components/responses/InstitutionCollectionGeography.yaml
     '400':

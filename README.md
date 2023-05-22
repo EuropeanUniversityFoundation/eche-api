@@ -10,7 +10,7 @@ The **ECHE List API** is designed to expose the list of institutions holding the
 
 ## Installation
 
-The main app is built with Flask and it requires Python 3.8+ to run. To start the virtual environment and install the required libraries, execute the following commands:
+The main app is built with Flask, and it requires Python 3.8+ to run. To start the virtual environment and install the required libraries, execute the following commands:
 
     # generate and activate a virtual environment
     python3 -m venv venv

@@ -1,3 +1,15 @@
+countryCode:
+  type: string
+  description: Country code from Country
+  pattern: '^[A-Z]{2}$'
+countryCodeIso:
+  type: string
+  description: Country code (ISO 3166-1 alpha-2) from Country
+  pattern: '^[A-Z]{2}$'
+countryName:
+  type: string
+  description: Country name from Country
+  pattern: '^[A-Z]{2}$'
 erasmusCodeNormalized:
   type: string
   description: Normalized Erasmus Code
@@ -18,7 +30,7 @@ erasmusCodeCountryCode:
   type: string
   description: Country code from Erasmus Code prefix
   pattern: '^[A-Z]{2}$'
-countryCode:
+erasmusCodeCountryCodeIso:
   type: string
-  description: Country code from Country
+  description: Country code (ISO 3166-1 alpha-2) from Erasmus Code country code
   pattern: '^[A-Z]{2}$'

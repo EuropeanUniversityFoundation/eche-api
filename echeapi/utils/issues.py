@@ -9,12 +9,12 @@ def detect_duplicates(df):
     """
     issues = []
 
-    for field, severity in settings.UNIQUE_FIELDS.items():
+    for field, severity in settings.UNIQUE_CHECKS.items():
         df_dups = df[df.duplicated([field], keep=False)].copy()
         df_dups.replace({None: np.nan}, inplace=True)
         df_dups.dropna(subset=[field], inplace=True)
         df_dups.replace({np.nan: None}, inplace=True)
-        df_dups = df_dups[settings.UNIQUE_FIELDS.keys()].sort_values(field)
+        df_dups = df_dups[settings.UNIQUE_CHECKS.keys()].sort_values(field)
 
         if not df_dups.empty:
             msg = f'Duplicates found in "{field}".'
@@ -32,7 +32,7 @@ def detect_empty(df, field):
     """
     df_null = df[df[field].isnull()].copy()
     df_null.replace({np.nan: None}, inplace=True)
-    df_null = df_null[settings.UNIQUE_FIELDS.keys()]
+    df_null = df_null[settings.UNIQUE_CHECKS.keys()]
 
     if not df_null.empty:
         msg = f'Empty values in "{field}".'
@@ -64,7 +64,7 @@ def detect_different(df, first, second):
 
 
 def detect_all(df):
-    _field = f'{settings.PROCESSED_KEY}.erasmusCodeNormalized'
+    _field = 'erasmusCodeNormalized'
     return [
         *detect_duplicates(df),
         detect_different(df, 'erasmusCode', _field),

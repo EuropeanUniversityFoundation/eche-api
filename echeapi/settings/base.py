@@ -5,10 +5,11 @@ DATA_DIR = 'data'
 # Verified data subdirectory.
 VERIFIED_DIR = 'verified'
 
-VERIFIED_PREFIX = 'verified'
-VERIFIED_EXTENSION = 'csv'
+# Verified data files naming pattern.
+VERIFIED_FILE_PREFIX = 'verified'
+VERIFIED_FILE_EXT = '.csv'
 
-# Database directory.
+# Database directory (default: project root).
 DB_DIR = ''
 
 # Database filename.
@@ -20,10 +21,14 @@ DB_TABLE = 'eche'
 # Docs directory.
 DOCS_DIR = 'docs'
 
-DOCS_DEFAULT = '00_OVERVIEW.md'
+# Default docs file.
+DOCS_DEFAULT_PAGE = '00_OVERVIEW.md'
 
-# Log files directory.
+# Log files directory (default: project root).
 LOG_DIR = ''
+
+# Log file name.
+LOG_FILENAME = 'app.log'
 
 # Log format.
 LOG_FORMAT = '[%(asctime)s] [%(levelname)s] %(message)s'
@@ -37,20 +42,34 @@ ECHE_NULL_STR = [
     'Transitory Erasmus  Charter',
     'Transitory Erasmus charter',
     'Transitory Erasmus Charter',
+    'Erasmus Charter Awarded',
 ]
 
 # ECHE country names to be replaced.
-ECHE_COUNTRY_NAMES = {
-    'Turkije': 'Turkiye',
-    'Turkey': 'Turkiye',
+COUNTRY_NAMES_MAP = {
+    'Turkiye': 'Türkiye',
+    'Turkije': 'Türkiye',
+    'Turkey': 'Türkiye',
 }
 
+# ECHE country codes to be replaced.
+COUNTRY_CODES_MAP = {
+    'SF': 'FI',
+}
+
+# ECHE country codes to be replaced with ISO 3166-1 alpha-2.
+COUNTRY_CODES_TO_ISO_MAP = {
+    'EL': 'GR',
+    'UK': 'GB',
+}
+
+# Type of data contained in the 'Country' column.
+ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
+
 # ECHE list headers and corresponding API keys.
-ECHE_FIELDS = {
-    # 'Proposal Number': 'proposalNumber',
-    'Proposal ID': 'proposalNumber',
-    # 'Erasmus Code': 'erasmusCode',
-    'Erasmus code': 'erasmusCode',
+ECHE_HEADERS_MAP = {
+    'Proposal Number': 'proposalNumber',
+    'Erasmus Code': 'erasmusCode',
     'PIC': 'pic',
     'OID': 'oid',
     'Organisation Legal Name': 'organisationLegalName',
@@ -70,35 +89,21 @@ DATE_FIELDS = [
 ]
 
 # Processed fields.
-PROCESSED_FIELDS = [
+PROCESSED_KEYS = [
+    'countryCode',
+    'countryCodeIso',
+    'countryName',
     'erasmusCodeNormalized',
     'erasmusCodePrefix',
     'erasmusCodeCity',
     'erasmusCodeNumber',
     'erasmusCodeCountryCode',
-    'countryCode',
+    'erasmusCodeCountryCodeIso',
+    'hasVerifiedData',
 ]
 
-# Database column prefix for verified fields.
-PROCESSED_KEY = '_processed'
-
-# Unique fields and severity of non-empty duplicates.
-UNIQUE_FIELDS = {
-    'proposalNumber': 'warning',
-    'pic': 'danger',
-    'oid': 'warning',
-    'organisationLegalName': 'info',
-    f'{PROCESSED_KEY}.erasmusCodeNormalized': 'danger',
-}
-
-# Reference field headers for data attachment.
-REFERENCE_FIELDS = {
-    'erasmusCode': f'{PROCESSED_KEY}.erasmusCodeNormalized',
-    'pic': 'pic',
-}
-
-# Verified data field headers for data attachment.
-VERIFIED_FIELDS = [
+# Verified data fields (unprefixed).
+VERIFIED_BASE_KEYS = [
     'organisationLegalName',
     'organisationLegalNameLang',
     'street',
@@ -108,8 +113,23 @@ VERIFIED_FIELDS = [
     'webpage',
 ]
 
+# Verified data headers required for data attachment.
+VERIFIED_REQUIRED_FIELDS = ['pic', 'erasmusCode']
+
+# Verified data join columns.
+VERIFIED_JOIN_BY_FIELDS = ['pic', 'erasmusCodeNormalized']
+
 # Database column prefix for verified fields.
-VERIFIED_KEY = '_verified'
+VERIFIED_KEY_PREFIX = '_verified'
+
+# Unique fields and severity of non-empty duplicates.
+UNIQUE_CHECKS = {
+    'proposalNumber': 'warning',
+    'pic': 'danger',
+    'oid': 'warning',
+    'organisationLegalName': 'info',
+    'erasmusCodeNormalized': 'danger',
+}
 
 # Cache control max age for static pages.
 CACHE_CONTROL_MAX_AGE = 60 * 10  # 10 minutes
