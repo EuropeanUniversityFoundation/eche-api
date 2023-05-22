@@ -34,19 +34,19 @@ def api_error(error):
 @app.route("/api/<string:key>/", methods=['GET'])
 @app.route("/api/<string:key>/<string:value>/", methods=['GET'])
 def eche_list(key=None, value=None):
-    if 'fields' in request.args:
+    if '_fields' in request.args:
         fields = [
             f.strip()
-            for f in request.args['fields'].split(',')
+            for f in request.args['_fields'].split(',')
             if f.strip() in settings.DEFAULT_API_KEYS
         ]
     else:
         fields = settings.DEFAULT_API_KEYS
 
-    if 'verified' in request.args:
+    if '_verified' in request.args:
         verified = [
             v.strip()
-            for v in request.args['verified'].split(',')
+            for v in request.args['_verified'].split(',')
             if v.strip() in [*settings.VERIFIED_BASE_KEYS, 'all']
         ]
         if 'all' in verified:
@@ -64,7 +64,7 @@ def eche_list(key=None, value=None):
 
     filter = {}
     for _key, _value in params.items():
-        if _key in ['fields', 'verified']:
+        if _key.startswith('_'):
             continue
 
         if _key not in settings.ALL_API_KEYS:

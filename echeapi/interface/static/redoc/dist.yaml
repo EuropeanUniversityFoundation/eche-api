@@ -390,7 +390,7 @@ components:
   parameters:
     QueryParamFields:
       in: query
-      name: fields
+      name: _fields
       style: form
       explode: true
       schema:
@@ -425,7 +425,7 @@ components:
          If not specified, all fields will be included in the response.
     QueryParamVerified:
       in: query
-      name: verified
+      name: _verified
       style: form
       explode: true
       schema:
