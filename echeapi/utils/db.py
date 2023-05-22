@@ -1,4 +1,5 @@
 
+import re
 import sqlite3
 from datetime import datetime
 
@@ -38,6 +39,11 @@ def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
     for key, value in (filter or {}).items():
         if value is None:
             where.append(f'"{key}" IS NULL')
+        elif value == '*':
+            where.append(f'"{key}" IS NOT NULL')
+        elif value.startswith('*') or value.endswith('*'):
+            where.append(f'"{key}" LIKE ? COLLATE NOCASE')
+            params.append(re.sub(r'\*+', '%', value))
         else:
             where.append(f'"{key}" = ? COLLATE NOCASE')
             params.append(value)
