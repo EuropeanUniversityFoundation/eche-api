@@ -1,5 +1,5 @@
 in: query
-name: verified
+name: _verified
 style: form
 explode: true
 schema:
