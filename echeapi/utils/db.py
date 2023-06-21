@@ -41,7 +41,7 @@ def fetch(fields=None, filter=None, table=settings.DB_TABLE, connection=None):
             where.append(f'"{key}" IS NULL')
         elif value == '*':
             where.append(f'"{key}" IS NOT NULL')
-        elif value.startswith('*') or value.endswith('*'):
+        elif isinstance(value, str) and (value.startswith('*') or value.endswith('*')):
             where.append(f'"{key}" LIKE ? COLLATE NOCASE')
             params.append(re.sub(r'\*+', '%', value))
         else:
