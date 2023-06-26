@@ -1,5 +1,5 @@
 in: query
-name: fields
+name: _fields
 style: form
 explode: true
 schema:

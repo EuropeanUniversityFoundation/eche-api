@@ -2,8 +2,11 @@ get:
   tags:
     - Institutions
   summary: GET /{key}/{value}
+  deprecated: true
   description: |
-    Get _Institutions_ where a given **key** has a certain **value**.
+    **Use `/?key=value` or `/?key=*` instead.**
+
+     Get _Institutions_ where a given **key** has a certain **value**.
   operationId: getFilter
   parameters:
     - $ref: ../components/schemas/PathParamKey.yaml

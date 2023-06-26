@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 0.2.1
+  version: 0.3.0
   title: ECHE List API
   contact:
     email: api.support@uni-foundation.eu
@@ -152,8 +152,11 @@ paths:
       tags:
         - Institutions
       summary: GET /{key}/{value}
+      deprecated: true
       description: |
-        Get _Institutions_ where a given **key** has a certain **value**.
+        **Use `/?key=value` or `/?key=*` instead.**
+
+         Get _Institutions_ where a given **key** has a certain **value**.
       operationId: getFilter
       parameters:
         - $ref: '#/components/parameters/PathParamKey'
@@ -272,8 +275,11 @@ paths:
       tags:
         - Institutions
       summary: GET /{key}
+      deprecated: true
       description: |
-        Get _Institutions_ where a given **key** has a `null` value.
+        **Use `/?key=` instead.**
+
+         Get _Institutions_ where a given **key** has a `null` value.
       operationId: getNull
       parameters:
         - $ref: '#/components/parameters/PathParamKey'
@@ -390,7 +396,7 @@ components:
   parameters:
     QueryParamFields:
       in: query
-      name: fields
+      name: _fields
       style: form
       explode: true
       schema:
@@ -425,7 +431,7 @@ components:
          If not specified, all fields will be included in the response.
     QueryParamVerified:
       in: query
-      name: verified
+      name: _verified
       style: form
       explode: true
       schema:
