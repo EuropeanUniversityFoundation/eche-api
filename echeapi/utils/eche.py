@@ -18,8 +18,11 @@ def load(fname=settings.DATA_FILENAME):
     sheet = next(iter(workbook.worksheets))
     sheet_data = sheet.values
 
-    # Get the headers from the first line of data.
-    columns = next(sheet_data)
+    # Get the headers from the first non empty line of data.
+    valid_columns = []
+    while not valid_columns:
+        columns = next(sheet_data)
+        valid_columns = [c for c in columns if c]
 
     # Create a DataFrame based on the subsequent lines of data.
     return pd.DataFrame(sheet_data, columns=columns)
