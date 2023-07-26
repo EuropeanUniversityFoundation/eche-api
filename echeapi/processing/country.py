@@ -254,9 +254,15 @@ CC_COUNTRY = {
     "ZW": "Zimbabwe",
 }
 
+# Additional codes used in practice.
+CC_TERRITORY = CC_COUNTRY.copy()
+CC_TERRITORY.update({
+    "XK": "Kosovo",
+})
+
 # Map names to codes.
 COUNTRY_TO_CC = {
-    name: cc for cc, name in CC_COUNTRY.items()
+    name: cc for cc, name in CC_TERRITORY.items()
 }
 
 # Column names, as API keys.
@@ -277,7 +283,7 @@ def get_cname(row, col=COL_REF, empty=''):
     """ Extract country name from country code.
     """
     item = row[col]
-    return CC_COUNTRY.get(item, empty)
+    return CC_TERRITORY.get(item, empty)
 
 
 def process(df):

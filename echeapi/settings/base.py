@@ -61,6 +61,7 @@ COUNTRY_CODES_MAP = {
 COUNTRY_CODES_TO_ISO_MAP = {
     'EL': 'GR',
     'UK': 'GB',
+    'XK': None,
 }
 
 # Type of data contained in the 'Country' column.
