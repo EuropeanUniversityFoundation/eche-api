@@ -1,4 +1,4 @@
 -r requirements.txt
-flake8
-ipython
+flake8==6.0.0
+ipython==8.12.2
 isort<5.0

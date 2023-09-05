@@ -2,15 +2,13 @@
 apis:
   sample@v1:
     root: openapi/openapi.yaml
-lint:
-  extends:
-    - recommended
-  rules:
-    no-unused-components: error
-features.openapi:
-  showConsole: true
-  htmlTemplate: ./docs/index.html
-  theme:
-    colors:
-      primary:
-        main: "#32329f"
+rules:
+  no-unused-components: error
+theme:
+  openapi:
+    showConsole: true
+    htmlTemplate: ./docs/index.html
+    theme:
+      colors:
+        primary:
+          main: "#32329f"
