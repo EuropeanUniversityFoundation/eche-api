@@ -7,27 +7,20 @@ info:
     url: https://github.com/EuropeanUniversityFoundation/eche-api
   x-logo:
     url: https://uni-foundation.eu/wp-content/uploads/2019/04/EUF-1.png
-  description: >
+  description: |
     # Introduction
 
+    This API exposes all Institutions that currently hold the [Erasmus Charter for Higher Education](https://erasmus-plus.ec.europa.eu/document/higher-education-institutions-holding-an-eche-2021-2027) as published by the European Commission.
 
-    This API exposes all Institutions that currently hold the [Erasmus Charter
-    for Higher
-    Education](https://erasmus-plus.ec.europa.eu/document/higher-education-institutions-holding-an-eche-2021-2027)
-    as published by the European Commission.
-
-
-    All the data fields contained in the original list are made available to
-    client applications. Additionally, some processed values are also provided
-    to respond to more specific use cases.
-tags:
-  - name: Institutions
-    description: See all _Institutions_ in the ECHE list, with optional filtering.
+    All the data fields contained in the original list are made available to client applications. Additionally, some processed values are also provided to respond to more specific use cases.
 servers:
   - url: https://eche-list.erasmuswithoutpaper.eu/api
     description: Production server
   - url: /api
     description: Current server
+tags:
+  - name: Institutions
+    description: See all _Institutions_ in the ECHE list, with optional filtering.
 paths:
   /:
     get:
@@ -697,24 +690,15 @@ components:
       type: object
       additionalProperties: true
       minProperties: 1
-      description: >-
-        The Problem Details JSON Object
-        [[RFC7807](https://tools.ietf.org/html/rfc7807)].
+      description: The Problem Details JSON Object [[RFC7807](https://tools.ietf.org/html/rfc7807)].
       properties:
         type:
           type: string
-          description: >-
-            A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)]
-            that identifies the problem type. It should provide human-readable
-            documentation for the problem type. When this member is not present,
-            its value is assumed to be "about:blank".
+          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be "about:blank".
           format: uri
         title:
           type: string
-          description: >-
-            A short, human-readable summary of the problem type. It SHOULD NOT
-            change from occurrence to occurrence of the problem, except for
-            purposes of localization.
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
         status:
           type: integer
           description: The HTTP status code.
@@ -722,15 +706,10 @@ components:
           maximum: 599
         detail:
           type: string
-          description: >-
-            A human-readable explanation specific to this occurrence of the
-            problem.
+          description: A human-readable explanation specific to this occurrence of the problem.
         instance:
           type: string
-          description: >-
-            A URI reference that identifies the specific occurrence of the
-            problem.  It may or may not yield further information if
-            dereferenced.
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
   responses:
     Problem:
       description: Problem
