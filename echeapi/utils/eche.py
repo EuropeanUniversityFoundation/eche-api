@@ -79,15 +79,12 @@ def assign_types(df):
 def set_datetime(df):
     """ Convert strings with dates into datetime type.
     """
-    # Known date format found in string (2023-01-12).
-    format = "%d/%m/%Y"
-
     for col in df.columns.tolist():
         if col in settings.DATE_FIELDS:
             # Isolate the strings in datetime column.
             df_str = df[df[col].apply(lambda x: isinstance(x, str))]
             for i, row in df_str.iterrows():
-                df.iloc[i][col] = datetime.datetime.strptime(row[col], format)
+                df.iloc[i][col] = datetime.datetime.strptime(row[col], settings.DATE_FORMAT)
 
 
 def normalize(df):

@@ -45,7 +45,11 @@ DATA_FILENAME = 'Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_0507202
 #     'Webpage': 'webpage',
 #     'Website Url': 'webpage',
 #     'ECHE Start Date': 'echeStartDate',
-#     'Erasmus ECHE Start': 'echeStartDate',
+#     'Erasmus Eche Start': 'echeStartDate',
 #     'ECHE End Date': 'echeEndDate',
-#     'Erasmus ECHE End': 'echeEndDate',
+#     'Erasmus Eche End': 'echeEndDate',
 # }
+
+# Date format used for string conversion.
+# DATE_FORMAT = "%d/%m/%Y"
+# DATE_FORMAT = "%d-%m-%Y"
