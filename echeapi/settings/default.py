@@ -37,6 +37,7 @@ DATA_FILENAME = '20231114_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_
 #     'OID': 'oid',
 #     'Organisation Legal Name': 'organisationLegalName',
 #     'Legal Name': 'organisationLegalName',
+#     'Organisation': 'organisationLegalName',
 #     'Street': 'street',
 #     'Postal Code': 'postalCode',
 #     'Post Cd': 'postalCode',
