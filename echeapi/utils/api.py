@@ -1,6 +1,8 @@
 
 import json
 
+import numpy as np
+
 from echeapi import settings
 from echeapi.utils import db, nesting
 
@@ -18,6 +20,8 @@ def as_dataframe(fields, filter=None):
     _verified = 'hasVerifiedData'
     if _verified in fields:
         df[_verified] = df[_verified].astype('bool')
+
+    df = df.replace(np.nan, None)
 
     return df
 
