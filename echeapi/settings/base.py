@@ -83,6 +83,9 @@ ECHE_HEADERS_MAP = {
     'ECHE End Date': 'echeEndDate',
 }
 
+# Date format used for string conversion.
+DATE_FORMAT = '%d-%m-%Y'
+
 # Date fields to be parsed when reading from the database.
 DATE_FIELDS = [
     'echeStartDate',
