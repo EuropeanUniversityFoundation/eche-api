@@ -99,7 +99,7 @@ def eche_list(key=None, value=None):
             fields=[*fields, *verified],
             filter=filter,
             nested=True,
-        )
+        ).encode()
     except Exception:
         app.logger.exception('Error while fetching API data')
         raise ApiError(500, 'Server error')

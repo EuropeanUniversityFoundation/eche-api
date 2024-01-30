@@ -39,7 +39,7 @@ def as_json(fields, filter=None, **kwargs):
     """ Export a database table to a DataFrame and return it in JSON format.
     """
     data = as_dict(fields, filter=filter, **kwargs)
-    return json.dumps(data)
+    return json.dumps(data, ensure_ascii=False)
 
 
 def as_html(fields, filter=None, **kwargs):
