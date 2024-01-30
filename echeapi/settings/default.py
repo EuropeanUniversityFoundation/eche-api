@@ -21,38 +21,38 @@ DATA_FILENAME = '20231220_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
 # ECHE_COUNTRY_FIELD_TYPE = 'countryName'
-# ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
+ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
 
 # ECHE list headers and corresponding API keys.
 # Override base settings depending on individual DATA_FILENAME issues.
-# ECHE_HEADERS_MAP = {
-#     'Proposal Number': 'proposalNumber',
-#     'Proposal ID': 'proposalNumber',
-#     'Proposal number': 'proposalNumber',
-#     'Erasmus Code': 'erasmusCode',
-#     'Erasmus code': 'erasmusCode',
-#     'Eramus Code': 'erasmusCode',
-#     None: 'erasmusCode',
-#     'PIC': 'pic',
-#     'Pic': 'pic',
-#     'OID': 'oid',
-#     'Organisation Legal Name': 'organisationLegalName',
-#     'Legal Name': 'organisationLegalName',
-#     'Organisation': 'organisationLegalName',
-#     'Street': 'street',
-#     'Postal Code': 'postalCode',
-#     'Post Cd': 'postalCode',
-#     'City': 'city',
-#     'Country': 'country',
-#     'Country Cd': 'country',
-#     'Webpage': 'webpage',
-#     'Website Url': 'webpage',
-#     'ECHE Start Date': 'echeStartDate',
-#     'Erasmus Eche Start': 'echeStartDate',
-#     'ECHE End Date': 'echeEndDate',
-#     'Erasmus Eche End': 'echeEndDate',
-# }
+ECHE_HEADERS_MAP = {
+    'Proposal Number': 'proposalNumber',
+    # 'Proposal ID': 'proposalNumber',
+    # 'Proposal number': 'proposalNumber',
+    'Erasmus Code': 'erasmusCode',
+    # 'Erasmus code': 'erasmusCode',
+    # 'Eramus Code': 'erasmusCode',
+    # None: 'erasmusCode',
+    # 'PIC': 'pic',
+    'Pic': 'pic',
+    'OID': 'oid',
+    # 'Organisation Legal Name': 'organisationLegalName',
+    # 'Legal Name': 'organisationLegalName',
+    'Organisation': 'organisationLegalName',
+    'Street': 'street',
+    # 'Postal Code': 'postalCode',
+    'Post Cd': 'postalCode',
+    'City': 'city',
+    # 'Country': 'country',
+    'Country Cd': 'country',
+    # 'Webpage': 'webpage',
+    'Website Url': 'webpage',
+    # 'ECHE Start Date': 'echeStartDate',
+    'Erasmus Eche Start': 'echeStartDate',
+    # 'ECHE End Date': 'echeEndDate',
+    'Erasmus Eche End': 'echeEndDate',
+}
 
 # Date format used for string conversion.
-# DATE_FORMAT = "%d/%m/%Y"
-# DATE_FORMAT = "%d-%m-%Y"
+# DATE_FORMAT = '%d/%m/%Y'
+DATE_FORMAT = '%d-%m-%Y'

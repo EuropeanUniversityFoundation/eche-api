@@ -77,7 +77,7 @@ def assign_types(df):
 
 
 def set_datetime(df):
-    """ Convert strings with dates into datetime type.
+    """ Convert strings with dates and serial dates into datetime type.
     """
     for col in df.columns.tolist():
         if col in settings.DATE_FIELDS:
@@ -85,6 +85,18 @@ def set_datetime(df):
             df_str = df[df[col].apply(lambda x: isinstance(x, str))]
             for i, row in df_str.iterrows():
                 df.iloc[i][col] = datetime.datetime.strptime(row[col], settings.DATE_FORMAT)
+
+            # Isolate the integers in datetime column.
+            df_int = df[df[col].apply(lambda x: isinstance(x, int))]
+            for i, row in df_int.iterrows():
+                start = datetime.datetime(1899, 12, 31)
+                delta = datetime.timedelta(row[col])
+                df.iloc[i][col] = start + delta
+
+            # Nullify all other values.
+            df_err = df[df[col].apply(lambda x: not isinstance(x, datetime.date))]
+            for i, row in df_err.iterrows():
+                df.iloc[i][col] = None
 
 
 def normalize(df):
