@@ -446,6 +446,7 @@ components:
     PathParamKey:
       in: path
       name: key
+      required: true
       schema:
         type: string
         enum:
@@ -482,6 +483,7 @@ components:
     PathParamValue:
       in: path
       name: value
+      required: true
       schema:
         type: string
       description: The value to filter by.
