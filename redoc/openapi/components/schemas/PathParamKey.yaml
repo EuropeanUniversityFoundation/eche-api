@@ -1,5 +1,6 @@
 in: path
 name: key
+required: true
 schema:
   type: string
   enum:
