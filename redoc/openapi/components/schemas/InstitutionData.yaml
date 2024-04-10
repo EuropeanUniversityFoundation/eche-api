@@ -20,7 +20,9 @@ organisationLegalName:
   type: string
   description: '[ECHE list] Organisation Legal Name'
 street:
-  type: string
+  type:
+    - "string"
+    - "null"
   description: '[ECHE list] Street'
 postalCode:
   type:
@@ -51,19 +53,20 @@ countryCode:
   description: Country code from Country
   pattern: '^[A-Z]{2}$'
 countryCodeIso:
-  type: string
+  type:
+    - "string"
+    - "null"
   description: Country code (ISO 3166-1 alpha-2) from Country
   pattern: '^[A-Z]{2}$'
 countryName:
   type: string
   description: Country name from Country
-  pattern: '^[A-Z]{2}$'
 erasmusCodeNormalized:
   type:
     - "string"
     - "null"
   description: Normalized Erasmus Code
-  pattern: '^([A-Z]{3}|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]+[A-Z]\d{2,3}$'
+  pattern: '^([A-Z]{3}|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]*[A-Z]\d{2,3}$'
 erasmusCodePrefix:
   type:
     - "string"
@@ -81,7 +84,7 @@ erasmusCodeCity:
     Erasmus Code city component
 
      (depends on Normalized Erasmus Code)
-  pattern: '^[A-Z][A-Z-]+[A-Z]$'
+  pattern: '^[A-Z][A-Z-]*[A-Z]$'
 erasmusCodeNumber:
   type:
     - "string"
@@ -115,13 +118,13 @@ hasVerifiedData:
 _verified:
   type: object
   description: Verified fields
-  required:
-    - organisationLegalName
-    - organisationLegalNameLang
-    - street
-    - postalCode
-    - city
-    - cityLang
-    - webpage
+  # required:
+  #   - organisationLegalName
+  #   - organisationLegalNameLang
+  #   - street
+  #   - postalCode
+  #   - city
+  #   - cityLang
+  #   - webpage
   properties:
     $ref: ./VerifiedData.yaml
