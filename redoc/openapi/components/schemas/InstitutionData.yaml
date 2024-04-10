@@ -57,7 +57,6 @@ countryCodeIso:
 countryName:
   type: string
   description: Country name from Country
-  pattern: '^[A-Z]{2}$'
 erasmusCodeNormalized:
   type:
     - "string"
@@ -115,13 +114,13 @@ hasVerifiedData:
 _verified:
   type: object
   description: Verified fields
-  required:
-    - organisationLegalName
-    - organisationLegalNameLang
-    - street
-    - postalCode
-    - city
-    - cityLang
-    - webpage
+  # required:
+  #   - organisationLegalName
+  #   - organisationLegalNameLang
+  #   - street
+  #   - postalCode
+  #   - city
+  #   - cityLang
+  #   - webpage
   properties:
     $ref: ./VerifiedData.yaml

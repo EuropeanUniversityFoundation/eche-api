@@ -553,7 +553,6 @@ components:
           countryName:
             type: string
             description: Country name from Country
-            pattern: ^[A-Z]{2}$
           erasmusCodeNormalized:
             type:
               - string
@@ -611,14 +610,6 @@ components:
           _verified:
             type: object
             description: Verified fields
-            required:
-              - organisationLegalName
-              - organisationLegalNameLang
-              - street
-              - postalCode
-              - city
-              - cityLang
-              - webpage
             properties:
               organisationLegalName:
                 type:

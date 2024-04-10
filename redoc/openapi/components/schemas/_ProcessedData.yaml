@@ -9,7 +9,6 @@ countryCodeIso:
 countryName:
   type: string
   description: Country name from Country
-  pattern: '^[A-Z]{2}$'
 erasmusCodeNormalized:
   type: string
   description: Normalized Erasmus Code
