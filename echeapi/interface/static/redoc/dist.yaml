@@ -516,7 +516,9 @@ components:
             type: string
             description: '[ECHE list] Organisation Legal Name'
           street:
-            type: string
+            type:
+              - string
+              - 'null'
             description: '[ECHE list] Street'
           postalCode:
             type:
