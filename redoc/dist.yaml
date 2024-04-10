@@ -549,7 +549,9 @@ components:
             description: Country code from Country
             pattern: ^[A-Z]{2}$
           countryCodeIso:
-            type: string
+            type:
+              - string
+              - 'null'
             description: Country code (ISO 3166-1 alpha-2) from Country
             pattern: ^[A-Z]{2}$
           countryName:
@@ -578,7 +580,7 @@ components:
               Erasmus Code city component
 
                (depends on Normalized Erasmus Code)
-            pattern: ^[A-Z][A-Z-]+[A-Z]$
+            pattern: ^[A-Z][A-Z-]*[A-Z]$
           erasmusCodeNumber:
             type:
               - string
