@@ -2,28 +2,28 @@ type: array
 description: List of _Institution_ resources.
 items:
   type: object
-  required:
-    - proposalNumber
-    - erasmusCode
-    - pic
-    - oid
-    - organisationLegalName
-    - street
-    - postalCode
-    - city
-    - country
-    - webpage
-    - echeStartDate
-    - echeEndDate
-    - countryCode
-    - countryCodeIso
-    - countryName
-    - erasmusCodeNormalized
-    - erasmusCodePrefix
-    - erasmusCodeCity
-    - erasmusCodeNumber
-    - erasmusCodeCountryCode
-    - erasmusCodeCountryCodeIso
-    - hasVerifiedData
+  # required:
+  #   - proposalNumber
+  #   - erasmusCode
+  #   - pic
+  #   - oid
+  #   - organisationLegalName
+  #   - street
+  #   - postalCode
+  #   - city
+  #   - country
+  #   - webpage
+  #   - echeStartDate
+  #   - echeEndDate
+  #   - countryCode
+  #   - countryCodeIso
+  #   - countryName
+  #   - erasmusCodeNormalized
+  #   - erasmusCodePrefix
+  #   - erasmusCodeCity
+  #   - erasmusCodeNumber
+  #   - erasmusCodeCountryCode
+  #   - erasmusCodeCountryCodeIso
+  #   - hasVerifiedData
   properties:
     $ref: ./InstitutionData.yaml

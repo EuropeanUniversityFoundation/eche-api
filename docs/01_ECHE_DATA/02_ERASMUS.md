@@ -35,7 +35,7 @@ As such, while the original Erasmus Codes are retained, the ECHE List API also p
 The following regular expression encapsulates all of the above:
 
 ```
-^(IRL|LUX|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]+[A-Z]\d{2,3}$
+^(IRL|LUX|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]*[A-Z]\d{2,3}$
 ```
 
 ### Known differences between original and normalized Erasmus Codes
