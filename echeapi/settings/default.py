@@ -17,7 +17,8 @@ SECRET_KEY = ''
 # DATA_FILENAME = 'Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_05072023.xlsx'
 # DATA_FILENAME = '20231114_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027.xlsx'
 # DATA_FILENAME = '20231220_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_0.xlsx'
-DATA_FILENAME = '20240223_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027.xlsx'
+# DATA_FILENAME = '20240223_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027.xlsx'
+DATA_FILENAME = '08042024_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027.xlsx'
 
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
@@ -27,15 +28,16 @@ ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
 # ECHE list headers and corresponding API keys.
 # Override base settings depending on individual DATA_FILENAME issues.
 ECHE_HEADERS_MAP = {
-    'Proposal Number': 'proposalNumber',
+    # 'Proposal Number': 'proposalNumber',
     # 'Proposal ID': 'proposalNumber',
     # 'Proposal number': 'proposalNumber',
+    'Erasmus Refcode': 'proposalNumber',
     'Erasmus Code': 'erasmusCode',
     # 'Erasmus code': 'erasmusCode',
     # 'Eramus Code': 'erasmusCode',
     # None: 'erasmusCode',
-    # 'PIC': 'pic',
-    'Pic': 'pic',
+    'PIC': 'pic',
+    # 'Pic': 'pic',
     'OID': 'oid',
     # 'Organisation Legal Name': 'organisationLegalName',
     'Legal Name': 'organisationLegalName',
@@ -44,8 +46,8 @@ ECHE_HEADERS_MAP = {
     # 'Postal Code': 'postalCode',
     'Post Cd': 'postalCode',
     'City': 'city',
-    # 'Country': 'country',
-    'Country Cd': 'country',
+    'Country': 'country',
+    # 'Country Cd': 'country',
     # 'Webpage': 'webpage',
     'Website Url': 'webpage',
     # 'ECHE Start Date': 'echeStartDate',
