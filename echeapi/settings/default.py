@@ -59,4 +59,5 @@ ECHE_HEADERS_MAP = {
 
 # Date format used for string conversion.
 # DATE_FORMAT = '%d/%m/%Y'
-DATE_FORMAT = '%d-%m-%Y'
+# DATE_FORMAT = "%d-%m-%Y"
+DATE_FORMAT = "%m/%d/%y"
