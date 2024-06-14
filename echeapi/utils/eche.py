@@ -81,6 +81,9 @@ def set_datetime(df):
     """
     for col in df.columns.tolist():
         if col in settings.DATE_FIELDS:
+            # Empty dates are problematic.
+            df.dropna(axis=0, how='all', subset=[col], inplace=True)
+
             # Isolate the strings in datetime column.
             df_str = df[df[col].apply(lambda x: isinstance(x, str))]
             for i, row in df_str.iterrows():
