@@ -81,22 +81,25 @@ def set_datetime(df):
     """
     for col in df.columns.tolist():
         if col in settings.DATE_FIELDS:
+            # Empty dates are problematic.
+            df.dropna(axis=0, how='all', subset=[col], inplace=True)
+
             # Isolate the strings in datetime column.
             df_str = df[df[col].apply(lambda x: isinstance(x, str))]
             for i, row in df_str.iterrows():
-                df.iloc[i][col] = datetime.datetime.strptime(row[col], settings.DATE_FORMAT)
+                df.iat[i, df.columns.get_loc(col)] = datetime.datetime.strptime(row[col], settings.DATE_FORMAT)
 
             # Isolate the integers in datetime column.
             df_int = df[df[col].apply(lambda x: isinstance(x, int))]
             for i, row in df_int.iterrows():
                 start = datetime.datetime(1899, 12, 31)
                 delta = datetime.timedelta(row[col])
-                df.iloc[i][col] = start + delta
+                df.iat[i, df.columns.get_loc(col)] = start + delta
 
             # Nullify all other values.
             df_err = df[df[col].apply(lambda x: not isinstance(x, datetime.date))]
             for i, row in df_err.iterrows():
-                df.iloc[i][col] = None
+                df.iat[i, df.columns.get_loc(col)] = None
 
 
 def normalize(df):
