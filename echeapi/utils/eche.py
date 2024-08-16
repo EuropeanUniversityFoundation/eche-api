@@ -86,8 +86,12 @@ def set_datetime(df):
 
             # Isolate the strings in datetime column.
             df_str = df[df[col].apply(lambda x: isinstance(x, str))]
+
+            # Get the date format for the column in question.
+            date_format = settings.ECHE_DATE_FORMATS[col]
+
             for i, row in df_str.iterrows():
-                df.iat[i, df.columns.get_loc(col)] = datetime.datetime.strptime(row[col], settings.DATE_FORMAT)
+                df.iat[i, df.columns.get_loc(col)] = datetime.datetime.strptime(row[col], date_format)
 
             # Isolate the integers in datetime column.
             df_int = df[df[col].apply(lambda x: isinstance(x, int))]

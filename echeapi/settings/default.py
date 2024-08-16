@@ -33,10 +33,10 @@ ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
 ECHE_HEADERS_MAP = {
     # 'Proposal Number': 'proposalNumber',
     # 'Proposal ID': 'proposalNumber',
-    'Proposal number': 'proposalNumber',
-    # 'Erasmus Refcode': 'proposalNumber',
-    'Erasmus Code': 'erasmusCode',
-    # 'Erasmus code': 'erasmusCode',
+    # 'Proposal number': 'proposalNumber',
+    'Erasmus Refcode': 'proposalNumber',
+    # 'Erasmus Code': 'erasmusCode',
+    'Erasmus code': 'erasmusCode',
     # 'Eramus Code': 'erasmusCode',
     # None: 'erasmusCode',
     # 'PIC': 'pic',
@@ -59,7 +59,13 @@ ECHE_HEADERS_MAP = {
     'Erasmus Eche End': 'echeEndDate',
 }
 
-# Date format used for string conversion.
-# DATE_FORMAT = '%d/%m/%Y'
-# DATE_FORMAT = "%d-%m-%Y"
-# DATE_FORMAT = "%m/%d/%y"
+# Date formats used for string conversion.
+ECHE_DATE_FORMATS = {
+    # 'echeStartDate': '%d/%m/%Y',
+    # 'echeStartDate': '%d-%m-%Y',
+    # 'echeStartDate': '%m/%d/%Y',
+    'echeStartDate': '%Y-%m-%d',
+    # 'echeEndDate': '%d/%m/%Y',
+    # 'echeEndDate': '%d-%m-%Y',
+    'echeEndDate': "%m/%d/%Y",
+}
