@@ -21,7 +21,8 @@ SECRET_KEY = ''
 # DATA_FILENAME = '08042024_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027.xlsx'
 # DATA_FILENAME = '13062024_List_of_Accredited_HEIs_within_the_Erasmus_Programme_2021-2027.xlsx'
 # DATA_FILENAME = '13062024_List_of_Accredited_HEIs_within_the_Erasmus_Programme_2021-2027_0.xlsx'
-DATA_FILENAME = '_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_27062024.xlsx'
+# DATA_FILENAME = '_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_27062024.xlsx'
+DATA_FILENAME = '_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_13082024.xlsx'
 
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
@@ -33,10 +34,10 @@ ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
 ECHE_HEADERS_MAP = {
     # 'Proposal Number': 'proposalNumber',
     # 'Proposal ID': 'proposalNumber',
-    'Proposal number': 'proposalNumber',
-    # 'Erasmus Refcode': 'proposalNumber',
-    'Erasmus Code': 'erasmusCode',
-    # 'Erasmus code': 'erasmusCode',
+    # 'Proposal number': 'proposalNumber',
+    'Erasmus Refcode': 'proposalNumber',
+    # 'Erasmus Code': 'erasmusCode',
+    'Erasmus code': 'erasmusCode',
     # 'Eramus Code': 'erasmusCode',
     # None: 'erasmusCode',
     # 'PIC': 'pic',
@@ -59,7 +60,13 @@ ECHE_HEADERS_MAP = {
     'Erasmus Eche End': 'echeEndDate',
 }
 
-# Date format used for string conversion.
-# DATE_FORMAT = '%d/%m/%Y'
-# DATE_FORMAT = "%d-%m-%Y"
-# DATE_FORMAT = "%m/%d/%y"
+# Date formats used for string conversion.
+ECHE_DATE_FORMATS = {
+    # 'echeStartDate': '%d/%m/%Y',
+    # 'echeStartDate': '%d-%m-%Y',
+    # 'echeStartDate': '%m/%d/%Y',
+    'echeStartDate': '%Y-%m-%d',
+    # 'echeEndDate': '%d/%m/%Y',
+    # 'echeEndDate': '%d-%m-%Y',
+    'echeEndDate': "%m/%d/%Y",
+}
