@@ -25,7 +25,8 @@ SECRET_KEY = ''
 # DATA_FILENAME = '_List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_13082024.xlsx'
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_29082024.xlsx'
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_12092024.xlsx'
-DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_02102024.xlsx'
+# DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_02102024.xlsx'
+DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_25102024.xlsx'
 
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
@@ -39,10 +40,10 @@ ECHE_HEADERS_MAP = {
     # 'Proposal ID': 'proposalNumber',
     # 'Proposal number': 'proposalNumber',
     # 'Erasmus Refcode': 'proposalNumber',
-    # 'Erasmus Code': 'erasmusCode',
+    'Erasmus Code': 'erasmusCode',
     # 'Erasmus code': 'erasmusCode',
     # 'Eramus Code': 'erasmusCode',
-    'Erasms Code': 'erasmusCode',
+    # 'Erasms Code': 'erasmusCode',
     # None: 'erasmusCode',
     'PIC': 'pic',
     # 'Pic': 'pic',
