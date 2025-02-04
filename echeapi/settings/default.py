@@ -26,7 +26,8 @@ SECRET_KEY = ''
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_29082024.xlsx'
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_12092024.xlsx'
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_02102024.xlsx'
-DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_25102024.xlsx'
+# DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_25102024.xlsx'
+DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus_Programme_2021-2027_16012025.xlsx'
 
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
@@ -61,12 +62,14 @@ ECHE_HEADERS_MAP = {
     # 'Webpage': 'webpage',
     'Website Url': 'webpage',
     # 'ECHE Start Date': 'echeStartDate',
-    'Erasmus Eche Start': 'echeStartDate',
+    # 'Erasmus Eche Start': 'echeStartDate',
     # 'ECHE Start': 'echeStartDate',
     # 'ECHE start': 'echeStartDate',
+    'Start Date': 'echeStartDate',
     # 'ECHE End Date': 'echeEndDate',
-    'Erasmus Eche End': 'echeEndDate',
+    # 'Erasmus Eche End': 'echeEndDate',
     # 'ECHE End': 'echeEndDate',
+    'End Date': 'echeEndDate',
 }
 
 # Date formats used for string conversion.
