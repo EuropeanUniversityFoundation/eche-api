@@ -31,7 +31,8 @@ SECRET_KEY = ''
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus_Programme_2021-2027_24022025_0.xlsx'
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027_10042025 (1) (2).xlsx'
 # DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027-13052025.xlsx'
-DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027-13082025.xlsx'
+# DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027-13082025.xlsx'
+DATA_FILENAME = 'List_of_Accredited_HEIs_within_the_Erasmus+_Programme_2021-2027-30102025.xlsx'
 
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
@@ -41,17 +42,18 @@ ECHE_COUNTRY_FIELD_TYPE = 'countryCode'
 # ECHE list headers and corresponding API keys.
 # Override base settings depending on individual DATA_FILENAME issues.
 ECHE_HEADERS_MAP = {
-    'Proposal Number': 'proposalNumber',
+    # 'Proposal Number': 'proposalNumber',
     # 'Proposal ID': 'proposalNumber',
     # 'Proposal number': 'proposalNumber',
     # 'Erasmus Refcode': 'proposalNumber',
+    'Proposal Reference': 'proposalNumber',
     # 'Erasmus Code': 'erasmusCode',
     'Erasmus code': 'erasmusCode',
     # 'Eramus Code': 'erasmusCode',
     # 'Erasms Code': 'erasmusCode',
     # None: 'erasmusCode',
-    'PIC': 'pic',
-    # 'Pic': 'pic',
+    # 'PIC': 'pic',
+    'Pic': 'pic',
     'OID': 'oid',
     # 'Organisation Legal Name': 'organisationLegalName',
     'Legal Name': 'organisationLegalName',
@@ -66,16 +68,16 @@ ECHE_HEADERS_MAP = {
     # 'Webpage': 'webpage',
     'Website Url': 'webpage',
     # 'ECHE Start Date': 'echeStartDate',
-    # 'Erasmus Eche Start': 'echeStartDate',
+    'Erasmus Eche Start': 'echeStartDate',
     # 'ECHE Start': 'echeStartDate',
     # 'ECHE start': 'echeStartDate',
     # 'Start Date': 'echeStartDate',
-    'Start date': 'echeStartDate',
+    # 'Start date': 'echeStartDate',
     # 'ECHE End Date': 'echeEndDate',
-    # 'Erasmus Eche End': 'echeEndDate',
+    'Erasmus Eche End': 'echeEndDate',
     # 'ECHE End': 'echeEndDate',
     # 'End Date': 'echeEndDate',
-    'End date': 'echeEndDate',
+    # 'End date': 'echeEndDate',
 }
 
 # Date formats used for string conversion.
