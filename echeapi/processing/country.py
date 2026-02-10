@@ -293,7 +293,7 @@ def process(df):
         # Copy the country codes to another column.
         df[COL_CC] = df.loc[:, COL_REF]
         # Replace country codes.
-        df[COL_CC].replace(settings.COUNTRY_CODES_MAP, inplace=True)
+        df[COL_CC] = df[COL_CC].replace(settings.COUNTRY_CODES_MAP)
         # Store country names from country codes in new column.
         df[COL_CNAME] = df.apply(lambda row: get_cname(row, col=COL_CC), axis=1)
     else:
@@ -307,4 +307,4 @@ def process(df):
     # Duplicate the country code column.
     df[COL_CC_ISO] = df.loc[:, COL_CC]
     # Replace country codes with ISO 3166-1 alpha-2 country codes.
-    df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP, inplace=True)
+    df[COL_CC_ISO] = df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP)
