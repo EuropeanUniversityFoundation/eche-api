@@ -1,6 +1,7 @@
 get:
   tags:
     - Institutions
+  security: []
   summary: GET /{key}
   deprecated: true
   description: |
@@ -28,19 +29,15 @@ get:
           examples:
             default:
               summary: Default response
-              value:
-                $ref: ../components/responses/InstitutionCollection.yaml
+              $ref: ../components/responses/InstitutionCollection.yaml
             canonical:
               summary: Response with original ECHE fields only
-              value:
-                $ref: ../components/responses/InstitutionCollectionCanonical.yaml
+              $ref: ../components/responses/InstitutionCollectionCanonical.yaml
             verified:
               summary: Response with verified fields
-              value:
-                $ref: ../components/responses/InstitutionCollectionVerified.yaml
+              $ref: ../components/responses/InstitutionCollectionVerified.yaml
             geography:
               summary: Combining `fields` and `verified`
-              value:
-                $ref: ../components/responses/InstitutionCollectionGeography.yaml
+              $ref: ../components/responses/InstitutionCollectionGeography.yaml
     '400':
       $ref: ../components/responses/Problem.yaml
