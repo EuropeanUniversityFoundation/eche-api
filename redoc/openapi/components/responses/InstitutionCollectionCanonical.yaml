@@ -1,3 +1,4 @@
+summary: Response with original ECHE fields only
 value:
   - proposalNumber: '111111111'
     erasmusCode: 'AQ TESTING99'

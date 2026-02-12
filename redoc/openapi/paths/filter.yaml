@@ -29,16 +29,12 @@ get:
             $ref: ../components/schemas/InstitutionCollection.yaml
           examples:
             default:
-              summary: Default response
               $ref: ../components/responses/InstitutionCollection.yaml
             canonical:
-              summary: Response with original ECHE fields only
               $ref: ../components/responses/InstitutionCollectionCanonical.yaml
             verified:
-              summary: Response with verified fields
               $ref: ../components/responses/InstitutionCollectionVerified.yaml
             geography:
-              summary: Combining `fields` and `verified`
               $ref: ../components/responses/InstitutionCollectionGeography.yaml
     '400':
       $ref: ../components/responses/Problem.yaml
