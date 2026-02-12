@@ -26,13 +26,66 @@ paths:
     get:
       tags:
         - Institutions
+      security: []
       summary: GET /
       description: |
         Get all _Institutions_ covered by this provider.
       operationId: getList
       parameters:
-        - $ref: '#/components/parameters/QueryParamFields'
-        - $ref: '#/components/parameters/QueryParamVerified'
+        - in: query
+          name: _fields
+          style: form
+          explode: true
+          schema: &ref_0
+            type: array
+            items:
+              type: string
+              enum:
+                - proposalNumber
+                - erasmusCode
+                - pic
+                - oid
+                - organisationLegalName
+                - street
+                - postalCode
+                - city
+                - country
+                - webpage
+                - echeStartDate
+                - echeEndDate
+                - countryCode
+                - countryCodeIso
+                - countryName
+                - erasmusCodeNormalized
+                - erasmusCodePrefix
+                - erasmusCodeCity
+                - erasmusCodeNumber
+                - erasmusCodeCountryCode
+                - erasmusCodeCountryCodeIso
+                - hasVerifiedData
+          description: |
+            The fields to include in the response.
+             If not specified, all fields will be included in the response.
+        - in: query
+          name: _verified
+          style: form
+          explode: true
+          schema: &ref_1
+            type: array
+            items:
+              type: string
+              enum:
+                - all
+                - organisationLegalName
+                - organisationLegalNameLang
+                - street
+                - postalCode
+                - city
+                - cityLang
+                - webpage
+          description: |
+            The verified fields to include in the response.
+             If `all` is specified, all verified fields will be included in the response.
       responses:
         '200':
           description: OK
@@ -45,11 +98,181 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InstitutionCollection'
+                type: array
+                description: List of _Institution_ resources.
+                items: &ref_2
+                  type: object
+                  properties: &ref_11
+                    proposalNumber:
+                      type:
+                        - string
+                        - 'null'
+                      description: '[ECHE list] Proposal Number'
+                    erasmusCode:
+                      type: string
+                      description: '[ECHE list] Erasmus Code'
+                    pic:
+                      type: string
+                      description: '[ECHE list] PIC'
+                      pattern: ^\d{9}$
+                    oid:
+                      type:
+                        - string
+                        - 'null'
+                      description: '[ECHE list] OID'
+                      pattern: ^E\d{8}$
+                    organisationLegalName:
+                      type: string
+                      description: '[ECHE list] Organisation Legal Name'
+                    street:
+                      type:
+                        - string
+                        - 'null'
+                      description: '[ECHE list] Street'
+                    postalCode:
+                      type:
+                        - string
+                        - 'null'
+                      description: '[ECHE list] Postal Code'
+                    city:
+                      type: string
+                      description: '[ECHE list] City'
+                    country:
+                      type: string
+                      description: '[ECHE list] Country'
+                    webpage:
+                      type:
+                        - string
+                        - 'null'
+                      description: '[ECHE list] Webpage'
+                    echeStartDate:
+                      type: string
+                      description: '[ECHE list] ECHE Start Date'
+                      format: date
+                    echeEndDate:
+                      type: string
+                      description: '[ECHE list] ECHE End Date'
+                      format: date
+                    countryCode:
+                      type: string
+                      description: Country code from Country
+                      pattern: ^[A-Z]{2}$
+                    countryCodeIso:
+                      type:
+                        - string
+                        - 'null'
+                      description: Country code (ISO 3166-1 alpha-2) from Country
+                      pattern: ^[A-Z]{2}$
+                    countryName:
+                      type: string
+                      description: Country name from Country
+                    erasmusCodeNormalized:
+                      type:
+                        - string
+                        - 'null'
+                      description: Normalized Erasmus Code
+                      pattern: ^([A-Z]{3}|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]*[A-Z]\d{2,3}$
+                    erasmusCodePrefix:
+                      type:
+                        - string
+                        - 'null'
+                      description: |
+                        Erasmus Code prefix
+
+                        (depends on Normalized Erasmus Code)
+                      pattern: ^[A-Z]{1,3}$
+                    erasmusCodeCity:
+                      type:
+                        - string
+                        - 'null'
+                      description: |
+                        Erasmus Code city component
+
+                        (depends on Normalized Erasmus Code)
+                      pattern: ^[A-Z][A-Z-]*[A-Z]$
+                    erasmusCodeNumber:
+                      type:
+                        - string
+                        - 'null'
+                      description: |
+                        Erasmus Code number
+
+                        (depends on Normalized Erasmus Code)
+                      pattern: ^\d{2,3}$
+                    erasmusCodeCountryCode:
+                      type:
+                        - string
+                        - 'null'
+                      description: |
+                        Country code from Erasmus Code
+
+                        (depends on Erasmus Code prefix)
+                      pattern: ^[A-Z]{2}$
+                    erasmusCodeCountryCodeIso:
+                      type:
+                        - string
+                        - 'null'
+                      description: |
+                        Country code (ISO 3166-1 alpha-2) from Erasmus Code
+
+                        (depends on Country code from Erasmus Code)
+                      pattern: ^[A-Z]{2}$
+                    hasVerifiedData:
+                      type: boolean
+                      description: Returns `true` if at least one verified field is not `null`
+                    _verified:
+                      type: object
+                      description: Verified fields
+                      properties: &ref_10
+                        organisationLegalName:
+                          type:
+                            - string
+                            - 'null'
+                          description: Organisation Legal Name
+                        organisationLegalNameLang:
+                          type:
+                            - string
+                            - 'null'
+                          description: |
+                            IETF language tag for the `organisationLegalName` value
+
+                            e.g. `lv` for Latvian, `pt-PT` for Portuguese from Portugal, `sr-Latn` for
+                            Serbian in Latin script
+                          pattern: ^[a-z]{2,3}(-(([A-Z]{1}[a-z]{3})|\d{3}))?(-([A-Z]{2}))?$
+                        street:
+                          type:
+                            - string
+                            - 'null'
+                          description: Street
+                        postalCode:
+                          type:
+                            - string
+                            - 'null'
+                          description: Postal Code
+                        city:
+                          type:
+                            - string
+                            - 'null'
+                          description: City
+                        cityLang:
+                          type:
+                            - string
+                            - 'null'
+                          description: |
+                            IETF language tag for the `city` value
+
+                            e.g. `lv` for Latvian, `pt-PT` for Portuguese from Portugal, `sr-Latn` for
+                            Serbian in Latin script
+                          pattern: ^[a-z]{2,3}(-(([A-Z]{1}[a-z]{3})|\d{3}))?(-([A-Z]{2}))?$
+                        webpage:
+                          type:
+                            - string
+                            - 'null'
+                          description: Webpage
               examples:
                 default:
                   summary: Default response
-                  value:
+                  value: &ref_3
                     - proposalNumber: '111111111'
                       erasmusCode: AQ TESTING99
                       pic: '999999999'
@@ -74,7 +297,7 @@ paths:
                       hasVerifiedData: true
                 canonical:
                   summary: Response with original ECHE fields only
-                  value:
+                  value: &ref_4
                     - proposalNumber: '111111111'
                       erasmusCode: AQ TESTING99
                       pic: '999999999'
@@ -89,7 +312,7 @@ paths:
                       echeEndDate: '2029-12-31'
                 verified:
                   summary: Response with verified fields
-                  value:
+                  value: &ref_5
                     - proposalNumber: '111111111'
                       erasmusCode: AQ TESTING99
                       pic: '999999999'
@@ -122,7 +345,7 @@ paths:
                         webpage: https://example.com
                 geography:
                   summary: Combining `fields` and `verified`
-                  value:
+                  value: &ref_6
                     - erasmusCode: AQ TESTING99
                       city: Ridley Beach
                       country: Antarctica
@@ -139,11 +362,38 @@ paths:
                         city: Ridley Beach
                         cityLang: en
         '400':
-          $ref: '#/components/responses/Problem'
+          description: Problem
+          content: &ref_7
+            application/problem+json:
+              schema:
+                type: object
+                additionalProperties: true
+                minProperties: 1
+                description: The Problem Details JSON Object [[RFC7807](https://tools.ietf.org/html/rfc7807)].
+                properties: &ref_12
+                  type:
+                    type: string
+                    description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be "about:blank".
+                    format: uri
+                  title:
+                    type: string
+                    description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+                  status:
+                    type: integer
+                    description: The HTTP status code.
+                    minimum: 400
+                    maximum: 599
+                  detail:
+                    type: string
+                    description: A human-readable explanation specific to this occurrence of the problem.
+                  instance:
+                    type: string
+                    description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
   /{key}/{value}:
     get:
       tags:
         - Institutions
+      security: []
       summary: GET /{key}/{value}
       deprecated: true
       description: |
@@ -152,10 +402,64 @@ paths:
          Get _Institutions_ where a given **key** has a certain **value**.
       operationId: getFilter
       parameters:
-        - $ref: '#/components/parameters/PathParamKey'
-        - $ref: '#/components/parameters/PathParamValue'
-        - $ref: '#/components/parameters/QueryParamFields'
-        - $ref: '#/components/parameters/QueryParamVerified'
+        - in: path
+          name: key
+          required: true
+          schema: &ref_8
+            type: string
+            enum:
+              - proposalNumber
+              - erasmusCode
+              - pic
+              - oid
+              - organisationLegalName
+              - street
+              - postalCode
+              - city
+              - country
+              - webpage
+              - echeStartDate
+              - echeEndDate
+              - countryCode
+              - countryCodeIso
+              - countryName
+              - erasmusCodeNormalized
+              - erasmusCodePrefix
+              - erasmusCodeCity
+              - erasmusCodeNumber
+              - erasmusCodeCountryCode
+              - erasmusCodeCountryCodeIso
+              - hasVerifiedData
+              - _verified.organisationLegalName
+              - _verified.organisationLegalNameLang
+              - _verified.street
+              - _verified.postalCode
+              - _verified.city
+              - _verified.cityLang
+              - _verified.webpage
+          description: The field to filter by.
+        - in: path
+          name: value
+          required: true
+          schema: &ref_9
+            type: string
+          description: The value to filter by.
+        - in: query
+          name: _fields
+          style: form
+          explode: true
+          schema: *ref_0
+          description: |
+            The fields to include in the response.
+             If not specified, all fields will be included in the response.
+        - in: query
+          name: _verified
+          style: form
+          explode: true
+          schema: *ref_1
+          description: |
+            The verified fields to include in the response.
+             If `all` is specified, all verified fields will be included in the response.
       responses:
         '200':
           description: OK
@@ -168,105 +472,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InstitutionCollection'
+                type: array
+                description: List of _Institution_ resources.
+                items: *ref_2
               examples:
                 default:
                   summary: Default response
-                  value:
-                    - proposalNumber: '111111111'
-                      erasmusCode: AQ TESTING99
-                      pic: '999999999'
-                      oid: E11111111
-                      organisationLegalName: TEST ENTRY
-                      street: Main street 1
-                      postalCode: null
-                      city: Ridley Beach
-                      country: Antarctica
-                      webpage: https://example.com
-                      echeStartDate: '2021-01-01'
-                      echeEndDate: '2029-12-31'
-                      countryCode: AQ
-                      countryCodeIso: AQ
-                      countryName: Antarctica
-                      erasmusCodeNormalized: AQ TESTING99
-                      erasmusCodePrefix: AQ
-                      erasmusCodeCity: TESTING
-                      erasmusCodeNumber: '99'
-                      erasmusCodeCountryCode: AQ
-                      erasmusCodeCountryCodeIso: AQ
-                      hasVerifiedData: true
+                  value: *ref_3
                 canonical:
                   summary: Response with original ECHE fields only
-                  value:
-                    - proposalNumber: '111111111'
-                      erasmusCode: AQ TESTING99
-                      pic: '999999999'
-                      oid: E11111111
-                      organisationLegalName: TEST ENTRY
-                      street: Main street 1
-                      postalCode: null
-                      city: Ridley Beach
-                      country: Antarctica
-                      webpage: https://example.com
-                      echeStartDate: '2021-01-01'
-                      echeEndDate: '2029-12-31'
+                  value: *ref_4
                 verified:
                   summary: Response with verified fields
-                  value:
-                    - proposalNumber: '111111111'
-                      erasmusCode: AQ TESTING99
-                      pic: '999999999'
-                      oid: E11111111
-                      organisationLegalName: TEST ENTRY
-                      street: Main street 1
-                      postalCode: null
-                      city: Ridley Beach
-                      country: Antarctica
-                      webpage: https://example.com
-                      echeStartDate: '2021-01-01'
-                      echeEndDate: '2029-12-31'
-                      countryCode: AQ
-                      countryCodeIso: AQ
-                      countryName: Antarctica
-                      erasmusCodeNormalized: AQ TESTING99
-                      erasmusCodePrefix: AQ
-                      erasmusCodeCity: TESTING
-                      erasmusCodeNumber: '99'
-                      erasmusCodeCountryCode: AQ
-                      erasmusCodeCountryCodeIso: AQ
-                      hasVerifiedData: true
-                      _verified:
-                        organisationLegalName: Test Entry
-                        organisationLegalNameLang: en
-                        street: Main street 1
-                        postalCode: null
-                        city: Ridley Beach
-                        cityLang: en
-                        webpage: https://example.com
+                  value: *ref_5
                 geography:
                   summary: Combining `fields` and `verified`
-                  value:
-                    - erasmusCode: AQ TESTING99
-                      city: Ridley Beach
-                      country: Antarctica
-                      countryCode: AQ
-                      countryCodeIso: AQ
-                      countryName: AQ
-                      erasmusCodeNormalized: AQ TESTING99
-                      erasmusCodePrefix: AQ
-                      erasmusCodeCity: TESTING
-                      erasmusCodeCountryCode: AQ
-                      erasmusCodeCountryCodeIso: AQ
-                      hasVerifiedData: true
-                      _verified:
-                        city: Ridley Beach
-                        cityLang: en
+                  value: *ref_6
         '400':
-          $ref: '#/components/responses/Problem'
+          description: Problem
+          content: *ref_7
   /{key}:
     get:
       tags:
         - Institutions
+      security: []
       summary: GET /{key}
       deprecated: true
       description: |
@@ -275,9 +504,27 @@ paths:
          Get _Institutions_ where a given **key** has a `null` value.
       operationId: getNull
       parameters:
-        - $ref: '#/components/parameters/PathParamKey'
-        - $ref: '#/components/parameters/QueryParamFields'
-        - $ref: '#/components/parameters/QueryParamVerified'
+        - in: path
+          name: key
+          required: true
+          schema: *ref_8
+          description: The field to filter by.
+        - in: query
+          name: _fields
+          style: form
+          explode: true
+          schema: *ref_0
+          description: |
+            The fields to include in the response.
+             If not specified, all fields will be included in the response.
+        - in: query
+          name: _verified
+          style: form
+          explode: true
+          schema: *ref_1
+          description: |
+            The verified fields to include in the response.
+             If `all` is specified, all verified fields will be included in the response.
       responses:
         '200':
           description: OK
@@ -290,101 +537,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InstitutionCollection'
+                type: array
+                description: List of _Institution_ resources.
+                items: *ref_2
               examples:
                 default:
                   summary: Default response
-                  value:
-                    - proposalNumber: '111111111'
-                      erasmusCode: AQ TESTING99
-                      pic: '999999999'
-                      oid: E11111111
-                      organisationLegalName: TEST ENTRY
-                      street: Main street 1
-                      postalCode: null
-                      city: Ridley Beach
-                      country: Antarctica
-                      webpage: https://example.com
-                      echeStartDate: '2021-01-01'
-                      echeEndDate: '2029-12-31'
-                      countryCode: AQ
-                      countryCodeIso: AQ
-                      countryName: Antarctica
-                      erasmusCodeNormalized: AQ TESTING99
-                      erasmusCodePrefix: AQ
-                      erasmusCodeCity: TESTING
-                      erasmusCodeNumber: '99'
-                      erasmusCodeCountryCode: AQ
-                      erasmusCodeCountryCodeIso: AQ
-                      hasVerifiedData: true
+                  value: *ref_3
                 canonical:
                   summary: Response with original ECHE fields only
-                  value:
-                    - proposalNumber: '111111111'
-                      erasmusCode: AQ TESTING99
-                      pic: '999999999'
-                      oid: E11111111
-                      organisationLegalName: TEST ENTRY
-                      street: Main street 1
-                      postalCode: null
-                      city: Ridley Beach
-                      country: Antarctica
-                      webpage: https://example.com
-                      echeStartDate: '2021-01-01'
-                      echeEndDate: '2029-12-31'
+                  value: *ref_4
                 verified:
                   summary: Response with verified fields
-                  value:
-                    - proposalNumber: '111111111'
-                      erasmusCode: AQ TESTING99
-                      pic: '999999999'
-                      oid: E11111111
-                      organisationLegalName: TEST ENTRY
-                      street: Main street 1
-                      postalCode: null
-                      city: Ridley Beach
-                      country: Antarctica
-                      webpage: https://example.com
-                      echeStartDate: '2021-01-01'
-                      echeEndDate: '2029-12-31'
-                      countryCode: AQ
-                      countryCodeIso: AQ
-                      countryName: Antarctica
-                      erasmusCodeNormalized: AQ TESTING99
-                      erasmusCodePrefix: AQ
-                      erasmusCodeCity: TESTING
-                      erasmusCodeNumber: '99'
-                      erasmusCodeCountryCode: AQ
-                      erasmusCodeCountryCodeIso: AQ
-                      hasVerifiedData: true
-                      _verified:
-                        organisationLegalName: Test Entry
-                        organisationLegalNameLang: en
-                        street: Main street 1
-                        postalCode: null
-                        city: Ridley Beach
-                        cityLang: en
-                        webpage: https://example.com
+                  value: *ref_5
                 geography:
                   summary: Combining `fields` and `verified`
-                  value:
-                    - erasmusCode: AQ TESTING99
-                      city: Ridley Beach
-                      country: Antarctica
-                      countryCode: AQ
-                      countryCodeIso: AQ
-                      countryName: AQ
-                      erasmusCodeNormalized: AQ TESTING99
-                      erasmusCodePrefix: AQ
-                      erasmusCodeCity: TESTING
-                      erasmusCodeCountryCode: AQ
-                      erasmusCodeCountryCodeIso: AQ
-                      hasVerifiedData: true
-                      _verified:
-                        city: Ridley Beach
-                        cityLang: en
+                  value: *ref_6
         '400':
-          $ref: '#/components/responses/Problem'
+          description: Problem
+          content: *ref_7
 components:
   parameters:
     QueryParamFields:
@@ -392,33 +563,7 @@ components:
       name: _fields
       style: form
       explode: true
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-            - proposalNumber
-            - erasmusCode
-            - pic
-            - oid
-            - organisationLegalName
-            - street
-            - postalCode
-            - city
-            - country
-            - webpage
-            - echeStartDate
-            - echeEndDate
-            - countryCode
-            - countryCodeIso
-            - countryName
-            - erasmusCodeNormalized
-            - erasmusCodePrefix
-            - erasmusCodeCity
-            - erasmusCodeNumber
-            - erasmusCodeCountryCode
-            - erasmusCodeCountryCodeIso
-            - hasVerifiedData
+      schema: *ref_0
       description: |
         The fields to include in the response.
          If not specified, all fields will be included in the response.
@@ -427,19 +572,7 @@ components:
       name: _verified
       style: form
       explode: true
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-            - all
-            - organisationLegalName
-            - organisationLegalNameLang
-            - street
-            - postalCode
-            - city
-            - cityLang
-            - webpage
+      schema: *ref_1
       description: |
         The verified fields to include in the response.
          If `all` is specified, all verified fields will be included in the response.
@@ -447,247 +580,46 @@ components:
       in: path
       name: key
       required: true
-      schema:
-        type: string
-        enum:
-          - proposalNumber
-          - erasmusCode
-          - pic
-          - oid
-          - organisationLegalName
-          - street
-          - postalCode
-          - city
-          - country
-          - webpage
-          - echeStartDate
-          - echeEndDate
-          - countryCode
-          - countryCodeIso
-          - countryName
-          - erasmusCodeNormalized
-          - erasmusCodePrefix
-          - erasmusCodeCity
-          - erasmusCodeNumber
-          - erasmusCodeCountryCode
-          - erasmusCodeCountryCodeIso
-          - hasVerifiedData
-          - _verified.organisationLegalName
-          - _verified.organisationLegalNameLang
-          - _verified.street
-          - _verified.postalCode
-          - _verified.city
-          - _verified.cityLang
-          - _verified.webpage
+      schema: *ref_8
       description: The field to filter by.
     PathParamValue:
       in: path
       name: value
       required: true
-      schema:
-        type: string
+      schema: *ref_9
       description: The value to filter by.
   schemas:
+    VerifiedData:
+      type: object
+      description: Verified fields
+      properties: *ref_10
+    InstitutionData:
+      type: object
+      properties: *ref_11
     InstitutionCollection:
       type: array
       description: List of _Institution_ resources.
-      items:
-        type: object
-        properties:
-          proposalNumber:
-            type:
-              - string
-              - 'null'
-            description: '[ECHE list] Proposal Number'
-          erasmusCode:
-            type: string
-            description: '[ECHE list] Erasmus Code'
-          pic:
-            type: string
-            description: '[ECHE list] PIC'
-            pattern: ^\d{9}$
-          oid:
-            type:
-              - string
-              - 'null'
-            description: '[ECHE list] OID'
-            pattern: ^E\d{8}$
-          organisationLegalName:
-            type: string
-            description: '[ECHE list] Organisation Legal Name'
-          street:
-            type:
-              - string
-              - 'null'
-            description: '[ECHE list] Street'
-          postalCode:
-            type:
-              - string
-              - 'null'
-            description: '[ECHE list] Postal Code'
-          city:
-            type: string
-            description: '[ECHE list] City'
-          country:
-            type: string
-            description: '[ECHE list] Country'
-          webpage:
-            type:
-              - string
-              - 'null'
-            description: '[ECHE list] Webpage'
-          echeStartDate:
-            type: string
-            description: '[ECHE list] ECHE Start Date'
-            format: date
-          echeEndDate:
-            type: string
-            description: '[ECHE list] ECHE End Date'
-            format: date
-          countryCode:
-            type: string
-            description: Country code from Country
-            pattern: ^[A-Z]{2}$
-          countryCodeIso:
-            type:
-              - string
-              - 'null'
-            description: Country code (ISO 3166-1 alpha-2) from Country
-            pattern: ^[A-Z]{2}$
-          countryName:
-            type: string
-            description: Country name from Country
-          erasmusCodeNormalized:
-            type:
-              - string
-              - 'null'
-            description: Normalized Erasmus Code
-            pattern: ^([A-Z]{3}|[A-Z]{2}[ ]{1}|[A-Z]{1}[ ]{2})[A-Z][A-Z-]*[A-Z]\d{2,3}$
-          erasmusCodePrefix:
-            type:
-              - string
-              - 'null'
-            description: |
-              Erasmus Code prefix
-
-               (depends on Normalized Erasmus Code)
-            pattern: ^[A-Z]{1,3}$
-          erasmusCodeCity:
-            type:
-              - string
-              - 'null'
-            description: |
-              Erasmus Code city component
-
-               (depends on Normalized Erasmus Code)
-            pattern: ^[A-Z][A-Z-]*[A-Z]$
-          erasmusCodeNumber:
-            type:
-              - string
-              - 'null'
-            description: |
-              Erasmus Code number
-
-               (depends on Normalized Erasmus Code)
-            pattern: ^\d{2,3}$
-          erasmusCodeCountryCode:
-            type:
-              - string
-              - 'null'
-            description: |
-              Country code from Erasmus Code
-
-               (depends on Erasmus Code prefix)
-            pattern: ^[A-Z]{2}$
-          erasmusCodeCountryCodeIso:
-            type:
-              - string
-              - 'null'
-            description: |
-              Country code (ISO 3166-1 alpha-2) from Erasmus Code
-
-               (depends on Country code from Erasmus Code)
-            pattern: ^[A-Z]{2}$
-          hasVerifiedData:
-            type: boolean
-            description: Returns `true` if at least one verified field is not `null`
-          _verified:
-            type: object
-            description: Verified fields
-            properties:
-              organisationLegalName:
-                type:
-                  - string
-                  - 'null'
-                description: Organisation Legal Name
-              organisationLegalNameLang:
-                type:
-                  - string
-                  - 'null'
-                description: |
-                  IETF language tag for the `organisationLegalName` value
-
-                   e.g. `lv` for Latvian, `pt-PT` for Portuguese from Portugal, `sr-Latn` for
-                   Serbian in Latin script
-                pattern: ^[a-z]{2,3}(-(([A-Z]{1}[a-z]{3})|\d{3}))?(-([A-Z]{2}))?$
-              street:
-                type:
-                  - string
-                  - 'null'
-                description: Street
-              postalCode:
-                type:
-                  - string
-                  - 'null'
-                description: Postal Code
-              city:
-                type:
-                  - string
-                  - 'null'
-                description: City
-              cityLang:
-                type:
-                  - string
-                  - 'null'
-                description: |
-                  IETF language tag for the `city` value
-
-                   e.g. `lv` for Latvian, `pt-PT` for Portuguese from Portugal, `sr-Latn` for
-                   Serbian in Latin script
-                pattern: ^[a-z]{2,3}(-(([A-Z]{1}[a-z]{3})|\d{3}))?(-([A-Z]{2}))?$
-              webpage:
-                type:
-                  - string
-                  - 'null'
-                description: Webpage
+      items: *ref_2
     Problem:
       type: object
       additionalProperties: true
       minProperties: 1
       description: The Problem Details JSON Object [[RFC7807](https://tools.ietf.org/html/rfc7807)].
-      properties:
-        type:
-          type: string
-          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be "about:blank".
-          format: uri
-        title:
-          type: string
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: The HTTP status code.
-          minimum: 400
-          maximum: 599
-        detail:
-          type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+      properties: *ref_12
+  examples:
+    InstitutionCollection:
+      summary: Default response
+      value: *ref_3
+    InstitutionCollectionCanonical:
+      summary: Response with original ECHE fields only
+      value: *ref_4
+    InstitutionCollectionVerified:
+      summary: Response with verified fields
+      value: *ref_5
+    InstitutionCollectionGeography:
+      summary: Combining `fields` and `verified`
+      value: *ref_6
   responses:
     Problem:
       description: Problem
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Problem'
+      content: *ref_7
