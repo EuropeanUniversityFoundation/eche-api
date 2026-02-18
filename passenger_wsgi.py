@@ -9,6 +9,6 @@ if sys.executable != PYTHON_BIN:
     os.execl(PYTHON_BIN, PYTHON_BIN, *sys.argv)
 
 sys.path.insert(0, os.path.dirname(__file__))
-sys.path.insert(0, os.path.join(VENV, 'lib', 'python3.8', 'site-packages'))
+sys.path.insert(0, os.path.join(VENV, 'lib', 'python3.11', 'site-packages'))
 
 from echeapi import app as application
