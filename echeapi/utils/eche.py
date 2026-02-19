@@ -49,10 +49,10 @@ def clean_values(df):
         df[col] = df[col].apply(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Nullify certain strings, like formula errors.
-    df.replace(settings.ECHE_NULL_STR, value=None, inplace=True)
+    df.replace(settings.ECHE_NULL_STR, value=np.nan, inplace=True)
 
     # Nullify empty strings.
-    df.replace('', value=None, inplace=True)
+    df.replace('', value=np.nan, inplace=True)
 
 
 def reduce(df):
@@ -64,16 +64,13 @@ def reduce(df):
 def assign_types(df):
     """ Assign string type to all columns except dates.
     """
-    # Nullify NaN.
-    df.replace(np.nan, value=None, inplace=True)
-
     for col in df.columns.tolist():
         if col in settings.DATE_FIELDS:
             continue
         # Convert float to int before converting to string.
         if df[col].dtypes == float:
             df[col] = df[col].apply(int)
-        df[col] = df[col].apply(lambda x: x if x is None else str(x))
+        df[col] = df[col].apply(lambda x: x if x is np.nan else str(x))
 
 
 def set_datetime(df):
@@ -103,7 +100,7 @@ def set_datetime(df):
             # Nullify all other values.
             df_err = df[df[col].apply(lambda x: not isinstance(x, datetime.date))]
             for i, row in df_err.iterrows():
-                df.iat[i, df.columns.get_loc(col)] = None
+                df.iat[i, df.columns.get_loc(col)] = np.nan
 
 
 def normalize(df):
