@@ -3,7 +3,7 @@ import os
 import sys
 
 VENV = os.path.join(os.path.dirname(__file__), 'venv')
-PYTHON_BIN = os.path.join(VENV, 'bin', 'python')
+PYTHON_BIN = os.path.join(VENV, 'bin', 'python3')
 
 if sys.executable != PYTHON_BIN:
     os.execl(PYTHON_BIN, PYTHON_BIN, *sys.argv)
