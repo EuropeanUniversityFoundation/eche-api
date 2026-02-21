@@ -12,7 +12,7 @@ def load(fname=settings.DATA_FILENAME):
     """ Load the first worksheet of an Excel file into a DataFrame.
     """
     # Load the Excel file.
-    workbook = load_workbook(fname, data_only=True)
+    workbook = load_workbook(fname, read_only=True, data_only=True)
 
     # Load the first worksheet.
     sheet = next(iter(workbook.worksheets))
@@ -70,7 +70,7 @@ def assign_types(df):
         # Convert float to int before converting to string.
         if df[col].dtypes == float:
             df[col] = df[col].apply(int)
-        df[col] = df[col].apply(lambda x: x if x is np.nan else str(x))
+        df[col] = df[col].apply(lambda x: '' if pd.isna(x) else str(x))
 
 
 def set_datetime(df):

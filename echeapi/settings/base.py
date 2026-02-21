@@ -37,7 +37,9 @@ LOG_FORMAT = '[%(asctime)s] [%(levelname)s] %(message)s'
 ECHE_NULL_STR = [
     '#N/A',
     '#VALUE!',
+    'not applicable',
     'Not Found',
+    'Transitory charter',
     'Transitory Charter',
     'Transitory Erasmus  Charter',
     'Transitory Erasmus charter',
