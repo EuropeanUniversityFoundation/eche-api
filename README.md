@@ -10,7 +10,7 @@ The **ECHE List API** is designed to expose the list of institutions holding the
 
 ## Installation
 
-The main app is built with Flask, and it requires Python 3.8+ to run. To start the virtual environment and install the required libraries, execute the following commands:
+The main app is built with Flask, and it requires Python 3.11 to run. To start the virtual environment and install the required libraries, execute the following commands:
 
     # generate and activate a virtual environment
     python3 -m venv venv
@@ -62,7 +62,13 @@ Deploy the code to the `DOCROOT`; for a top-level domain, it will be `httpdocs`;
 Then, go to _Apache & nginx Settings_ and do the following:
 
 1. under _nginx settings_ turn off __Proxy mode__ to stop using Apache;
-2. under _Additional nginx directives_ add `passenger_enabled on;` and save.
+2. under _Additional nginx directives_ add the following and save:
+
+```
+passenger_enabled on;
+passenger_python /usr/bin/python3;
+add_header 'Access-Control-Allow-Origin' '*';
+```
 
 _Phusion Passenger_ by convention will read the `passenger_wsgi.py` file from one level above the new _Document root_ and use the correct Python binary from the `venv` created upon installation.
 
@@ -89,8 +95,3 @@ Once the config files are ready:
     # restart services
     service apache2 restart
     service uwsgi restart
-
-
----
-
-_This project is a work in progress and is considered unstable._

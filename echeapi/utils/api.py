@@ -1,7 +1,7 @@
 
 import json
 
-import numpy as np
+import pandas as pd
 
 from echeapi import settings
 from echeapi.utils import db, nesting
@@ -21,8 +21,6 @@ def as_dataframe(fields, filter=None):
     if _verified in fields:
         df[_verified] = df[_verified].astype('bool')
 
-    df = df.replace(np.nan, None)
-
     return df
 
 
@@ -30,8 +28,9 @@ def as_dict(fields, filter=None, **kwargs):
     """ Export a database table to a DataFrame and return it as dict.
     """
     df = as_dataframe(fields, filter=filter)
-
-    data = df.to_dict(orient='records')
+    df_obj = df.astype(object)
+    df_obj = df_obj.where(pd.notnull(df_obj), None)
+    data = df_obj.to_dict(orient='records')
 
     if kwargs.get('nested', False):
         data = nesting.process(data)

@@ -1,0 +1,15 @@
+# See https://redocly.com/docs/cli/configuration/ for more information.
+apis:
+  echeapi@v0.3:
+    root: openapi/openapi.yaml
+    output: preview/dist.yaml
+rules:
+  info-license: off
+  no-unused-components: error
+openapi:
+  showConsole: true
+  htmlTemplate: ./docs/index.html
+  theme:
+    colors:
+      primary:
+        main: "#32329f"

@@ -11,6 +11,8 @@ As such, it is necessary to check whether the Erasmus code is properly
 
 import unicodedata
 
+import numpy as np
+
 from echeapi import settings
 
 # 3-letter country codes have no trailing spaces, so they must be defined.
@@ -177,7 +179,7 @@ def process(df):
     # Duplicate the country code column.
     df[COL_CC_ISO] = df.loc[:, COL_CC]
     # Replace country codes with ISO 3166-1 alpha-2 country codes.
-    df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP, inplace=True)
+    df[COL_CC_ISO] = df[COL_CC_ISO].replace(settings.COUNTRY_CODES_TO_ISO_MAP)
 
     # Nullify empty strings.
-    df.replace('', value=None, inplace=True)
+    df.replace('', value=np.nan, inplace=True)

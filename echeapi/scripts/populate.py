@@ -2,6 +2,8 @@
 import os
 import sys
 
+import numpy as np
+
 from echeapi import settings
 from echeapi.processing import country, erasmus
 from echeapi.utils import db, eche, issues, verified
@@ -37,6 +39,7 @@ def main(*args):
         detected = [d for d in issues.detect_all(df) if not d[2].empty]
         if detected:
             for msg, severity, _df, issue_class in detected:
+                _df.replace({np.nan: ''}, inplace=True)
                 print(f'\n[{severity.upper()}] {msg}\n\n{_df}\n')
         else:
             print('No issues with data found.')

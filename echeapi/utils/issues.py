@@ -1,6 +1,4 @@
 
-import numpy as np
-
 from echeapi import settings
 
 
@@ -11,9 +9,7 @@ def detect_duplicates(df):
 
     for field, severity in settings.UNIQUE_CHECKS.items():
         df_dups = df[df.duplicated([field], keep=False)].copy()
-        df_dups.replace({None: np.nan}, inplace=True)
         df_dups.dropna(subset=[field], inplace=True)
-        df_dups.replace({np.nan: None}, inplace=True)
         df_dups = df_dups[settings.UNIQUE_CHECKS.keys()].sort_values(field)
 
         if not df_dups.empty:
@@ -31,7 +27,6 @@ def detect_empty(df, field):
     """ Find issues with empty values in field.
     """
     df_null = df[df[field].isnull()].copy()
-    df_null.replace({np.nan: None}, inplace=True)
     df_null = df_null[settings.UNIQUE_CHECKS.keys()]
 
     if not df_null.empty:
@@ -50,7 +45,6 @@ def detect_different(df, first, second):
     df_diff = df[[first, second]].copy()
     df_diff = df_diff[df_diff[first] != df_diff[second]]
     df_diff = df_diff[df_diff[second].notnull()]
-    df_diff.replace({np.nan: None}, inplace=True)
     df_diff = df_diff.sort_values(second)
 
     if not df_diff.empty:
