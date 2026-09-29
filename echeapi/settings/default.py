@@ -37,7 +37,8 @@ SECRET_KEY = ''
 # DATA_FILENAME = 'List-Accredited-HEIs within-Erasmus-Programme-2021-2027-10022026_0.xlsx'
 # DATA_FILENAME = 'accredited-HEIs-Erasmus-2021-2027_08042026.xlsx'
 # DATA_FILENAME = 'accredited-HEIs-Erasmus-2021-2027_26052026.xlsx'
-DATA_FILENAME = 'accredited-HEIs-Erasmus-2021-2027_17082026_1.xlsx'
+# DATA_FILENAME = 'accredited-HEIs-Erasmus-2021-2027_17082026_1.xlsx'
+DATA_FILENAME = 'List of Accredited HEIs within the Erasmus+ Programme 2021-2027 -24092026_0.xlsx'
 
 # Type of data contained in the 'Country' column.
 # Override base settings depending on individual DATA_FILENAME issues.
