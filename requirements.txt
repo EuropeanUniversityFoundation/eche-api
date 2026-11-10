@@ -16,4 +16,4 @@ pymdown-extensions==11.0.1
 python-dateutil==2.9.0.post0
 PyYAML==6.0.3
 six==1.17.0
-Werkzeug==3.1.6
+Werkzeug==3.1.9
